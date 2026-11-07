@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Meet the All-Rounder & Panchayat Assistant | Creative Portfolio</title>
-  <meta name="description" content="A creative, bold portfolio inspired by worksruthi.com. Bridging grassroots Panchayat E-Governance with modern AI video, media, and tech with chutzpah.">
+  <meta name="description" content="A creative, bold portfolio replicating the exact physics, 120 FPS smooth scrolling, and custom cursor system of worksruthi.com.">
 
   <!-- Google Fonts: Anton (Impact bold display), Syne (modern punchy), Plus Jakarta Sans (body), Caveat (handwritten scribbles) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Lenis Smooth Scroll (120 FPS high-precision silky scroll) -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 
   <style>
     :root {
@@ -21,14 +24,17 @@
       --paper: #fbfbf6;
       --ink: #1c1b1a;
       --ink-muted: #5e5d59;
-      --cinnabar: #e03c31; /* Signature worksruthi red */
+      --cinnabar: #e03c31; /* Signature worksruthi cinnabar red */
       --cinnabar-light: rgba(224, 60, 49, 0.12);
       --highlight: #fef08a; /* Highlighter yellow */
-      --spring: #d1fae5;
+      --spring: #f3f3e9;
       --font-display: 'Anton', 'Syne', sans-serif;
       --font-heading: 'Syne', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-hand: 'Caveat', cursive;
+      --font-mono: 'Space Mono', monospace;
+      --p2-size: 13px;
+      --ease-site: cubic-bezier(.22, 1, .36, 1);
       --border-dark: #1c1b1a;
     }
 
@@ -39,9 +45,25 @@
     }
 
     html {
-      scroll-behavior: smooth;
       background-color: var(--bg);
       color: var(--ink);
+    }
+
+    /* Lenis Smooth Scroll integration styles */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
     }
 
     body {
@@ -50,7 +72,8 @@
       font-family: var(--font-body);
       overflow-x: hidden;
       line-height: 1.5;
-      cursor: default;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Subtle Paper Grain Texture */
@@ -68,33 +91,197 @@
       background-size: 20px 20px;
     }
 
-    /* Trailing Cursor (inspired by worksruthi) */
-    .custom-cursor-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--cinnabar);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, opacity 0.2s;
+    /* ==========================================================================
+       EXACT worksruthi.com CURSOR SYSTEM (.tc) - DIRECTLY SOURCED
+       ========================================================================== */
+    @media (hover: hover) and (pointer: fine) {
+      html.has-tc, html.has-tc * {
+        cursor: none !important;
+      }
+      html.has-tc :is(input:not([type=button],[type=submit],[type=checkbox],[type=radio],[type=range]), textarea, [contenteditable=""], [contenteditable=true]) {
+        cursor: text !important;
+      }
+      html.has-tc [data-cursor=none], html.has-tc [data-cursor=none] * {
+        cursor: auto !important;
+      }
     }
 
-    .custom-cursor-ring {
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid var(--cinnabar);
-      border-radius: 50%;
-      position: fixed;
+    .tc {
+      --tc-ink: var(--ink);
+      --tc-mark: var(--cinnabar);
+      --tc-ball: var(--cinnabar);
+      z-index: 2147483000;
       pointer-events: none;
-      z-index: 99998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out, width 0.2s, height 0.2s;
-      opacity: 0.6;
+      font-family: var(--font-mono);
+      font-size: var(--p2-size);
+      text-transform: none;
+      letter-spacing: 0;
+      opacity: 0;
+      line-height: 1;
+      transition: opacity .2s ease-out;
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
     }
 
-    /* Container */
+    .tc[data-on="true"] {
+      opacity: 1;
+    }
+
+    .tc > * {
+      will-change: transform;
+      white-space: pre;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tc[data-tone="dark"] {
+      --tc-ink: var(--spring);
+    }
+    .tc[data-ink="cinnabar"]:not([data-tone="red"]) {
+      --tc-ink: var(--cinnabar);
+    }
+    .tc[data-tone="red"] {
+      --tc-ink: var(--ink);
+      --tc-mark: var(--ink);
+      --tc-ball: var(--ink);
+    }
+    .tc[data-tone="photo"] {
+      --tc-ink: var(--spring);
+    }
+    .tc[data-tone="photo"] .tc-verb {
+      text-shadow: 0 0 6px #1c1b1a80, 0 0 1px #1c1b1a99;
+    }
+
+    .tc-verb__in, .tc-ball__in {
+      transition: opacity .22s ease-out, transform .34s var(--ease-site);
+      display: block;
+    }
+
+    .tc[data-mode="idle"] .tc-verb__in {
+      opacity: 0;
+      transform: scale(.5);
+    }
+
+    .tc[data-mode="word"] .tc-ball__in {
+      opacity: 0;
+      transform: scale(.3);
+    }
+
+    .tc-trail {
+      transition: opacity .22s ease-out;
+    }
+
+    .tc[data-mode="word"] .tc-trail {
+      opacity: 0;
+    }
+
+    .tc-trail__dot {
+      will-change: transform;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tc-trail__dot:before {
+      content: "";
+      left: calc(var(--d) / -2);
+      top: calc(var(--d) / -2);
+      width: var(--d);
+      height: var(--d);
+      background: var(--tc-ball);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .tc-trail__dot:first-child  { --d: 12px;   opacity: .85; }
+    .tc-trail__dot:nth-child(2) { --d: 10.5px; opacity: .7;  }
+    .tc-trail__dot:nth-child(3) { --d: 9px;    opacity: .55; }
+    .tc-trail__dot:nth-child(4) { --d: 7.5px;  opacity: .4;  }
+    .tc-trail__dot:nth-child(5) { --d: 6px;    opacity: .28; }
+    .tc-trail__dot:nth-child(6) { --d: 4.5px;  opacity: .16; }
+
+    .tc-ball__dot {
+      background: var(--tc-ball);
+      border-radius: 50%;
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      top: -7px;
+      left: -7px;
+      will-change: transform;
+    }
+
+    .tc-verb {
+      color: var(--tc-ink);
+    }
+
+    .tc-verb__w {
+      transition: transform .18s var(--ease-site);
+      align-items: baseline;
+      display: flex;
+    }
+
+    .tc-ch {
+      width: 1ch;
+      display: inline-block;
+    }
+
+    .tc-verb__arrow {
+      color: var(--tc-mark);
+      margin-left: .6ch;
+      display: inline-block;
+    }
+
+    .tc-verb.is-down .tc-verb__w {
+      transform: scale(.82, .74);
+    }
+
+    .tc-verb[data-verb="scroll"] .tc-ch,
+    .tc-verb[data-verb="scroll"] .tc-verb__arrow {
+      animation: 1.1s cubic-bezier(.45, 0, .55, 1) infinite tc-drop;
+      animation-delay: calc(var(--i, 6) * 70ms);
+    }
+
+    @keyframes tc-drop {
+      0%, 100% { transform: translateY(-.12em); }
+      50% { transform: translateY(.28em); }
+    }
+
+    .tc-verb[data-verb="hover"] .tc-verb__w,
+    .tc-verb[data-verb="hover"] .tc-ch {
+      animation: 1.8s cubic-bezier(.45, 0, .55, 1) infinite tc-float;
+      animation-delay: calc(var(--i) * -150ms);
+    }
+
+    @keyframes tc-float {
+      0%, 100% { transform: translateY(-.18em); }
+      50% { transform: translateY(.18em); }
+    }
+
+    .tc-verb[data-verb="drag"] .tc-verb__w {
+      animation: 1.4s cubic-bezier(.45, 0, .55, 1) infinite tc-sway;
+    }
+
+    @keyframes tc-sway {
+      0%, 100% { transform: translate(-.3em); }
+      50% { transform: translate(.3em); }
+    }
+
+    .tc-verb[data-verb="open"] .tc-verb__arrow {
+      color: var(--tc-ink);
+      animation: 1.2s cubic-bezier(.45, 0, .55, 1) infinite tc-out;
+    }
+
+    @keyframes tc-out {
+      0%, 100% { transform: none; }
+      50% { transform: translate(.2em, -.2em); }
+    }
+
+    /* ==========================================================================
+       PAGE STYLING & CONTENT
+       ========================================================================== */
     .container {
       width: 92%;
       max-width: 1300px;
@@ -102,13 +289,12 @@
       padding: 0 16px;
     }
 
-    /* Header / Nav */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(243, 243, 233, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(243, 243, 233, 0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 2px solid var(--ink);
       padding: 16px 0;
     }
@@ -153,7 +339,6 @@
       font-weight: 600;
       text-transform: lowercase;
       letter-spacing: 0.3px;
-      position: relative;
       transition: color 0.2s;
     }
 
@@ -213,7 +398,6 @@
       color: var(--cinnabar);
     }
 
-    /* Hand-drawn red scribble underline under words */
     .squiggle-svg {
       position: absolute;
       bottom: -10px;
@@ -223,7 +407,6 @@
       pointer-events: none;
     }
 
-    /* Split Hero Grid: Text & Cutout PNG Photo */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -233,7 +416,7 @@
       margin-top: 20px;
     }
 
-    /* The Centerpiece Photo Container */
+    /* Cutout Stage */
     .photo-stage {
       position: relative;
       display: flex;
@@ -253,7 +436,6 @@
       background: radial-gradient(circle at 50% 60%, rgba(224, 60, 49, 0.12) 0%, transparent 70%);
     }
 
-    /* User Photo Display (supports transparent PNG) */
     #user-photo-img {
       max-height: 100%;
       max-width: 100%;
@@ -268,7 +450,6 @@
       transform: scale(1.03) rotate(-1deg);
     }
 
-    /* Photo Upload / Drop Zone Overlay */
     .photo-drop-badge {
       position: absolute;
       bottom: 15px;
@@ -322,7 +503,6 @@
       max-width: 170px;
     }
 
-    /* Hand-drawn SVG arrows */
     .arrow-svg {
       width: 48px;
       height: 48px;
@@ -333,7 +513,6 @@
       stroke-linejoin: round;
     }
 
-    /* Sticker Badges */
     .sticker {
       position: absolute;
       padding: 8px 16px;
@@ -346,12 +525,9 @@
       box-shadow: 3px 3px 0 var(--ink);
       border-radius: 6px;
       z-index: 6;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .sticker:hover {
-      transform: scale(1.1) rotate(0deg) !important;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
     }
 
     .sticker-red {
@@ -370,7 +546,6 @@
       transform: rotate(-5deg);
     }
 
-    /* Hero Bio Text */
     .hero-bio-lead {
       font-size: clamp(18px, 2.2vw, 24px);
       font-weight: 500;
@@ -410,7 +585,6 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      cursor: pointer;
     }
 
     .btn-brutal:hover {
@@ -437,7 +611,6 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      cursor: pointer;
     }
 
     .btn-brutal-alt:hover {
@@ -446,7 +619,7 @@
       background: var(--highlight);
     }
 
-    /* Infinite Marquee Ribbon (inspired by worksruthi) */
+    /* Infinite Marquee Ribbon */
     .marquee-ribbon {
       background: var(--ink);
       color: #fff;
@@ -541,7 +714,6 @@
       margin-bottom: 0;
     }
 
-    /* Tape Effect on Card */
     .tape-effect {
       position: absolute;
       top: -14px;
@@ -649,7 +821,7 @@
       flex: 1;
     }
 
-    /* B-Roll / Field Scrapbook (inspired by worksruthi B-Roll section) */
+    /* B-Roll / Field Scrapbook */
     .broll-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -736,7 +908,6 @@
       font-weight: 600;
     }
 
-    /* Hidden File Input for User Photo */
     #photo-file-input {
       display: none;
     }
@@ -786,7 +957,6 @@
       font-weight: 700;
     }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .hero-grid, .pitch-grid {
         grid-template-columns: 1fr;
@@ -807,29 +977,25 @@
 </head>
 <body>
 
-  <!-- Trailing Cursor elements -->
-  <div class="custom-cursor-dot" id="cursor-dot"></div>
-  <div class="custom-cursor-ring" id="cursor-ring"></div>
-
   <!-- Hidden file picker for user's PNG photo -->
   <input type="file" id="photo-file-input" accept="image/png, image/webp, image/jpeg">
 
   <!-- Header -->
   <header>
     <div class="container nav-inner">
-      <a href="#hero" class="brand">
+      <a href="#hero" class="brand" data-cursor="hover">
         <span class="brand-dot"></span>
         <span>THE ALL-ROUNDER</span>
       </a>
 
       <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#work">Selected Work</a></li>
-        <li><a href="#broll">B-Roll</a></li>
-        <li><a href="#contact">Let's Talk</a></li>
+        <li><a href="#about" data-cursor="hover">About</a></li>
+        <li><a href="#work" data-cursor="hover">Selected Work</a></li>
+        <li><a href="#broll" data-cursor="hover">B-Roll</a></li>
+        <li><a href="#contact" data-cursor="open">Let's Talk</a></li>
       </ul>
 
-      <div class="status-pill">
+      <div class="status-pill" data-cursor="hover">
         <span class="status-indicator"></span>
         <span>Panchayat Secretariat • Open for Impact</span>
       </div>
@@ -847,7 +1013,7 @@
 
       <!-- Giant Headline -->
       <h1 class="hero-headline">
-        MEET THE <span class="highlight-word">ALL-ROUNDER<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
+        MEET THE <span class="highlight-word" data-cursor="hover">ALL-ROUNDER<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
         PANCHAYAT ASSISTANT &<br/>
         DIGITAL ARTIST WITH CHUTZPAH.
       </h1>
@@ -864,28 +1030,28 @@
           </p>
 
           <div class="hero-cta-bar">
-            <a href="#contact" class="btn-brutal">
+            <a href="#contact" class="btn-brutal" data-cursor="open">
               <i class="fa-solid fa-bolt"></i> Work With Me
             </a>
-            <a href="#work" class="btn-brutal-alt">
+            <a href="#work" class="btn-brutal-alt" data-cursor="scroll">
               <i class="fa-solid fa-eye"></i> See The Work
             </a>
-            <button class="btn-brutal-alt" onclick="openPhotoInstructions()">
+            <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
               <i class="fa-solid fa-camera"></i> Change Photo
             </button>
           </div>
 
           <!-- Quick Micro-metrics -->
           <div style="display: flex; gap: 24px; padding-top: 16px; border-top: 2px solid var(--ink);">
-            <div>
+            <div data-cursor="hover">
               <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">5000+</div>
               <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Citizens Assisted</div>
             </div>
-            <div>
+            <div data-cursor="hover">
               <div style="font-family: var(--font-display); font-size: 32px; color: var(--ink);">100%</div>
               <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Portal Accuracy</div>
             </div>
-            <div>
+            <div data-cursor="hover">
               <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">4K AI</div>
               <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Video & Creative</div>
             </div>
@@ -910,21 +1076,19 @@
             turning raw footage into pure visual gold!
           </div>
 
-          <!-- Playful Stickers -->
-          <div class="sticker sticker-red">
+          <!-- Playful Draggable Stickers -->
+          <div class="sticker sticker-red" data-cursor="drag">
             ✦ 100% VERIFIED
           </div>
-          <div class="sticker sticker-yellow">
+          <div class="sticker sticker-yellow" data-cursor="drag">
             PANCHAYAT HERO
           </div>
 
           <!-- The Cutout Frame -->
           <div class="photo-cutout-frame">
-            <!-- User's Cutout PNG Photo (Default SVG Avatar if photo.png is not yet added) -->
-            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG">
+            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG" data-cursor="hover">
 
-            <!-- Floating Button to Upload / Change PNG Photo on the fly -->
-            <div class="photo-drop-badge" onclick="triggerPhotoUpload()">
+            <div class="photo-drop-badge" onclick="triggerPhotoUpload()" data-cursor="open">
               <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
               <span>Drop / Click Your PNG Photo Here</span>
             </div>
@@ -938,7 +1102,7 @@
   </main>
 
   <!-- Infinite Rolling Marquee Ribbon -->
-  <div class="marquee-ribbon">
+  <div class="marquee-ribbon" data-cursor="scroll">
     <div class="marquee-track">
       <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
       <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
@@ -948,7 +1112,7 @@
       <span>AYUSHMAN & PM-KISAN</span> <span class="star">✦</span>
       <span>100% TRANSPARENCY</span> <span class="star">✦</span>
       <span>TECH ALL-ROUNDER</span> <span class="star">✦</span>
-      <!-- Duplicate for loop -->
+      <!-- Loop duplicate -->
       <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
       <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
       <span>AI VIDEO PRODUCTION</span> <span class="star">✦</span>
@@ -975,7 +1139,7 @@
           </p>
         </div>
 
-        <div class="pitch-card">
+        <div class="pitch-card" data-cursor="hover">
           <div class="tape-effect"></div>
           <p>
             <strong>At the Gram Panchayat Secretariat:</strong> I manage the entire digital gateway for thousands of rural citizens. Aadhaar updates, Ayushman Bharat Golden Cards, PM-Kisan Samman Nidhi, Family ID, E-District certificates, and financial reporting on PFMS. Zero delay, zero corruption.
@@ -1004,7 +1168,7 @@
       <div class="works-grid">
 
         <!-- Work 01 -->
-        <div class="work-item">
+        <div class="work-item" data-cursor="open">
           <div class="work-media-box">
             <span class="work-number">01</span>
             <i class="fa-solid fa-id-card-clip work-icon"></i>
@@ -1023,7 +1187,7 @@
         </div>
 
         <!-- Work 02 -->
-        <div class="work-item">
+        <div class="work-item" data-cursor="open">
           <div class="work-media-box">
             <span class="work-number">02</span>
             <i class="fa-solid fa-video work-icon"></i>
@@ -1042,7 +1206,7 @@
         </div>
 
         <!-- Work 03 -->
-        <div class="work-item">
+        <div class="work-item" data-cursor="open">
           <div class="work-media-box">
             <span class="work-number">03</span>
             <i class="fa-solid fa-cubes work-icon"></i>
@@ -1061,7 +1225,7 @@
         </div>
 
         <!-- Work 04 -->
-        <div class="work-item">
+        <div class="work-item" data-cursor="open">
           <div class="work-media-box">
             <span class="work-number">04</span>
             <i class="fa-solid fa-network-wired work-icon"></i>
@@ -1083,7 +1247,7 @@
     </div>
   </section>
 
-  <!-- Section 3: B-Roll / Field Scrapbook (worksruthi style) -->
+  <!-- Section 3: B-Roll / Field Scrapbook -->
   <section id="broll">
     <div class="container">
       <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 40px;">
@@ -1098,28 +1262,28 @@
 
       <div class="broll-grid">
 
-        <div class="polaroid" style="transform: rotate(-3deg);">
+        <div class="polaroid" style="transform: rotate(-3deg);" data-cursor="hover">
           <div class="polaroid-img-box">
             <i class="fa-solid fa-desktop"></i>
           </div>
           <div class="polaroid-caption">portal grind at 9 AM</div>
         </div>
 
-        <div class="polaroid" style="transform: rotate(2deg);">
+        <div class="polaroid" style="transform: rotate(2deg);" data-cursor="hover">
           <div class="polaroid-img-box">
             <i class="fa-solid fa-mug-hot"></i>
           </div>
           <div class="polaroid-caption">cutting chai & gram sabha</div>
         </div>
 
-        <div class="polaroid" style="transform: rotate(-2deg);">
+        <div class="polaroid" style="transform: rotate(-2deg);" data-cursor="hover">
           <div class="polaroid-img-box">
             <i class="fa-solid fa-camera-retro"></i>
           </div>
           <div class="polaroid-caption">shooting raw reel b-roll</div>
         </div>
 
-        <div class="polaroid" style="transform: rotate(3deg);">
+        <div class="polaroid" style="transform: rotate(3deg);" data-cursor="hover">
           <div class="polaroid-img-box">
             <i class="fa-solid fa-people-roof"></i>
           </div>
@@ -1147,15 +1311,15 @@
         </p>
 
         <div class="contact-action-row">
-          <a href="https://wa.me/" target="_blank" class="btn-brutal" style="background: #25d366; border-color: #25d366; color: #fff; box-shadow: 4px 4px 0 var(--ink);">
+          <a href="https://wa.me/" target="_blank" class="btn-brutal" style="background: #25d366; border-color: #25d366; color: #fff; box-shadow: 4px 4px 0 var(--ink);" data-cursor="open">
             <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Chat on WhatsApp
           </a>
 
-          <a href="mailto:panchayat.assistant.official@gmail.com" class="btn-brutal-alt">
+          <a href="mailto:panchayat.assistant.official@gmail.com" class="btn-brutal-alt" data-cursor="open">
             <i class="fa-solid fa-envelope"></i> Send an Email
           </a>
 
-          <button class="btn-brutal-alt" onclick="openPhotoInstructions()">
+          <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
             <i class="fa-solid fa-image"></i> How to Add Your Photo
           </button>
         </div>
@@ -1167,7 +1331,7 @@
           © 2026 <strong>THE ALL-ROUNDER & PANCHAYAT ASSISTANT</strong>. Designed with chutzpah.
         </div>
         <div>
-          Inspired by worksruthi.com • Built with pure HTML, CSS & Three.js
+          Inspired by worksruthi.com • Built with exact .tc cursor physics & 120 FPS Lenis
         </div>
       </footer>
 
@@ -1204,47 +1368,259 @@
     </div>
   </div>
 
+  <!-- Floating Edit Info Button (Bottom Right) -->
+  <button onclick="openEditDrawer()" data-cursor="hover" style="position: fixed; bottom: 24px; right: 24px; z-index: 999; background: var(--cinnabar); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 20px; font-family: var(--font-heading); font-weight: 700; font-size: 13px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+    <i class="fa-solid fa-pen-to-square"></i> <span>Edit My Details</span>
+  </button>
+
+  <!-- Edit Profile Drawer Modal -->
+  <div id="edit-drawer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(28,27,26,0.85); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; max-width: 480px; width: 100%; padding: 32px; box-shadow: 10px 10px 0 var(--cinnabar); position: relative;">
+      <button onclick="closeEditDrawer()" style="position: absolute; top: 16px; right: 16px; background: var(--ink); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;">✕</button>
+      <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px;">अपनी जानकारी अपडेट करें ✏️</h3>
+      <p style="font-size: 13px; color: var(--ink-muted); margin-bottom: 20px;">यहाँ अपनी जानकारी भरें, वेबसाइट तुरंत अपडेट हो जाएगी:</p>
+      
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">आपका नाम (Full Name):</label>
+        <input type="text" id="edit-name" placeholder="जैसे: RAHUL VERMA" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">पंचायत और ब्लॉक / जिला:</label>
+        <input type="text" id="edit-panchayat" placeholder="जैसे: Gram Panchayat Rampur, Varanasi" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">व्हाट्सएप नंबर (10 डिजिट):</label>
+        <input type="tel" id="edit-phone" placeholder="जैसे: 9876543210" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 22px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">ईमेल आईडी:</label>
+        <input type="email" id="edit-email" placeholder="जैसे: yourname@gmail.com" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <button onclick="savePersonalDetails()" class="btn-brutal" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-check"></i> सेव करें (Save)
+        </button>
+        <button onclick="closeEditDrawer()" class="btn-brutal-alt">रद्द करें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       EXACT worksruthi.com JAVASCRIPT ENGINE (CURSOR & SMOOTH SCROLL)
+       ========================================================================== -->
   <script>
-    // 1. Trailing Cursor Logic (inspired by worksruthi.com)
-    const dot = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.left = mouseX + 'px';
-      dot.style.top = mouseY + 'px';
+    // 1. Lenis 120 FPS Inertial Smooth Scrolling (Desktop & Touch)
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.8,
+      infinite: false
     });
 
-    function renderCursor() {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-      requestAnimationFrame(renderCursor);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-    renderCursor();
+    requestAnimationFrame(raf);
 
-    // Hover expand cursor on links/buttons
-    document.querySelectorAll('a, button, .sticker, .photo-drop-badge, .polaroid').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        ring.style.width = '60px';
-        ring.style.height = '60px';
-        ring.style.borderColor = '#e03c31';
-        ring.style.background = 'rgba(224, 60, 49, 0.08)';
-      });
-      el.addEventListener('mouseleave', () => {
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-        ring.style.background = 'transparent';
-      });
-    });
+    // 2. EXACT worksruthi.com Cursor System (from worksruthi 0wwm4zeupoc1q.js)
+    (function initWorksruthiCursor() {
+      // Check if fine pointer
+      if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-    // 2. Photo Upload & Drag-and-Drop Handler
+      const htmlEl = document.documentElement;
+
+      // Exponential damping function directly from worksruthi:
+      // s = (current, target, rate, dt) => current + (target - current) * (1 - Math.exp(-rate * dt))
+      const smoothExp = (e, t, r, n) => e + (t - e) * (1 - Math.exp(-r * n));
+
+      const createSpan = (className, text = "") => {
+        let el = document.createElement("span");
+        el.className = className;
+        el.textContent = text;
+        return el;
+      };
+
+      const verbsSet = new Set(["scroll", "hover", "draw", "drag", "peel", "stick", "open"]);
+      const verbArrows = { scroll: "↓", drag: "↔", open: "↗" };
+
+      // Root container .tc
+      const tc = createSpan("tc");
+      tc.setAttribute("aria-hidden", "true");
+      tc.dataset.on = "false";
+      tc.dataset.mode = "idle";
+      tc.dataset.tone = "light";
+
+      // Verb container
+      const tcVerb = createSpan("tc-verb");
+      const tcVerbIn = createSpan("tc-verb__in");
+      const tcVerbW = createSpan("tc-verb__w");
+      tcVerbIn.append(tcVerbW);
+      tcVerb.append(tcVerbIn);
+
+      // Ball container
+      const tcBall = createSpan("tc-ball");
+      const tcBallIn = createSpan("tc-ball__in");
+      const tcBallDot = createSpan("tc-ball__dot");
+      tcBallIn.append(tcBallDot);
+      tcBall.append(tcBallIn);
+
+      // 6 Snake trail dots
+      const tcTrail = createSpan("tc-trail");
+      const trailDots = Array.from({ length: 6 }, () => {
+        let dot = createSpan("tc-trail__dot");
+        tcTrail.append(dot);
+        return { el: dot, x: -200, y: -200 };
+      });
+
+      tc.append(tcVerb, tcTrail, tcBall);
+      document.body.append(tc);
+      htmlEl.classList.add("has-tc");
+
+      // State tracking
+      let pos = { x: -200, y: -200, seen: false };
+      let trailPos = { x: -200, y: -200 };
+      let vel = { x: null, y: null, vx: 0, vy: 0 };
+      let currentVerb = "";
+      let lastElement = null;
+      let lastTime = performance.now();
+
+      // Update Cursor state on target hover
+      const updateCursorOnElement = (target) => {
+        let cursorData = target?.closest?.("[data-cursor]")?.dataset.cursor;
+        let interactiveTarget = target?.closest?.('[data-cursor], a[href], button, [role="button"], label, select, input');
+        
+        let verb = "";
+        if (interactiveTarget) {
+          if (interactiveTarget.hasAttribute("data-cursor")) {
+            let val = interactiveTarget.dataset.cursor;
+            verb = val === "none" ? null : (verbsSet.has(val) ? val : "");
+          } else {
+            verb = "hover";
+          }
+        }
+
+        if (verb === currentVerb) return;
+        currentVerb = verb;
+
+        if (verb === null) {
+          tc.dataset.on = "false";
+          return;
+        }
+
+        tc.dataset.on = pos.seen ? "true" : "false";
+        tc.dataset.mode = verb ? "word" : "idle";
+
+        if (!verb) return;
+
+        tcVerb.dataset.verb = verb;
+        let chars = [...verb].map((ch, idx) => {
+          let span = createSpan("tc-ch", ch);
+          span.style.setProperty("--i", idx);
+          return span;
+        });
+
+        tcVerbW.replaceChildren(...chars);
+        if (verbArrows[verb]) {
+          tcVerbW.append(createSpan("tc-verb__arrow", verbArrows[verb]));
+        }
+      };
+
+      // Pointer Move Handler
+      window.addEventListener("pointermove", (e) => {
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+
+        if (!pos.seen) {
+          pos.seen = true;
+          trailPos.x = pos.x;
+          trailPos.y = pos.y;
+          for (let d of trailDots) {
+            d.x = pos.x;
+            d.y = pos.y;
+          }
+        }
+
+        if (currentVerb !== null) {
+          tc.dataset.on = "true";
+        }
+
+        updateCursorOnElement(e.target);
+      }, { passive: true });
+
+      // Click / Down hop
+      window.addEventListener("pointerdown", () => {
+        tcVerb.classList.add("is-down");
+      });
+      window.addEventListener("pointerup", () => {
+        tcVerb.classList.remove("is-down");
+      });
+
+      // Mouse leave window
+      document.addEventListener("mouseleave", () => {
+        tc.dataset.on = "false";
+      });
+      document.addEventListener("mouseenter", () => {
+        tc.dataset.on = pos.seen ? "true" : "false";
+      });
+
+      // Physics RAF loop (Squash, Stretch, & Exponential Trail)
+      function tick(now) {
+        let dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
+
+        // Calculate velocity with smoothing
+        if (vel.x !== null && dt > 0) {
+          vel.vx = smoothExp(vel.vx, (pos.x - vel.x) / dt, 18, dt);
+          vel.vy = smoothExp(vel.vy, (pos.y - vel.y) / dt, 18, dt);
+        }
+        vel.x = pos.x;
+        vel.y = pos.y;
+
+        // Smooth text position
+        trailPos.x = smoothExp(trailPos.x, pos.x, 20, dt);
+        trailPos.y = smoothExp(trailPos.y, pos.y, 20, dt);
+
+        tcVerb.style.transform = `translate3d(${trailPos.x}px, ${trailPos.y}px, 0) translate(-50%, -50%)`;
+
+        // Squash & stretch based on velocity
+        let speed = Math.hypot(vel.vx, vel.vy);
+        let ballTransform = "";
+        if (speed > 30) {
+          let scaleFactor = Math.min(0.55, speed / 2600);
+          ballTransform = `rotate(${Math.atan2(vel.vy, vel.vx)}rad) scale(${1 + scaleFactor}, ${1 / (1 + scaleFactor)})`;
+        }
+
+        // Set Main Ball position
+        tcBall.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+        tcBallDot.style.transform = ballTransform;
+        tcBallDot.style.transformOrigin = "50% 50%";
+
+        // Cascade 6 trailing dots (each dot smoothly follows the previous one)
+        let leaderX = pos.x;
+        let leaderY = pos.y;
+        for (let dot of trailDots) {
+          dot.x = smoothExp(dot.x, leaderX, 30, dt);
+          dot.y = smoothExp(dot.y, leaderY, 30, dt);
+          dot.el.style.transform = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
+          leaderX = dot.x;
+          leaderY = dot.y;
+        }
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+
+    // 3. Photo Upload & Drag-and-Drop Handler
     const photoInput = document.getElementById('photo-file-input');
     const photoImg = document.getElementById('user-photo-img');
 
@@ -1263,7 +1639,6 @@
       }
     });
 
-    // Drag and Drop photo directly onto the stage
     const photoStage = document.querySelector('.photo-stage');
     photoStage.addEventListener('dragover', (e) => {
       e.preventDefault();
@@ -1285,13 +1660,11 @@
       }
     });
 
-    // Fallback stylish vector avatar if photo.png is not found
     function loadFallbackAvatar(img) {
       img.onerror = null;
       img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400"><rect width="320" height="400" fill="none"/><circle cx="160" cy="130" r="75" fill="%231c1b1a"/><path d="M50 380 C50 250, 270 250, 270 380 Z" fill="%231c1b1a"/><circle cx="160" cy="120" r="14" fill="%23e03c31"/><path d="M140 180 Q160 200 180 180" stroke="%23f3f3e9" stroke-width="6" fill="none" stroke-linecap="round"/></svg>';
     }
 
-    // Modal Helpers
     function openPhotoInstructions() {
       document.getElementById('photo-modal').classList.add('active');
     }
@@ -1299,7 +1672,7 @@
       document.getElementById('photo-modal').classList.remove('active');
     }
 
-    // 3. Draggable Stickers Physics (worksruthi style)
+    // 4. Draggable Stickers Physics
     document.querySelectorAll('.sticker').forEach(sticker => {
       let isDragging = false;
       let startX, startY, origLeft, origTop;
@@ -1332,43 +1705,6 @@
           sticker.style.cursor = 'grab';
         }
       });
-    });
-
-    // 4. Interactive Double-Click Red Stamp Easter Egg (worksruthi style)
-    window.addEventListener('dblclick', (e) => {
-      // Don't stamp on buttons or inputs
-      if (['BUTTON', 'INPUT', 'A'].includes(e.target.tagName)) return;
-
-      const stamp = document.createElement('div');
-      stamp.innerHTML = '✦ VERIFIED ✦';
-      stamp.style.position = 'fixed';
-      stamp.style.left = (e.clientX - 50) + 'px';
-      stamp.style.top = (e.clientY - 20) + 'px';
-      stamp.style.border = '2.5px solid #e03c31';
-      stamp.style.color = '#e03c31';
-      stamp.style.fontFamily = "'Anton', sans-serif";
-      stamp.style.fontSize = '14px';
-      stamp.style.padding = '4px 12px';
-      stamp.style.borderRadius = '4px';
-      stamp.style.textTransform = 'uppercase';
-      stamp.style.letterSpacing = '1px';
-      stamp.style.pointerEvents = 'none';
-      stamp.style.zIndex = '9999';
-      stamp.style.transform = 'rotate(' + ((Math.random() - 0.5) * 35) + 'deg) scale(1.4)';
-      stamp.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-      stamp.style.boxShadow = '0 0 10px rgba(224, 60, 49, 0.3)';
-
-      document.body.appendChild(stamp);
-
-      setTimeout(() => {
-        stamp.style.transform += ' scale(0.7)';
-      }, 50);
-
-      // Fade out after 6 seconds
-      setTimeout(() => {
-        stamp.style.opacity = '0';
-        setTimeout(() => stamp.remove(), 600);
-      }, 6000);
     });
 
     // 5. In-Page Personalizer / LocalStorage persistence
@@ -1412,7 +1748,6 @@
       document.getElementById('edit-drawer').style.display = 'none';
     }
 
-    // Auto-load saved details on page load
     window.addEventListener('DOMContentLoaded', () => {
       const savedName = localStorage.getItem('portfolio_name');
       const savedPanchayat = localStorage.getItem('portfolio_panchayat');
@@ -1431,46 +1766,5 @@
       }
     });
   </script>
-
-  <!-- Floating Edit Info Button (Bottom Right) -->
-  <button onclick="openEditDrawer()" style="position: fixed; bottom: 24px; right: 24px; z-index: 999; background: var(--cinnabar); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 20px; font-family: var(--font-heading); font-weight: 700; font-size: 13px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-solid fa-pen-to-square"></i> <span>Edit My Details</span>
-  </button>
-
-  <!-- Edit Profile Drawer Modal -->
-  <div id="edit-drawer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(28,27,26,0.85); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; max-width: 480px; width: 100%; padding: 32px; box-shadow: 10px 10px 0 var(--cinnabar); position: relative;">
-      <button onclick="closeEditDrawer()" style="position: absolute; top: 16px; right: 16px; background: var(--ink); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;">✕</button>
-      <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px;">अपनी जानकारी अपडेट करें ✏️</h3>
-      <p style="font-size: 13px; color: var(--ink-muted); margin-bottom: 20px;">यहाँ अपनी जानकारी भरें, वेबसाइट तुरंत अपडेट हो जाएगी:</p>
-      
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">आपका नाम (Full Name):</label>
-        <input type="text" id="edit-name" placeholder="जैसे: RAHUL VERMA" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
-      </div>
-
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">पंचायत और ब्लॉक / जिला:</label>
-        <input type="text" id="edit-panchayat" placeholder="जैसे: Gram Panchayat Rampur, Varanasi" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
-      </div>
-
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">व्हाट्सएप नंबर (10 डिजिट):</label>
-        <input type="tel" id="edit-phone" placeholder="जैसे: 9876543210" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
-      </div>
-
-      <div style="margin-bottom: 22px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">ईमेल आईडी:</label>
-        <input type="email" id="edit-email" placeholder="जैसे: yourname@gmail.com" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
-      </div>
-
-      <div style="display: flex; gap: 12px;">
-        <button onclick="savePersonalDetails()" class="btn-brutal" style="flex: 1; justify-content: center;">
-          <i class="fa-solid fa-check"></i> सेव करें (Save)
-        </button>
-        <button onclick="closeEditDrawer()" class="btn-brutal-alt">रद्द करें</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
