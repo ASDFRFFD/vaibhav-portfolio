@@ -332,69 +332,149 @@
     }
 
     /* ============================================================
-       WORKSRUTHI MONUMENTAL HERO: 4-WORD STAGE + VISITOR NAME
+       WORKSRUTHI MONUMENTAL HERO: CLEAN 3-COLUMN NON-OVERLAPPING GRID
        ============================================================ */
-    .hero-monument-wrap {
+    .hero-wrap {
       position: relative;
       width: 100%;
-      padding: 24px 0 30px;
+      padding: 30px 0 24px;
       overflow: hidden;
       background: var(--bg);
     }
 
-    .hero-eyebrow-pill {
+    .hero-top-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-hand);
       font-size: clamp(20px, 2.2vw, 26px);
       color: var(--cinnabar);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       transform: rotate(-1.5deg);
     }
 
-    /* Unified Editorial Hero Stage */
-    .hero-stage-unified {
+    .hero-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 440px) 1.25fr;
+      align-items: stretch;
+      min-height: clamp(520px, 78vh, 720px);
+      gap: 24px;
+      position: relative;
+    }
+
+    /* Left Side: HELLO (top) & MEET (bottom) */
+    .hero-side--left {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      position: relative;
-      width: 100%;
-      margin: 0 auto;
+      justify-content: space-between;
+      text-align: right;
+      padding: 20px 0 35px;
+      z-index: 3;
     }
 
-    /* Flow Rows: Natural sentence reading across */
-    .hero-flow-row {
+    /* Center Column: Grounded Photo Frame */
+    .hero-center-col {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-photo-wrapper {
+      width: 100%;
+      height: clamp(480px, 76vh, 700px);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 70%, rgba(224, 60, 49, 0.12) 0%, transparent 72%);
+    }
+
+    #user-photo-img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+      filter: drop-shadow(0 20px 32px rgba(28, 27, 26, 0.36));
+      display: block;
+      transition: transform 0.25s var(--ease-site);
+    }
+
+    #user-photo-img:hover {
+      transform: scale(1.02);
+    }
+
+    .photo-upload-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      border: 2px dashed var(--cinnabar);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      z-index: 10;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .photo-upload-badge:hover {
+      background: var(--highlight);
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Right Side: {{ first name }} (top) & vaibhav. + Byline (bottom) */
+    .hero-side--right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      padding: 20px 0 20px;
+      z-index: 3;
+    }
+
+    .hero-word-wrap {
       display: flex;
       align-items: baseline;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: clamp(12px, 2.5vw, 36px);
-      width: 100%;
-      z-index: 5;
     }
 
-    .hero-flow-row--top {
-      margin-bottom: -15px;
+    .hero-word--hello {
+      justify-content: flex-end;
     }
 
-    .hero-flow-row--bottom {
-      margin-top: -15px;
-      margin-bottom: 20px;
+    .hero-word--meet {
+      justify-content: flex-end;
+      margin-bottom: 24px;
     }
 
-    .hero-comma {
-      font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 9.5vw, 140px);
-      color: var(--cinnabar);
-      line-height: 0.8;
-      margin-left: -8px;
+    .hero-word--stranger-wrap {
+      justify-content: flex-start;
+      align-items: baseline;
+      gap: 4px;
     }
 
-    /* Monumental Words */
+    .hero-intro-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    /* Worksruthi Monumental Typography */
     .hero-word {
       font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 9.5vw, 140px);
+      font-size: clamp(54px, 8.8vw, 136px);
       color: var(--cinnabar);
       line-height: 0.82;
       letter-spacing: -0.015em;
@@ -402,12 +482,18 @@
       font-weight: 400;
       user-select: none;
       transition: transform 0.22s var(--ease-site);
-      display: inline-flex;
-      align-items: baseline;
     }
 
     .hero-word:hover {
       transform: scale(1.02);
+    }
+
+    .hero-word-comma {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(54px, 8.8vw, 136px);
+      color: var(--cinnabar);
+      line-height: 0.82;
+      margin-left: 2px;
     }
 
     /* Visitor Name Slot Interaction */
@@ -438,18 +524,18 @@
 
     .hero-placeholder {
       font-family: var(--font-mono);
-      font-size: clamp(20px, 3.2vw, 48px);
+      font-size: clamp(18px, 2.6vw, 42px);
       font-weight: 700;
       color: var(--cinnabar);
       text-transform: none;
       letter-spacing: -0.02em;
-      border-bottom: 3px dashed rgba(224, 60, 49, 0.6);
+      border-bottom: 2.5px dashed rgba(224, 60, 49, 0.6);
       padding: 2px 6px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       background: rgba(224, 60, 49, 0.05);
-      border-radius: 6px;
+      border-radius: 5px;
     }
 
     .hero-placeholder:hover {
@@ -480,7 +566,7 @@
     .hero-slot-input {
       all: unset;
       font-family: var(--font-mono);
-      font-size: clamp(20px, 3.2vw, 48px);
+      font-size: clamp(18px, 2.6vw, 42px);
       font-weight: 700;
       color: var(--cinnabar);
       caret-color: var(--cinnabar);
@@ -495,7 +581,7 @@
 
     .hero-merged {
       font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 9.5vw, 140px);
+      font-size: clamp(54px, 8.8vw, 136px);
       color: var(--cinnabar);
       line-height: 0.82;
       letter-spacing: -0.015em;
@@ -508,10 +594,10 @@
     .hero-merged::after {
       content: "✎";
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 13px;
       position: absolute;
       top: -8px;
-      right: -18px;
+      right: -16px;
       color: var(--ink-muted);
       opacity: 0;
       transition: opacity 0.2s;
@@ -526,71 +612,17 @@
       display: inline-block;
     }
 
-    /* Cutout Center Photo Stage */
-    .photo-stage-center {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      position: relative;
-      z-index: 2;
-      min-height: clamp(480px, 68vh, 680px);
-    }
-
-    .photo-stage {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      width: 100%;
-      height: 100%;
-    }
-
-    .photo-cutout-frame {
-      width: 100%;
-      max-width: 480px;
-      height: clamp(480px, 68vh, 680px);
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      background: radial-gradient(circle at 50% 70%, rgba(224, 60, 49, 0.12) 0%, transparent 72%);
-    }
-
-    #user-photo-img {
-      height: 100%;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
-      object-position: bottom center;
-      filter: drop-shadow(0 20px 32px rgba(28, 27, 26, 0.36));
-      display: block;
-      position: relative;
-      z-index: 2;
-      transform-origin: 50% 100%;
-      transition: transform 0.25s var(--ease-site);
-    }
-
-    #user-photo-img:hover {
-      transform: scale(1.02);
-    }
-
-    /* Byline & Micro-actions below name */
+    /* Byline Box Directly Under vaibhav. */
     .hero-byline-box {
-      max-width: 680px;
-      margin: 10px auto 0;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 6;
+      max-width: 480px;
+      margin-top: 4px;
     }
 
     .hero-byline-text {
-      font-size: clamp(15px, 1.4vw, 18px);
-      line-height: 1.55;
+      font-size: clamp(14px, 1.35vw, 17px);
+      line-height: 1.5;
       color: var(--ink);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .hero-byline-text .mark {
@@ -603,49 +635,62 @@
     .hero-byline-actions {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
     .hero-micro-stats {
       display: flex;
-      justify-content: center;
-      gap: 32px;
-      padding-top: 16px;
+      gap: 22px;
+      padding-top: 14px;
       border-top: 2px solid var(--ink);
-      width: 100%;
-      max-width: 500px;
     }
 
-    /* Desktop Wide Enhancement */
-    @media (min-width: 960px) {
-      .hero-flow-row--top {
-        position: absolute;
-        top: 20px;
-        left: 0;
-        right: 0;
-        justify-content: space-between;
-        padding: 0 4vw;
-        pointer-events: none;
+    /* Mobile Responsive (Below 920px) */
+    @media (max-width: 919px) {
+      .hero-layout-grid {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+        gap: 18px;
+        text-align: center;
       }
-      .hero-flow-row--top > * {
-        pointer-events: auto;
+      .hero-side--left {
+        padding: 0;
+        text-align: center;
+        align-items: center;
       }
-      .hero-flow-row--bottom {
-        position: absolute;
-        bottom: 120px;
-        left: 0;
-        right: 0;
-        justify-content: space-between;
-        padding: 0 4vw;
-        pointer-events: none;
+      .hero-side--right {
+        padding: 0;
+        text-align: center;
+        align-items: center;
       }
-      .hero-flow-row--bottom > * {
-        pointer-events: auto;
+      .hero-word--hello, .hero-word--meet, .hero-word--stranger-wrap {
+        justify-content: center;
+      }
+      .hero-word--meet {
+        margin-bottom: 0;
+      }
+      .hero-intro-group {
+        align-items: center;
+        text-align: center;
+      }
+      .hero-center-col {
+        order: 2;
+        min-height: 420px;
+      }
+      .hero-photo-wrapper {
+        height: 420px;
       }
       .hero-byline-box {
-        margin-top: 24px;
+        text-align: center;
+        margin: 12px auto 0;
+      }
+      .hero-byline-actions {
+        justify-content: center;
+      }
+      .hero-micro-stats {
+        justify-content: center;
       }
     }
 
@@ -1498,112 +1543,95 @@
     </div>
   </header>
 
-  <!-- Hero Section: Unified Natural Flow (hello {{ first name }} , meet vaibhav.) -->
-  <main class="hero-monument-wrap" id="hero">
+  <!-- Hero Section: Clean 3-Column Monumental Stage (Never Overlaps) -->
+  <main class="hero-wrap" id="hero">
     <div class="container">
       
-      <div class="hero-eyebrow-pill" id="hero-greeting-pill">
+      <div class="hero-top-eyebrow" id="hero-greeting-pill">
         hello world! welcome to my chaotic digital brain ✦
       </div>
 
-      <div class="hero-stage-unified">
+      <div class="hero-layout-grid">
         
-        <!-- Top Greeting Row: hello {{ first name }} , -->
-        <div class="hero-flow-row hero-flow-row--top">
-          <div class="hero-word hero-word--hello" data-cursor="hover">
-            hello
+        <!-- Column 1 (Left): HELLO (Top) & MEET (Bottom) -->
+        <div class="hero-side hero-side--left">
+          <div class="hero-word-wrap hero-word--hello" data-cursor="hover">
+            <span class="hero-word">hello</span>
           </div>
+          <div class="hero-word-wrap hero-word--meet" data-cursor="hover">
+            <span class="hero-word">meet</span>
+          </div>
+        </div>
+
+        <!-- Column 2 (Center): Grounded Cutout PNG Photo Frame -->
+        <div class="hero-center-col">
+          <div class="hero-photo-wrapper">
+            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Portrait PNG" data-cursor="hover">
+
+            <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
+              <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
+              <span>Drop / Click Your PNG Photo Here</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3 (Right): {{ first name }} , (Top) & VAIBHAV. + Byline (Bottom) -->
+        <div class="hero-side hero-side--right">
           
-          <div style="display: inline-flex; align-items: baseline;">
+          <!-- Top: Interactive Visitor Name Slot -->
+          <div class="hero-word-wrap hero-word--stranger-wrap">
             <div class="hero-word hero-word--stranger" id="hero-stranger-wrap" data-cursor="hover">
               <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" title="Click to enter your name">
                 <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
               </button>
             </div>
-            <span class="hero-comma">,</span>
+            <span class="hero-word-comma">,</span>
           </div>
-        </div>
 
-        <!-- Center Grounded Cutout PNG Photo Stage -->
-        <div class="photo-stage-center">
-          <div class="photo-stage">
-
-            <div class="doodle-note doodle-1">
-              yes, that's really me!
-              <svg style="width:34px; height:34px; fill:none; stroke:#e03c31; stroke-width:2.5;" viewBox="0 0 50 50">
-                <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
-              </svg>
+          <!-- Bottom: vaibhav. + Byline Box directly below -->
+          <div class="hero-intro-group">
+            <div class="hero-word hero-word--vaibhav" id="hero-author-word" data-cursor="hover">
+              <span id="hero-author-name">vaibhav.</span>
             </div>
 
-            <div class="doodle-note doodle-2">
-              crafting pixels & prompts ✦
-            </div>
+            <div class="hero-byline-box">
+              <p class="hero-byline-text">
+                Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
+                and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
+              </p>
 
-            <!-- Interactive Badges -->
-            <div class="sticker sticker-red" data-cursor="drag">
-              ✦ AI TINKERER
-            </div>
-            <div class="sticker sticker-yellow" data-cursor="drag">
-              STUDENT LIFE
-            </div>
-
-            <!-- Big Photo Frame -->
-            <div class="photo-cutout-frame">
-              <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Portrait PNG" data-cursor="hover">
-
-              <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
-                <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
-                <span>Drop / Click Your PNG Photo Here</span>
+              <div class="hero-byline-actions">
+                <a href="#projects" class="btn-brutal" data-cursor="open">
+                  <i class="fa-solid fa-rocket"></i> Shipped Projects
+                </a>
+                <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
+                  <i class="fa-solid fa-gamepad"></i> Play Games 🎮
+                </a>
+                <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
+                  <i class="fa-solid fa-camera"></i> Change Photo
+                </button>
               </div>
+
+              <!-- Micro Stats -->
+              <div class="hero-micro-stats">
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
+                </div>
+              </div>
+
             </div>
 
           </div>
-        </div>
 
-        <!-- Bottom Introduction Row: meet vaibhav. -->
-        <div class="hero-flow-row hero-flow-row--bottom">
-          <div class="hero-word hero-word--meet" data-cursor="hover">
-            meet
-          </div>
-          <div class="hero-word hero-word--vaibhav" id="hero-author-word" data-cursor="hover">
-            <span id="hero-author-name">vaibhav.</span>
-          </div>
-        </div>
-
-        <!-- Byline & Action Box -->
-        <div class="hero-byline-box">
-          <p class="hero-byline-text">
-            Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
-            and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
-          </p>
-
-          <div class="hero-byline-actions">
-            <a href="#projects" class="btn-brutal" data-cursor="open">
-              <i class="fa-solid fa-rocket"></i> Shipped Projects
-            </a>
-            <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
-              <i class="fa-solid fa-gamepad"></i> Play Games 🎮
-            </a>
-            <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
-          </div>
-
-          <!-- Micro Stats -->
-          <div class="hero-micro-stats">
-            <div>
-              <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
-            </div>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
-            </div>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
-              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
-            </div>
-          </div>
         </div>
 
       </div>
