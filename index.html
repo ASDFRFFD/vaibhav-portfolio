@@ -1298,6 +1298,179 @@
     function closePhotoInstructions() {
       document.getElementById('photo-modal').classList.remove('active');
     }
+
+    // 3. Draggable Stickers Physics (worksruthi style)
+    document.querySelectorAll('.sticker').forEach(sticker => {
+      let isDragging = false;
+      let startX, startY, origLeft, origTop;
+
+      sticker.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = sticker.getBoundingClientRect();
+        origLeft = rect.left;
+        origTop = rect.top;
+        sticker.style.position = 'fixed';
+        sticker.style.left = origLeft + 'px';
+        sticker.style.top = origTop + 'px';
+        sticker.style.zIndex = '9999';
+        sticker.style.cursor = 'grabbing';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        sticker.style.left = (origLeft + dx) + 'px';
+        sticker.style.top = (origTop + dy) + 'px';
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          sticker.style.cursor = 'grab';
+        }
+      });
+    });
+
+    // 4. Interactive Double-Click Red Stamp Easter Egg (worksruthi style)
+    window.addEventListener('dblclick', (e) => {
+      // Don't stamp on buttons or inputs
+      if (['BUTTON', 'INPUT', 'A'].includes(e.target.tagName)) return;
+
+      const stamp = document.createElement('div');
+      stamp.innerHTML = '✦ VERIFIED ✦';
+      stamp.style.position = 'fixed';
+      stamp.style.left = (e.clientX - 50) + 'px';
+      stamp.style.top = (e.clientY - 20) + 'px';
+      stamp.style.border = '2.5px solid #e03c31';
+      stamp.style.color = '#e03c31';
+      stamp.style.fontFamily = "'Anton', sans-serif";
+      stamp.style.fontSize = '14px';
+      stamp.style.padding = '4px 12px';
+      stamp.style.borderRadius = '4px';
+      stamp.style.textTransform = 'uppercase';
+      stamp.style.letterSpacing = '1px';
+      stamp.style.pointerEvents = 'none';
+      stamp.style.zIndex = '9999';
+      stamp.style.transform = 'rotate(' + ((Math.random() - 0.5) * 35) + 'deg) scale(1.4)';
+      stamp.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      stamp.style.boxShadow = '0 0 10px rgba(224, 60, 49, 0.3)';
+
+      document.body.appendChild(stamp);
+
+      setTimeout(() => {
+        stamp.style.transform += ' scale(0.7)';
+      }, 50);
+
+      // Fade out after 6 seconds
+      setTimeout(() => {
+        stamp.style.opacity = '0';
+        setTimeout(() => stamp.remove(), 600);
+      }, 6000);
+    });
+
+    // 5. In-Page Personalizer / LocalStorage persistence
+    function savePersonalDetails() {
+      const name = document.getElementById('edit-name').value;
+      const panchayat = document.getElementById('edit-panchayat').value;
+      const phone = document.getElementById('edit-phone').value;
+      const email = document.getElementById('edit-email').value;
+
+      if (name) {
+        document.querySelectorAll('.brand span').forEach(el => el.textContent = name.toUpperCase());
+        localStorage.setItem('portfolio_name', name);
+      }
+      if (panchayat) {
+        document.querySelector('.status-pill span:last-child').textContent = panchayat + ' • Open for Impact';
+        localStorage.setItem('portfolio_panchayat', panchayat);
+      }
+      if (phone) {
+        const waBtn = document.querySelector('a[href*="wa.me"]');
+        if (waBtn) waBtn.href = 'https://wa.me/91' + phone.replace(/\D/g, '');
+        localStorage.setItem('portfolio_phone', phone);
+      }
+      if (email) {
+        const mailBtn = document.querySelector('a[href*="mailto:"]');
+        if (mailBtn) mailBtn.href = 'mailto:' + email;
+        localStorage.setItem('portfolio_email', email);
+      }
+      closeEditDrawer();
+      alert('बधाई! आपकी जानकारी अपडेट हो गई है और सुरक्षित सेव कर दी गई है।');
+    }
+
+    function openEditDrawer() {
+      document.getElementById('edit-drawer').style.display = 'flex';
+      document.getElementById('edit-name').value = localStorage.getItem('portfolio_name') || '';
+      document.getElementById('edit-panchayat').value = localStorage.getItem('portfolio_panchayat') || '';
+      document.getElementById('edit-phone').value = localStorage.getItem('portfolio_phone') || '';
+      document.getElementById('edit-email').value = localStorage.getItem('portfolio_email') || '';
+    }
+
+    function closeEditDrawer() {
+      document.getElementById('edit-drawer').style.display = 'none';
+    }
+
+    // Auto-load saved details on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedName = localStorage.getItem('portfolio_name');
+      const savedPanchayat = localStorage.getItem('portfolio_panchayat');
+      const savedPhone = localStorage.getItem('portfolio_phone');
+      const savedEmail = localStorage.getItem('portfolio_email');
+
+      if (savedName) document.querySelectorAll('.brand span').forEach(el => el.textContent = savedName.toUpperCase());
+      if (savedPanchayat) document.querySelector('.status-pill span:last-child').textContent = savedPanchayat + ' • Open for Impact';
+      if (savedPhone) {
+        const waBtn = document.querySelector('a[href*="wa.me"]');
+        if (waBtn) waBtn.href = 'https://wa.me/91' + savedPhone.replace(/\D/g, '');
+      }
+      if (savedEmail) {
+        const mailBtn = document.querySelector('a[href*="mailto:"]');
+        if (mailBtn) mailBtn.href = 'mailto:' + savedEmail;
+      }
+    });
   </script>
+
+  <!-- Floating Edit Info Button (Bottom Right) -->
+  <button onclick="openEditDrawer()" style="position: fixed; bottom: 24px; right: 24px; z-index: 999; background: var(--cinnabar); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 20px; font-family: var(--font-heading); font-weight: 700; font-size: 13px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+    <i class="fa-solid fa-pen-to-square"></i> <span>Edit My Details</span>
+  </button>
+
+  <!-- Edit Profile Drawer Modal -->
+  <div id="edit-drawer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(28,27,26,0.85); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; max-width: 480px; width: 100%; padding: 32px; box-shadow: 10px 10px 0 var(--cinnabar); position: relative;">
+      <button onclick="closeEditDrawer()" style="position: absolute; top: 16px; right: 16px; background: var(--ink); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;">✕</button>
+      <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px;">अपनी जानकारी अपडेट करें ✏️</h3>
+      <p style="font-size: 13px; color: var(--ink-muted); margin-bottom: 20px;">यहाँ अपनी जानकारी भरें, वेबसाइट तुरंत अपडेट हो जाएगी:</p>
+      
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">आपका नाम (Full Name):</label>
+        <input type="text" id="edit-name" placeholder="जैसे: RAHUL VERMA" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">पंचायत और ब्लॉक / जिला:</label>
+        <input type="text" id="edit-panchayat" placeholder="जैसे: Gram Panchayat Rampur, Varanasi" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">व्हाट्सएप नंबर (10 डिजिट):</label>
+        <input type="tel" id="edit-phone" placeholder="जैसे: 9876543210" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="margin-bottom: 22px;">
+        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">ईमेल आईडी:</label>
+        <input type="email" id="edit-email" placeholder="जैसे: yourname@gmail.com" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <button onclick="savePersonalDetails()" class="btn-brutal" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-check"></i> सेव करें (Save)
+        </button>
+        <button onclick="closeEditDrawer()" class="btn-brutal-alt">रद्द करें</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
