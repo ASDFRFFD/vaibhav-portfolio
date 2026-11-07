@@ -331,138 +331,249 @@
       transform: translateY(-1px);
     }
 
-    /* Hero Section */
-    .hero-wrap {
-      padding: 45px 0 35px;
+    /* ============================================================
+       WORKSRUTHI MONUMENTAL HERO: 4-WORD STAGE + VISITOR NAME
+       ============================================================ */
+    .hero-monument-wrap {
+      position: relative;
+      width: 100%;
+      padding: 24px 0 30px;
+      overflow: hidden;
+      background: var(--bg);
     }
 
-    .hero-eyebrow {
+    .hero-eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--font-hand);
-      font-size: 26px;
+      font-size: clamp(20px, 2.2vw, 26px);
       color: var(--cinnabar);
-      margin-bottom: 6px;
-      display: inline-block;
+      margin-bottom: 8px;
       transform: rotate(-1.5deg);
     }
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(40px, 7.8vw, 108px);
-      line-height: 0.92;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      color: var(--ink);
-      margin-bottom: 22px;
+    .hero-monument-stage {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 460px) 1.15fr;
+      align-items: stretch;
+      position: relative;
+      min-height: clamp(540px, 76vh, 740px);
+      gap: 16px;
     }
 
-    .hero-title .cinnabar-text {
+    /* Left Column: HELLO (Top) & MEET (Bottom) */
+    .hero-col--left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      text-align: right;
+      padding-bottom: 24px;
+      z-index: 3;
+    }
+
+    /* Center Column: Cutout Grounded Photo Centerpiece */
+    .hero-col--center {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Right Column: {{ first name }} (Top) & [NAME]. + Byline (Bottom) */
+    .hero-col--right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      text-align: left;
+      padding-bottom: 14px;
+      z-index: 3;
+    }
+
+    /* Worksruthi Monumental Typography */
+    .hero-word {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(50px, 8.8vw, 136px);
       color: var(--cinnabar);
+      line-height: 0.82;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      font-weight: 400;
+      user-select: none;
+      transition: transform 0.22s var(--ease-site);
+    }
+
+    .hero-word:hover {
+      transform: scale(1.015);
+    }
+
+    .hero-word--hello {
+      margin-top: 6px;
+      align-self: flex-end;
+    }
+
+    .hero-word--meet {
+      margin-bottom: 14px;
+      align-self: flex-end;
+    }
+
+    .hero-word--sruthi {
+      margin-bottom: 10px;
+      color: var(--cinnabar);
+      display: flex;
+      align-items: baseline;
+    }
+
+    /* Visitor Name Slot - The Exact Worksruthi Interaction */
+    .hero-word--stranger {
+      margin-top: 6px;
+      min-height: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-slot-btn {
+      all: unset;
+      cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.18s var(--ease-site);
+    }
+
+    .hero-slot-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .hero-slot-btn:focus-visible {
+      outline: 2px solid var(--cinnabar);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .hero-placeholder {
+      font-family: var(--font-mono);
+      font-size: clamp(18px, 2.8vw, 42px);
+      font-weight: 700;
+      color: var(--cinnabar);
+      text-transform: none;
+      letter-spacing: -0.02em;
+      border-bottom: 2.5px dashed rgba(224, 60, 49, 0.55);
+      padding: 2px 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(224, 60, 49, 0.04);
+      border-radius: 4px;
+    }
+
+    .hero-placeholder:hover {
+      border-bottom-style: solid;
+      background: rgba(224, 60, 49, 0.09);
+    }
+
+    .hero-placeholder .bracket {
+      color: var(--ink-muted);
+      font-weight: 400;
+      opacity: 0.6;
+    }
+
+    .hero-slot-caret {
+      display: inline-block;
+      width: max(2.5px, 0.08em);
+      height: 1.05em;
+      background: var(--ink);
+      margin-left: 0.08em;
+      vertical-align: -0.15em;
+      animation: 1.06s step-end infinite hero-slot-blink;
+    }
+
+    @keyframes hero-slot-blink {
+      50% { opacity: 0; }
+    }
+
+    .hero-slot-input {
+      all: unset;
+      font-family: var(--font-mono);
+      font-size: clamp(18px, 2.8vw, 42px);
+      font-weight: 700;
+      color: var(--cinnabar);
+      caret-color: var(--cinnabar);
+      border-bottom: 3px solid var(--cinnabar);
+      min-width: 3ch;
+      width: calc(var(--len, 6) * 1ch + 0.25em);
+      background: rgba(224, 60, 49, 0.08);
+      padding: 0 4px;
+      border-radius: 3px;
+      cursor: text;
+    }
+
+    .hero-merged {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(50px, 8.8vw, 136px);
+      color: var(--cinnabar);
+      line-height: 0.82;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      display: inline-block;
+      cursor: pointer;
       position: relative;
     }
 
-    .squiggle-svg {
+    .hero-merged::after {
+      content: "✎";
+      font-family: var(--font-mono);
+      font-size: 13px;
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 12px;
-      pointer-events: none;
+      top: -8px;
+      right: -16px;
+      color: var(--ink-muted);
+      opacity: 0;
+      transition: opacity 0.2s;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: center;
+    .hero-merged:hover::after {
+      opacity: 0.85;
     }
 
-    .hero-bio {
-      font-size: clamp(17px, 1.8vw, 21px);
-      line-height: 1.55;
-      color: var(--ink);
-      margin-bottom: 26px;
-      max-width: 530px;
+    .hero-merged__rise {
+      animation: 0.85s cubic-bezier(.22, 1, .36, 1) both hero-merge;
+      display: inline-block;
     }
 
-    .hero-bio .mark {
-      background: var(--highlight);
-      padding: 2px 6px;
-      font-weight: 700;
-      border-radius: 3px;
+    @keyframes hero-merge {
+      0% {
+        opacity: 0;
+        transform: translateY(110%);
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
     }
 
-    .hero-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    /* Brutalist Magnetic Buttons */
-    .btn-brutal {
-      padding: 12px 24px;
-      background: var(--ink);
-      color: #fff;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      box-shadow: 4px 4px 0 var(--cinnabar);
-      transition: box-shadow 0.15s ease, background 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .btn-brutal:hover {
-      box-shadow: 6px 6px 0 var(--cinnabar);
-      background: var(--cinnabar);
-      border-color: var(--cinnabar);
-    }
-
-    .btn-brutal-alt {
-      padding: 12px 20px;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      box-shadow: 4px 4px 0 var(--ink);
-      transition: box-shadow 0.15s ease, background 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .btn-brutal-alt:hover {
-      box-shadow: 6px 6px 0 var(--ink);
-      background: var(--highlight);
-    }
-
-    /* Cutout Photo Centerpiece - Grounded & Huge like worksruthi */
+    /* Cutout Photo Centerpiece - Grounded & Framed between words */
     .photo-stage {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      min-height: clamp(520px, 72vh, 720px);
+      width: 100%;
+      height: 100%;
+      min-height: clamp(500px, 74vh, 720px);
     }
 
     .photo-cutout-frame {
       width: 100%;
-      max-width: 500px;
-      height: clamp(520px, 72vh, 720px);
+      max-width: 460px;
+      height: clamp(500px, 74vh, 720px);
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -476,7 +587,7 @@
       max-width: 100%;
       object-fit: contain;
       object-position: bottom center;
-      filter: drop-shadow(0 20px 30px rgba(28, 27, 26, 0.38));
+      filter: drop-shadow(0 20px 32px rgba(28, 27, 26, 0.36));
       display: block;
       position: relative;
       z-index: 2;
@@ -526,8 +637,8 @@
       z-index: 5;
     }
 
-    .doodle-1 { top: 35px; left: -10px; transform: rotate(-6deg); }
-    .doodle-2 { bottom: 85px; right: -15px; transform: rotate(5deg); }
+    .doodle-1 { top: 25px; left: -10px; transform: rotate(-6deg); }
+    .doodle-2 { bottom: 95px; right: -15px; transform: rotate(5deg); }
 
     .sticker {
       position: absolute;
@@ -549,16 +660,278 @@
       background: var(--cinnabar);
       color: #fff;
       top: 15px;
-      right: 20px;
+      right: 15px;
       transform: rotate(6deg);
     }
 
     .sticker-yellow {
       background: var(--highlight);
       color: var(--ink);
-      bottom: 25px;
+      bottom: 30px;
       left: 10px;
       transform: rotate(-4deg);
+    }
+
+    /* Byline & Micro-actions below name */
+    .hero-byline-box {
+      max-width: 480px;
+      margin-top: 6px;
+    }
+
+    .hero-byline-text {
+      font-size: clamp(14px, 1.35vw, 17px);
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .hero-byline-text .mark {
+      background: var(--highlight);
+      padding: 2px 6px;
+      font-weight: 700;
+      border-radius: 3px;
+    }
+
+    .hero-byline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* Brutalist Buttons */
+    .btn-brutal {
+      padding: 12px 22px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--cinnabar);
+      transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-brutal:hover {
+      box-shadow: 6px 6px 0 var(--cinnabar);
+      background: var(--cinnabar);
+      border-color: var(--cinnabar);
+      transform: translateY(-1px);
+    }
+
+    .btn-brutal-alt {
+      padding: 12px 18px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-brutal-alt:hover {
+      box-shadow: 6px 6px 0 var(--ink);
+      background: var(--highlight);
+      transform: translateY(-1px);
+    }
+
+    /* Micro Stats */
+    .hero-micro-stats {
+      display: flex;
+      gap: 22px;
+      padding-top: 14px;
+      border-top: 2px solid var(--ink);
+    }
+
+    /* Responsive Mobile Layout for Hero */
+    @media (max-width: 849px) {
+      .hero-monument-stage {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .hero-mobile-row {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .hero-col--left, .hero-col--right {
+        text-align: center;
+        align-items: center;
+        padding: 0;
+        height: auto;
+      }
+
+      .hero-word {
+        font-size: clamp(40px, 13vw, 76px);
+        line-height: 0.9;
+      }
+
+      .hero-placeholder, .hero-slot-input {
+        font-size: clamp(20px, 6.2vw, 34px);
+      }
+
+      .hero-col--center {
+        min-height: 440px;
+        order: 2;
+      }
+
+      .hero-byline-box {
+        margin: 16px auto 0;
+        text-align: center;
+      }
+
+      .hero-byline-actions {
+        justify-content: center;
+      }
+
+      .hero-micro-stats {
+        justify-content: center;
+      }
+    }
+
+    /* ============================================================
+       THE WORKSRUTHI BOUNCING / HOPPING MASCOT MESSAGE BUTTON (.pf)
+       ============================================================ */
+    .pf {
+      z-index: 990;
+      cursor: pointer;
+      position: fixed;
+      right: 28px;
+      bottom: 34px;
+      width: 78px;
+      height: 84px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      transform-origin: 50% 100%;
+      will-change: transform;
+      outline: none;
+      user-select: none;
+    }
+
+    .pf-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pf-mascot-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 12px 20px rgba(224, 60, 49, 0.42));
+      transition: filter 0.25s ease;
+    }
+
+    .pf:hover .pf-mascot-svg {
+      filter: drop-shadow(0 18px 28px rgba(224, 60, 49, 0.65));
+    }
+
+    .pf-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1.5px solid var(--bg);
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.22);
+      animation: pfBadgeFloat 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pfBadgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Mail Slot Drop Opening (.pf-slot) */
+    .pf-slot {
+      z-index: 989;
+      pointer-events: none;
+      position: fixed;
+      right: 27px;
+      bottom: 28px;
+      width: 80px;
+      height: 12px;
+      background: #1c1b1a;
+      border-radius: 999px;
+      border: 2px solid rgba(243, 243, 233, 0.4);
+      opacity: 0;
+      transform: scaleX(0.2);
+      transform-origin: 50% 50%;
+      transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.6);
+    }
+
+    .pf-slot.is-open {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    /* Floating Toast notification for Mascot */
+    .pf-toast {
+      position: fixed;
+      bottom: 125px;
+      right: 28px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      border: 2px solid var(--cinnabar);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.25s var(--ease-site);
+      pointer-events: none;
+    }
+
+    .pf-toast.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     /* Infinite Marquee */
@@ -1082,90 +1455,114 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main class="hero-wrap" id="hero">
+  <!-- Hero Section: The Exact Worksruthi 4-Word Monumental Stage -->
+  <main class="hero-monument-wrap" id="hero">
     <div class="container">
       
-      <div class="hero-eyebrow">
+      <div class="hero-eyebrow-pill" id="hero-greeting-pill">
         hello world! welcome to my chaotic digital brain ✦
       </div>
 
-      <!-- Funny, Witty Headline -->
-      <h1 class="hero-title">
-        A LITTLE BIT OF AI,<br/>
-        A LITTLE BIT OF STUDENT,<br/>
-        A LITTLE BIT OF <span class="cinnabar-text" data-cursor="hover">PANCHAYAT<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
-        & A WHOLE LOT OF CHUTZPAH.
-      </h1>
-
-      <div class="hero-grid">
+      <div class="hero-monument-stage">
         
-        <!-- Left: Crisp, Funny 1-2 Liners -->
-        <div>
-          <p class="hero-bio">
-            Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
-            and passionately an <span class="mark">AI tinkerer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
-          </p>
-
-          <div class="hero-btns">
-            <a href="#projects" class="btn-brutal" data-cursor="open">
-              <i class="fa-solid fa-rocket"></i> My Projects
-            </a>
-            <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
-              <i class="fa-solid fa-basketball"></i> Play Game 🏀
-            </a>
-            <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
+        <!-- Left Column: HELLO (Top) & MEET (Bottom) -->
+        <div class="hero-col--left">
+          <div class="hero-word hero-word--hello" data-cursor="hover">
+            hello
           </div>
-
-          <!-- Micro Stats -->
-          <div style="display: flex; gap: 24px; padding-top: 14px; border-top: 2px solid var(--ink);">
-            <div>
-              <div style="font-family: var(--font-display); font-size: 28px; color: var(--cinnabar);">2+</div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">Shipped Portals</div>
-            </div>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 28px; color: var(--ink);">∞</div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">AI Curiosity</div>
-            </div>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 28px; color: var(--cinnabar);">100%</div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">Pure Hustle</div>
-            </div>
+          <div class="hero-word hero-word--meet" data-cursor="hover">
+            meet
           </div>
         </div>
 
-        <!-- Right: Grounded, Large Cutout PNG Photo -->
-        <div class="photo-stage">
+        <!-- Center Column: Grounded Cutout PNG Photo Frame -->
+        <div class="hero-col--center">
+          <div class="photo-stage">
 
-          <div class="doodle-note doodle-1">
-            yes, that's really me!
-            <svg style="width:34px; height:34px; fill:none; stroke:#e03c31; stroke-width:2.5;" viewBox="0 0 50 50">
-              <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
-            </svg>
-          </div>
-
-          <div class="doodle-note doodle-2">
-            pretending to study ✦
-          </div>
-
-          <!-- Draggable Badges -->
-          <div class="sticker sticker-red" data-cursor="drag">
-            ✦ AI TINKERER
-          </div>
-          <div class="sticker sticker-yellow" data-cursor="drag">
-            STUDENT LIFE
-          </div>
-
-          <!-- Big Photo Frame -->
-          <div class="photo-cutout-frame">
-            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG" data-cursor="hover">
-
-            <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
-              <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
-              <span>Drop / Click Your PNG Photo Here</span>
+            <div class="doodle-note doodle-1">
+              yes, that's really me!
+              <svg style="width:34px; height:34px; fill:none; stroke:#e03c31; stroke-width:2.5;" viewBox="0 0 50 50">
+                <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
+              </svg>
             </div>
+
+            <div class="doodle-note doodle-2">
+              crafting pixels & prompts ✦
+            </div>
+
+            <!-- Interactive Badges -->
+            <div class="sticker sticker-red" data-cursor="drag">
+              ✦ AI TINKERER
+            </div>
+            <div class="sticker sticker-yellow" data-cursor="drag">
+              STUDENT LIFE
+            </div>
+
+            <!-- Big Photo Frame -->
+            <div class="photo-cutout-frame">
+              <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG" data-cursor="hover">
+
+              <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
+                <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
+                <span>Drop / Click Your PNG Photo Here</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: {{ first name }} (Top) & ALOK. + Byline (Bottom) -->
+        <div class="hero-col--right">
+          
+          <!-- Interactive Visitor Name Slot -->
+          <div class="hero-word hero-word--stranger" id="hero-stranger-wrap" data-cursor="hover">
+            <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" title="Click to enter your name">
+              <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
+            </button>
+          </div>
+
+          <!-- Bottom: [NAME]. and Byline Box -->
+          <div>
+            <div class="hero-word hero-word--sruthi" id="hero-author-word" data-cursor="hover">
+              <span id="hero-author-name">ALOK.</span>
+            </div>
+
+            <div class="hero-byline-box">
+              <p class="hero-byline-text">
+                Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
+                and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
+              </p>
+
+              <div class="hero-byline-actions">
+                <a href="#projects" class="btn-brutal" data-cursor="open">
+                  <i class="fa-solid fa-rocket"></i> Shipped Projects
+                </a>
+                <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
+                  <i class="fa-solid fa-basketball"></i> Play Hoops 🏀
+                </a>
+                <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
+                  <i class="fa-solid fa-camera"></i> Change Photo
+                </button>
+              </div>
+
+              <!-- Micro Stats -->
+              <div class="hero-micro-stats">
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
+                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
@@ -1174,7 +1571,7 @@
 
     </div>
   </main>
-
+  
   <!-- Marquee Banner -->
   <div class="marquee-ribbon" data-cursor="scroll">
     <div class="marquee-track">
@@ -1987,6 +2384,8 @@
 
       if (name) {
         document.getElementById('header-brand-name').textContent = name.toUpperCase();
+        const heroAuthor = document.getElementById('hero-author-name');
+        if (heroAuthor) heroAuthor.textContent = name.toUpperCase() + '.';
         localStorage.setItem('portfolio_name', name);
       }
       if (phone) {
@@ -2027,6 +2426,279 @@
         if (mailBtn) mailBtn.href = 'mailto:' + savedEmail;
       }
     });
+  
+    // ============================================================
+    // 10. Worksruthi Interactive Visitor Name Slot
+    // ============================================================
+    const strangerWrap = document.getElementById('hero-stranger-wrap');
+
+    function renderVisitorSlot() {
+      if (!strangerWrap) return;
+      const visitorName = localStorage.getItem('portfolio_visitor_name');
+      if (visitorName && visitorName.trim()) {
+        strangerWrap.classList.add('hero-word--merged');
+        strangerWrap.innerHTML = `
+          <button type="button" class="hero-slot-btn tap hero-merged" id="hero-slot-btn" aria-label="change your name, ${visitorName}" data-cursor="hover" title="Click to change your name">
+            <span class="hero-merged__rise">${visitorName.trim().toUpperCase()}</span>
+          </button>
+        `;
+        const greetingPill = document.getElementById('hero-greeting-pill');
+        if (greetingPill) greetingPill.innerHTML = `welcome, <strong>${visitorName.trim()}</strong>! glad you stopped by ✦`;
+      } else {
+        strangerWrap.classList.remove('hero-word--merged');
+        strangerWrap.innerHTML = `
+          <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" data-cursor="hover" title="Click to type your name">
+            <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
+          </button>
+        `;
+      }
+
+      const currentBtn = document.getElementById('hero-slot-btn');
+      if (currentBtn) {
+        currentBtn.addEventListener('click', enterVisitorNameMode);
+      }
+    }
+
+    function enterVisitorNameMode() {
+      if (!strangerWrap) return;
+      const currentVal = localStorage.getItem('portfolio_visitor_name') || '';
+      strangerWrap.classList.remove('hero-word--merged');
+      strangerWrap.innerHTML = `
+        <span class="hero-placeholder hero-placeholder--editing">
+          <span class="bracket">{{</span>
+          <input type="text" id="visitor-name-input" class="hero-slot-input" maxlength="20" placeholder="your name" value="${currentVal}" autocomplete="off" spellcheck="false" enterkeyhint="done" autofocus />
+          <span class="bracket">}}</span>
+        </span>
+      `;
+
+      const input = document.getElementById('visitor-name-input');
+      if (input) {
+        input.focus();
+        input.select();
+        const updateLen = () => {
+          input.style.setProperty('--len', Math.max(input.value.length, 1));
+        };
+        updateLen();
+        input.addEventListener('input', updateLen);
+
+        let finished = false;
+        const finishEdit = () => {
+          if (finished) return;
+          finished = true;
+          const val = input.value.trim();
+          if (val) {
+            localStorage.setItem('portfolio_visitor_name', val);
+            playAudioSfx('score');
+            if (typeof confetti === 'function') {
+              confetti({
+                particleCount: 35,
+                spread: 60,
+                origin: { x: 0.72, y: 0.28 }
+              });
+            }
+          } else {
+            localStorage.removeItem('portfolio_visitor_name');
+          }
+          renderVisitorSlot();
+        };
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            input.blur();
+          } else if (e.key === 'Escape') {
+            finished = true;
+            renderVisitorSlot();
+          }
+        });
+
+        input.addEventListener('blur', finishEdit, { once: true });
+      }
+    }
+
+    // ============================================================
+    // 11. Worksruthi Hopping Mascot Physics Engine
+    // ============================================================
+    const mascotBtn = document.getElementById('mascot-mail-btn');
+    const mascotSlot = document.getElementById('mascot-slot');
+    const mascotBadge = document.getElementById('mascot-badge');
+    const mascotToast = document.getElementById('mascot-toast');
+    const mascotShadow = document.getElementById('mascot-shadow');
+
+    let mascotPhysics = {
+      t: 0,
+      lastTime: performance.now(),
+      lastScroll: window.scrollY,
+      scrollVel: 0,
+      idleSeconds: 0,
+      hopT: -1,
+      plunging: false,
+      lastSectionIndex: -1
+    };
+
+    const trackedSections = document.querySelectorAll('section, main, .marquee-ribbon');
+
+    function updateMascotLoop(timestamp) {
+      if (!mascotBtn) return;
+      const dt = Math.min(0.05, (timestamp - mascotPhysics.lastTime) / 1000);
+      mascotPhysics.lastTime = timestamp;
+      mascotPhysics.t += dt;
+
+      if (!mascotPhysics.plunging) {
+        const currentScroll = window.scrollY;
+        const rawVel = dt > 0 ? (currentScroll - mascotPhysics.lastScroll) / dt : 0;
+        mascotPhysics.scrollVel += (rawVel - mascotPhysics.scrollVel) * Math.min(1, 10 * dt);
+        mascotPhysics.lastScroll = currentScroll;
+
+        if (Math.abs(rawVel) > 2) {
+          mascotPhysics.idleSeconds = 0;
+        } else {
+          mascotPhysics.idleSeconds += dt;
+        }
+
+        // Natural harmonic floating / breathing
+        let y = Math.sin(mascotPhysics.t * 3.2) * 6;
+        let tilt = Math.max(-16, Math.min(16, mascotPhysics.scrollVel * 0.04));
+        let scaleX = 1;
+        let scaleY = 1;
+
+        // Section change detection (triggers energetic Worksruthi hop)
+        let currentSecIndex = -1;
+        const viewMid = currentScroll + window.innerHeight * 0.5;
+        trackedSections.forEach((sec, idx) => {
+          const top = sec.offsetTop;
+          const bottom = top + sec.offsetHeight;
+          if (viewMid >= top && viewMid < bottom) currentSecIndex = idx;
+        });
+
+        if (currentSecIndex !== mascotPhysics.lastSectionIndex && mascotPhysics.lastSectionIndex !== -1) {
+          if (mascotPhysics.hopT < 0) mascotPhysics.hopT = 0;
+        }
+        mascotPhysics.lastSectionIndex = currentSecIndex;
+
+        // Idle cute hop every 5 seconds of inactivity
+        if (mascotPhysics.idleSeconds > 5.0 && mascotPhysics.hopT < 0) {
+          mascotPhysics.hopT = 0;
+          mascotPhysics.idleSeconds = 0;
+        }
+
+        // Parabolic Hop physics with squash and stretch
+        if (mascotPhysics.hopT >= 0) {
+          const duration = 0.65;
+          const progress = mascotPhysics.hopT / duration;
+          if (progress < 0.15) {
+            // Squash before leap
+            scaleX = 1.18;
+            scaleY = 0.82;
+          } else if (progress < 0.85) {
+            // Airborne arc
+            const arc = (progress - 0.15) / 0.7;
+            y -= Math.sin(Math.PI * arc) * 36;
+            scaleY = 1 + 0.22 * Math.cos(Math.PI * arc);
+            scaleX = 1 / Math.sqrt(scaleY);
+            tilt += Math.sin(Math.PI * 2 * arc) * -12;
+          } else {
+            // Landing bounce
+            const landProg = (progress - 0.85) / 0.15;
+            scaleX = 1 + (1 - landProg) * 0.14;
+            scaleY = 1 - (1 - landProg) * 0.12;
+          }
+
+          mascotPhysics.hopT += dt;
+          if (mascotPhysics.hopT > duration) {
+            mascotPhysics.hopT = -1;
+          }
+        }
+
+        // Shadow scaling with elevation
+        if (mascotShadow) {
+          const shadowScale = Math.max(0.45, 1 - (y < 0 ? -y / 55 : 0));
+          mascotShadow.setAttribute('transform', `scale(${shadowScale}) translate(${(1 - shadowScale) * 50}, ${(1 - shadowScale) * 84})`);
+        }
+
+        mascotBtn.style.transform = `translate3d(0, ${y}px, 0) rotate(${tilt}deg) scale(${scaleX}, ${scaleY})`;
+      }
+
+      requestAnimationFrame(updateMascotLoop);
+    }
+
+    if (mascotBtn) {
+      requestAnimationFrame(updateMascotLoop);
+
+      // Mascot Click: The Worksruthi Drop-Slot Plunge Sequence
+      mascotBtn.addEventListener('click', () => {
+        if (mascotPhysics.plunging) return;
+        mascotPhysics.plunging = true;
+        playAudioSfx('pop');
+
+        // Open mail slot
+        if (mascotSlot) mascotSlot.classList.add('is-open');
+
+        // Plunge dive into slot
+        mascotBtn.style.transition = 'transform 0.45s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.35s ease';
+        mascotBtn.style.transform = 'translate3d(0, 44px, 0) scale(0.65, 1.4)';
+        mascotBtn.style.opacity = '0';
+
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 45,
+            spread: 70,
+            origin: { x: 0.92, y: 0.9 }
+          });
+        }
+
+        // Show dispatch toast
+        const visitor = localStorage.getItem('portfolio_visitor_name') || 'Friend';
+        if (mascotToast) {
+          mascotToast.innerHTML = `💌 Opening message dispatch for <strong>${visitor}</strong>...`;
+          mascotToast.classList.add('show');
+        }
+
+        setTimeout(() => {
+          const contactSec = document.getElementById('contact');
+          if (contactSec) {
+            contactSec.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 400);
+
+        // Re-emerge after 1.2s with joyful jump
+        setTimeout(() => {
+          if (mascotSlot) mascotSlot.classList.remove('is-open');
+          if (mascotToast) mascotToast.classList.remove('show');
+          mascotBtn.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease';
+          mascotBtn.style.transform = 'translate3d(0, 0px, 0) scale(1, 1)';
+          mascotBtn.style.opacity = '1';
+          mascotPhysics.hopT = 0;
+          setTimeout(() => {
+            mascotBtn.style.transition = '';
+            mascotPhysics.plunging = false;
+          }, 600);
+        }, 1300);
+      });
+
+      // Hover wiggles & badge text
+      mascotBtn.addEventListener('mouseenter', () => {
+        if (mascotBadge) mascotBadge.textContent = "let's chat! 💌";
+        if (mascotPhysics.hopT < 0) mascotPhysics.hopT = 0;
+      });
+
+      mascotBtn.addEventListener('mouseleave', () => {
+        if (mascotBadge) mascotBadge.textContent = "say hi! ✦";
+      });
+    }
+
+    // Initialize visitor slot on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderVisitorSlot();
+
+      // Sync saved author name to hero
+      const savedName = localStorage.getItem('portfolio_name');
+      if (savedName) {
+        const heroAuthorName = document.getElementById('hero-author-name');
+        if (heroAuthorName) heroAuthorName.textContent = savedName.toUpperCase() + '.';
+      }
+    });
+
   </script>
 </body>
 </html>
