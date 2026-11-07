@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vaibhav Yadav | Portfolio Admin Dashboard</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+  <style>
+    :root {
+      --bg: #f3f3e9;
+      --bg-alt: #eaeae0;
+      --paper: #fbfbf6;
+      --ink: #1c1b1a;
+      --ink-muted: #5e5d59;
+      --cinnabar: #e03c31;
+      --highlight: #fef08a;
+      --font-display: 'Anton', 'Syne', sans-serif;
+      --font-heading: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Admin Top Bar */
+    .admin-header {
+      background: var(--ink);
+      color: #fff;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--cinnabar);
+    }
+
+    .admin-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .admin-brand {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .admin-brand span {
+      color: var(--cinnabar);
+    }
+
+    .admin-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-admin {
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid var(--ink);
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--cinnabar);
+      color: #fff;
+      box-shadow: 3px 3px 0 var(--highlight);
+    }
+
+    .btn-primary:hover {
+      background: #c8281d;
+      transform: translate(-1px, -1px);
+    }
+
+    .btn-secondary {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .btn-secondary:hover {
+      background: var(--highlight);
+      transform: translate(-1px, -1px);
+    }
+
+    /* Admin Hero Notice */
+    .admin-hero {
+      margin: 32px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .admin-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .dot-online {
+      width: 9px;
+      height: 9px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+
+    /* Admin Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 28px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      background: transparent;
+      border: 2px solid transparent;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      color: var(--ink-muted);
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--paper);
+      border-color: var(--ink);
+      color: var(--cinnabar);
+      border-bottom: 2px solid var(--paper);
+      margin-bottom: -2px;
+    }
+
+    /* Form Cards */
+    .admin-card {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      padding: clamp(20px, 3vw, 36px);
+      box-shadow: 8px 8px 0 var(--ink);
+      margin-bottom: 30px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      background: var(--bg);
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink);
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--cinnabar);
+      background: #fff;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Photo Upload Box */
+    .photo-upload-container {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--bg);
+      border: 2px dashed var(--ink);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .photo-preview-box {
+      width: 140px;
+      height: 180px;
+      background: #1c1b1a;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .photo-upload-meta {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--ink);
+      color: #fff;
+      border: 2px solid var(--cinnabar);
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      animation: slideUp 0.25s ease;
+    }
+
+    .toast-pill.show { display: flex; }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="container admin-nav">
+      <a href="admin.html" class="admin-brand">
+        <i class="fa-solid fa-sliders"></i>
+        VAIBHAV <span>ADMIN PANEL</span>
+      </a>
+
+      <div class="admin-actions">
+        <button class="btn-admin btn-primary" onclick="saveAllToFirebase()">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Save to Cloud
+        </button>
+        <a href="index.html" class="btn-admin btn-secondary" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> View Live Site
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="admin-hero">
+      <div>
+        <div style="font-family: var(--font-hand); font-size: 24px; color: var(--cinnabar); transform: rotate(-1deg);">
+          control room ✦
+        </div>
+        <h1 class="admin-title">PORTFOLIO MANAGER</h1>
+      </div>
+
+      <div class="status-badge" id="firebase-status">
+        <span class="dot-online"></span> Firebase Connected (work-69135)
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchAdminTab('hero')"><i class="fa-solid fa-user"></i> 1. Profile & Hero</button>
+      <button class="tab-btn" onclick="switchAdminTab('projects')"><i class="fa-solid fa-rocket"></i> 2. Shipped Projects</button>
+      <button class="tab-btn" onclick="switchAdminTab('passions')"><i class="fa-solid fa-camera-retro"></i> 3. Passions & Polaroids</button>
+      <button class="tab-btn" onclick="switchAdminTab('contact')"><i class="fa-solid fa-envelope"></i> 4. Contact & Socials</button>
+    </div>
+
+    <!-- TAB 1: HERO & PROFILE -->
+    <div id="tab-hero" class="tab-content">
+      <div class="admin-card">
+        <div class="card-title"><i class="fa-solid fa-id-badge" style="color: var(--cinnabar);"></i> Hero Headline & Profile</div>
+        <p class="card-desc">Update your hero cutout picture, prominent name, headline, and witty bio.</p>
+
+        <!-- Hero Photo Upload -->
+        <label class="form-label">Hero Cutout Photo (PNG with transparent background looks best)</label>
+        <div class="photo-upload-container">
+          <div class="photo-preview-box">
+            <img id="admin-hero-preview" class="photo-preview-img" src="photo.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100\' height=\'100\' fill=\'%231c1b1a\'/><text x=\'50\' y=\'55\' fill=\'%23fff\' font-size=\'12\' text-anchor=\'middle\'>Photo</text></svg>'">
+          </div>
+          <div class="photo-upload-meta">
+            <p style="font-size: 14px; color: var(--ink-muted); margin-bottom: 12px;">
+              Upload your high-resolution portrait or transparent PNG cutout. It will be stored in your cloud database and display across all screens.
+            </p>
+            <input type="file" id="hero-photo-input" accept="image/*" style="display:none" onchange="handleHeroPhotoUpload(event)">
+            <button class="btn-admin btn-secondary" onclick="document.getElementById('hero-photo-input').click()">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Choose New Photo
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Full Name (Large Heading)</label>
+            <input type="text" id="cfg-name" class="form-input" value="VAIBHAV YADAV">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Eyebrow Subtext</label>
+            <input type="text" id="cfg-eyebrow" class="form-input" value="welcome to my digital brain ✦">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Hero Headline</label>
+          <input type="text" id="cfg-headline" class="form-input" value="A LITTLE BIT OF AI, A LITTLE BIT OF STUDENT, A LITTLE BIT OF PANCHAYAT, & A WHOLE LOT OF CHUTZPAH.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bio Paragraph</label>
+          <textarea id="cfg-bio" class="form-textarea" rows="3">Technically a student, officially a Panchayat Assistant (to keep my parents calm), and passionately an AI explorer & web maker building gpsahayak.in and psunionup.site.</textarea>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Stat 1 (e.g. 2+ Shipped Portals)</label>
+            <input type="text" id="cfg-stat1" class="form-input" value="2+ SHIPPED PORTALS">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stat 2 (e.g. ∞ AI Curiosity)</label>
+            <input type="text" id="cfg-stat2" class="form-input" value="∞ AI CURIOSITY">
+          </div>
+        </div>
+
+        <button class="btn-admin btn-primary" onclick="saveAllToFirebase()">
+          <i class="fa-solid fa-floppy-disk"></i> Save Profile Details
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 2: SHIPPED PROJECTS -->
+    <div id="tab-projects" class="tab-content" style="display:none;">
+      <div class="admin-card">
+        <div class="card-title"><i class="fa-solid fa-rocket" style="color: var(--cinnabar);"></i> Project 1: gpsahayak.in</div>
+        <p class="card-desc">Your flagship digital assistance portal for Gram Panchayats.</p>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Project Title</label>
+            <input type="text" id="cfg-p1-title" class="form-input" value="GPSAHAYAK.IN">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Live URL</label>
+            <input type="url" id="cfg-p1-url" class="form-input" value="https://gpsahayak.in">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="cfg-p1-desc" class="form-textarea" rows="3">The premier digital dashboard designed for Panchayat Assistants to streamline citizen scheme verifications (Ayushman, PM-Kisan, E-District) and official portal links in one fast, unified web hub.</textarea>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="card-title"><i class="fa-solid fa-users" style="color: var(--cinnabar);"></i> Project 2: psunionup.site</div>
+        <p class="card-desc">Your community portal uniting Panchayat Sahayaks across Uttar Pradesh.</p>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Project Title</label>
+            <input type="text" id="cfg-p2-title" class="form-input" value="PSUNIONUP.SITE">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Live URL</label>
+            <input type="url" id="cfg-p2-url" class="form-input" value="https://psunionup.site">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="cfg-p2-desc" class="form-textarea" rows="3">A state-wide union and community platform uniting Panchayat Sahayaks across Uttar Pradesh for circulars, updates, welfare resources, and technical support forums.</textarea>
+        </div>
+
+        <button class="btn-admin btn-primary" onclick="saveAllToFirebase()">
+          <i class="fa-solid fa-floppy-disk"></i> Save Project Details
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 3: PASSIONS & POLAROIDS -->
+    <div id="tab-passions" class="tab-content" style="display:none;">
+      <div class="admin-card">
+        <div class="card-title"><i class="fa-solid fa-camera-retro" style="color: var(--cinnabar);"></i> The Multiverse Polaroid Scrapbook</div>
+        <p class="card-desc">Upload actual photos for each of your 4 passions and write custom captions.</p>
+
+        <div class="form-grid-2">
+          <!-- Passion 1: Travel -->
+          <div style="background: var(--bg); border: 2px solid var(--ink); border-radius: 12px; padding: 18px;">
+            <h4 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px;">01. Adventure & Travel 🥾</h4>
+            <div style="height: 160px; background: #000; border-radius: 6px; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">
+              <img id="admin-preview-travel" src="hobby_travel.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <input type="file" id="input-photo-travel" accept="image/*" style="display:none" onchange="handleHobbyPhoto(event, 'travel')">
+            <button class="btn-admin btn-secondary" style="width: 100%; justify-content: center;" onclick="document.getElementById('input-photo-travel').click()">
+              <i class="fa-solid fa-upload"></i> Upload Travel Photo
+            </button>
+          </div>
+
+          <!-- Passion 2: Astronomy -->
+          <div style="background: var(--bg); border: 2px solid var(--ink); border-radius: 12px; padding: 18px;">
+            <h4 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px;">02. Astronomy & Cosmos 🔭</h4>
+            <div style="height: 160px; background: #000; border-radius: 6px; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">
+              <img id="admin-preview-astronomy" src="hobby_astronomy.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <input type="file" id="input-photo-astronomy" accept="image/*" style="display:none" onchange="handleHobbyPhoto(event, 'astronomy')">
+            <button class="btn-admin btn-secondary" style="width: 100%; justify-content: center;" onclick="document.getElementById('input-photo-astronomy').click()">
+              <i class="fa-solid fa-upload"></i> Upload Astronomy Photo
+            </button>
+          </div>
+
+          <!-- Passion 3: Robotics -->
+          <div style="background: var(--bg); border: 2px solid var(--ink); border-radius: 12px; padding: 18px;">
+            <h4 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px;">03. Robotics & Hardware 🤖</h4>
+            <div style="height: 160px; background: #000; border-radius: 6px; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">
+              <img id="admin-preview-robotics" src="hobby_robotics.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <input type="file" id="input-photo-robotics" accept="image/*" style="display:none" onchange="handleHobbyPhoto(event, 'robotics')">
+            <button class="btn-admin btn-secondary" style="width: 100%; justify-content: center;" onclick="document.getElementById('input-photo-robotics').click()">
+              <i class="fa-solid fa-upload"></i> Upload Robotics Photo
+            </button>
+          </div>
+
+          <!-- Passion 4: Coding -->
+          <div style="background: var(--bg); border: 2px solid var(--ink); border-radius: 12px; padding: 18px;">
+            <h4 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 8px;">04. Midnight AI Coding ⚡</h4>
+            <div style="height: 160px; background: #000; border-radius: 6px; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">
+              <img id="admin-preview-coding" src="hobby_coding.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <input type="file" id="input-photo-coding" accept="image/*" style="display:none" onchange="handleHobbyPhoto(event, 'coding')">
+            <button class="btn-admin btn-secondary" style="width: 100%; justify-content: center;" onclick="document.getElementById('input-photo-coding').click()">
+              <i class="fa-solid fa-upload"></i> Upload Coding Photo
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button class="btn-admin btn-primary" onclick="saveAllToFirebase()">
+            <i class="fa-solid fa-floppy-disk"></i> Save Passions Photos
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: CONTACT & SOCIALS -->
+    <div id="tab-contact" class="tab-content" style="display:none;">
+      <div class="admin-card">
+        <div class="card-title"><i class="fa-solid fa-envelope" style="color: var(--cinnabar);"></i> Contact Information & Links</div>
+        <p class="card-desc">Update where visitors reach out to you.</p>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="cfg-email" class="form-input" value="upsc431@gmail.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number (e.g. 919876543210)</label>
+          <input type="text" id="cfg-whatsapp" class="form-input" placeholder="Enter your 10-digit number">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">GitHub Profile URL</label>
+          <input type="url" id="cfg-github" class="form-input" value="https://github.com/ASDFRFFD">
+        </div>
+
+        <button class="btn-admin btn-primary" onclick="saveAllToFirebase()">
+          <i class="fa-solid fa-floppy-disk"></i> Save Contact Links
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast-pill" id="admin-toast">
+    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+    <span id="toast-text">Synced successfully to Firebase! ☁️</span>
+  </div>
+
+  <script>
+    // Firebase Configuration from user
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5-gzeKnu1qbMj1TAzbo_2-yuLXijrqic",
+      authDomain: "work-69135.firebaseapp.com",
+      projectId: "work-69135",
+      storageBucket: "work-69135.firebasestorage.app",
+      messagingSenderId: "154916955198",
+      appId: "1:154916955198:web:3a134ad404a13229da9d6f"
+    };
+
+    let db = null;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      console.log('Firebase initialized successfully!');
+    } catch (e) {
+      console.warn('Firebase init warning:', e);
+    }
+
+    // Tab Switcher
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.textContent.toLowerCase().includes(tabName));
+      if (activeBtn) activeBtn.classList.add('active');
+      const target = document.getElementById('tab-' + tabName);
+      if (target) target.style.display = 'block';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('admin-toast');
+      document.getElementById('toast-text').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Hero photo handler
+    let heroPhotoBase64 = localStorage.getItem('portfolio_user_photo') || '';
+    if (heroPhotoBase64) {
+      const prev = document.getElementById('admin-hero-preview');
+      if (prev) prev.src = heroPhotoBase64;
+    }
+
+    function handleHeroPhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        heroPhotoBase64 = e.target.result;
+        document.getElementById('admin-hero-preview').src = heroPhotoBase64;
+        localStorage.setItem('portfolio_user_photo', heroPhotoBase64);
+        showToast('Photo loaded locally! Click "Save to Cloud" to sync.');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Hobby photo handlers
+    const hobbyPhotos = {
+      travel: localStorage.getItem('portfolio_hobby_travel') || '',
+      astronomy: localStorage.getItem('portfolio_hobby_astronomy') || '',
+      robotics: localStorage.getItem('portfolio_hobby_robotics') || '',
+      coding: localStorage.getItem('portfolio_hobby_coding') || ''
+    };
+
+    Object.keys(hobbyPhotos).forEach(h => {
+      if (hobbyPhotos[h]) {
+        const el = document.getElementById('admin-preview-' + h);
+        if (el) el.src = hobbyPhotos[h];
+      }
+    });
+
+    function handleHobbyPhoto(event, hobby) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        hobbyPhotos[hobby] = e.target.result;
+        document.getElementById('admin-preview-' + hobby).src = e.target.result;
+        localStorage.setItem('portfolio_hobby_' + hobby, e.target.result);
+        showToast(hobby.toUpperCase() + ' photo updated! Click "Save to Cloud".');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Save All Data to Firebase Firestore + localStorage
+    async function saveAllToFirebase() {
+      const data = {
+        name: document.getElementById('cfg-name').value.trim() || 'VAIBHAV YADAV',
+        eyebrow: document.getElementById('cfg-eyebrow').value.trim(),
+        headline: document.getElementById('cfg-headline').value.trim(),
+        bio: document.getElementById('cfg-bio').value.trim(),
+        stat1: document.getElementById('cfg-stat1').value.trim(),
+        stat2: document.getElementById('cfg-stat2').value.trim(),
+        p1: {
+          title: document.getElementById('cfg-p1-title').value.trim(),
+          url: document.getElementById('cfg-p1-url').value.trim(),
+          desc: document.getElementById('cfg-p1-desc').value.trim()
+        },
+        p2: {
+          title: document.getElementById('cfg-p2-title').value.trim(),
+          url: document.getElementById('cfg-p2-url').value.trim(),
+          desc: document.getElementById('cfg-p2-desc').value.trim()
+        },
+        email: document.getElementById('cfg-email').value.trim(),
+        whatsapp: document.getElementById('cfg-whatsapp').value.trim(),
+        github: document.getElementById('cfg-github').value.trim(),
+        heroPhoto: heroPhotoBase64,
+        hobbyPhotos: hobbyPhotos,
+        updatedAt: new Date().toISOString()
+      };
+
+      // Save to localStorage for instant local reflection
+      localStorage.setItem('portfolio_firebase_data', JSON.stringify(data));
+      localStorage.setItem('portfolio_name', data.name);
+      localStorage.setItem('portfolio_email', data.email);
+      if (data.whatsapp) localStorage.setItem('portfolio_phone', data.whatsapp);
+
+      // Save to Firebase Firestore
+      if (db) {
+        try {
+          await db.collection('portfolio').doc('content').set(data, { merge: true });
+          showToast('Synced to Firebase Cloud successfully! ☁️✨');
+        } catch (err) {
+          console.warn('Firestore write notice:', err);
+          showToast('Saved locally in browser! (Firebase: ' + (err.code || 'synced locally') + ')');
+        }
+      } else {
+        showToast('Saved locally in browser cache!');
+      }
+    }
+
+    // Load initial data from Firebase on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+      // First check local cache
+      const cached = localStorage.getItem('portfolio_firebase_data');
+      if (cached) {
+        try {
+          const d = JSON.parse(cached);
+          populateFields(d);
+        } catch (e) {}
+      }
+
+      // Then fetch from Firebase
+      if (db) {
+        try {
+          const doc = await db.collection('portfolio').doc('content').get();
+          if (doc.exists) {
+            const cloudData = doc.data();
+            populateFields(cloudData);
+            localStorage.setItem('portfolio_firebase_data', JSON.stringify(cloudData));
+          }
+        } catch (err) {
+          console.log('Firebase fetch notice:', err.message);
+        }
+      }
+    });
+
+    function populateFields(d) {
+      if (d.name) document.getElementById('cfg-name').value = d.name;
+      if (d.eyebrow) document.getElementById('cfg-eyebrow').value = d.eyebrow;
+      if (d.headline) document.getElementById('cfg-headline').value = d.headline;
+      if (d.bio) document.getElementById('cfg-bio').value = d.bio;
+      if (d.stat1) document.getElementById('cfg-stat1').value = d.stat1;
+      if (d.stat2) document.getElementById('cfg-stat2').value = d.stat2;
+      if (d.p1) {
+        if (d.p1.title) document.getElementById('cfg-p1-title').value = d.p1.title;
+        if (d.p1.url) document.getElementById('cfg-p1-url').value = d.p1.url;
+        if (d.p1.desc) document.getElementById('cfg-p1-desc').value = d.p1.desc;
+      }
+      if (d.p2) {
+        if (d.p2.title) document.getElementById('cfg-p2-title').value = d.p2.title;
+        if (d.p2.url) document.getElementById('cfg-p2-url').value = d.p2.url;
+        if (d.p2.desc) document.getElementById('cfg-p2-desc').value = d.p2.desc;
+      }
+      if (d.email) document.getElementById('cfg-email').value = d.email;
+      if (d.whatsapp) document.getElementById('cfg-whatsapp').value = d.whatsapp;
+      if (d.github) document.getElementById('cfg-github').value = d.github;
+      if (d.heroPhoto) {
+        heroPhotoBase64 = d.heroPhoto;
+        const prev = document.getElementById('admin-hero-preview');
+        if (prev) prev.src = d.heroPhoto;
+      }
+      if (d.hobbyPhotos) {
+        Object.keys(d.hobbyPhotos).forEach(h => {
+          if (d.hobbyPhotos[h]) {
+            hobbyPhotos[h] = d.hobbyPhotos[h];
+            const el = document.getElementById('admin-preview-' + h);
+            if (el) el.src = d.hobbyPhotos[h];
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>

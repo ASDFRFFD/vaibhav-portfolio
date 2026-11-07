@@ -16,7 +16,12 @@
   <!-- Lenis Smooth Scroll -->
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   
-  <!-- Canvas Confetti -->
+  
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -235,7 +240,29 @@
       animation: pulse 1.5s infinite;
     }
 
-    .sound-toggle-btn {
+    
+    .admin-pill-btn {
+      background: var(--ink);
+      color: #fff;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0 var(--cinnabar);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .admin-pill-btn:hover {
+      background: var(--cinnabar);
+      transform: translateY(-1px);
+    }
+.sound-toggle-btn {
       background: var(--paper);
       border: 1.5px solid var(--ink);
       border-radius: 999px;
@@ -561,7 +588,7 @@
       align-items: flex-end;
       width: 100%;
       max-width: 440px;
-      height: clamp(380px, 48vh, 520px);
+      height: clamp(500px, 64vh, 660px); max-width: 500px;
     }
 
     .photo-cutout-frame {
@@ -1668,6 +1695,7 @@
       </ul>
 
       <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="admin.html" class="admin-pill-btn" data-cursor="hover" title="Open Firebase Admin Panel"><i class="fa-solid fa-sliders"></i> Admin</a>
         <button class="sound-toggle-btn" id="sound-toggle" data-cursor="hover" title="Toggle Sound">
           <i class="fa-solid fa-volume-high"></i> SFX: ON
         </button>
@@ -1682,37 +1710,24 @@
   <main class="hero-wrap" id="hero">
     <div class="container">
       
-      <!-- Worksruthi Interactive Stranger Greeting Bar -->
-      <div class="hero-top-bar">
-        <div class="hero-greeting-line">
-          <span class="hero-greeting-lead">hello</span>
-          <span class="hero-slot-wrap" id="hero-stranger-wrap">
-            <button type="button" class="hero-slot-btn hero-placeholder" id="hero-slot-btn" title="Click to enter your name">
-              <span class="bracket">{{</span> first name<span class="hero-slot-caret"></span> <span class="bracket">}}</span>
-            </button>
-          </span>
-          <span class="hero-greeting-comma">,</span>
-          <span class="hero-greeting-tail">meet <span id="hero-author-name">vaibhav.</span> ✦</span>
-        </div>
-      </div>
-
       <!-- Hero 2-Column Responsive Grid -->
       <div class="hero-grid">
         
-        <!-- Left Column: Title, Bio, Buttons, Stats -->
+        <!-- Left Column: I AM VAIBHAV YADAV, Title, Bio, Buttons, Stats -->
         <div class="hero-left-col">
           <div class="hero-eyebrow" id="hero-greeting-pill">
-            welcome to my chaotic digital brain ✦
+            welcome to my digital brain ✦
           </div>
 
-          <h1 class="hero-title">
-            A LITTLE BIT OF AI,<br/>
-            A LITTLE BIT OF STUDENT,<br/>
-            A LITTLE BIT OF <span class="cinnabar-text" data-cursor="hover">PANCHAYAT<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
-            & A WHOLE LOT OF CHUTZPAH.
+          <h1 class="hero-title" style="margin-bottom: 8px;">
+            I AM <span class="cinnabar-text"><span id="hero-name-span">VAIBHAV YADAV</span><svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>
           </h1>
 
-          <p class="hero-bio">
+          <div class="hero-tagline-punch" id="hero-headline" style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(17px, 2vw, 22px); line-height: 1.3; text-transform: uppercase; color: var(--ink); margin-bottom: 10px;">
+            A LITTLE BIT OF AI, A LITTLE BIT OF STUDENT, A LITTLE BIT OF <span style="background: var(--cinnabar); color:#fff; padding:1px 6px; border-radius:4px; border:1.5px solid var(--ink);">PANCHAYAT</span>, & A WHOLE LOT OF CHUTZPAH.
+          </div>
+
+          <p class="hero-bio" id="hero-bio">
             Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
           </p>
 
@@ -1733,11 +1748,11 @@
 
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-num">2+</span>
+              <span class="stat-num" id="stat-portals">2+</span>
               <span class="stat-lbl">Shipped Portals</span>
             </div>
             <div class="stat-item">
-              <span class="stat-num">∞</span>
+              <span class="stat-num" id="stat-ai">∞</span>
               <span class="stat-lbl">AI Curiosity</span>
             </div>
             <div class="stat-item">
@@ -1747,7 +1762,7 @@
           </div>
         </div>
 
-        <!-- Right Column: Grounded Photo Stage -->
+        <!-- Right Column: Grounded Large Photo Stage (BADA SIZE) -->
         <div class="hero-right-col">
           <div class="photo-stage">
             <div class="photo-cutout-frame">
@@ -3224,18 +3239,29 @@
         cosmicBtn.style.color = '#fff';
         hoopsBtn.style.background = 'var(--paper)';
         hoopsBtn.style.color = 'var(--ink)';
-        resizeCosmicCanvas();
+        
+        requestAnimationFrame(() => {
+          resizeCosmicCanvas();
+          if (!cosmicGame.running) {
+            startCosmicGame();
+          }
+        });
       }
       playAudioSfx('pop');
     }
 
-    // Cosmic Defender Game Logic
+    // ============================================================
+    // 7. RETRO COSMIC DEFENDER SPACE ARCADE GAME (FULLY FUNCTIONAL)
+    // ============================================================
+    const cosmicCanvas = document.getElementById('cosmic-canvas');
+    let ctxCosmic = cosmicCanvas ? cosmicCanvas.getContext('2d') : null;
+
     let cosmicGame = {
       running: false,
       score: 0,
       highScore: parseInt(localStorage.getItem('cosmic_highscore') || '0', 10),
       lives: 3,
-      player: { x: 350, y: 330, vx: 0, size: 24 },
+      player: { x: 350, y: 350, vx: 0, size: 28 },
       lasers: [],
       asteroids: [],
       particles: [],
@@ -3244,31 +3270,34 @@
       lastFire: 0
     };
 
-    const cosmicCanvas = document.getElementById('cosmic-canvas');
-    let ctxCosmic = cosmicCanvas ? cosmicCanvas.getContext('2d') : null;
-
     function resizeCosmicCanvas() {
       if (!cosmicCanvas) return;
-      const rect = cosmicCanvas.getBoundingClientRect();
-      cosmicCanvas.width = rect.width || 700;
-      cosmicCanvas.height = rect.height || 380;
+      const stage = document.getElementById('cosmic-stage');
+      const w = stage ? stage.clientWidth : 740;
+      const h = stage ? stage.clientHeight : 460;
+      
+      cosmicCanvas.width = w > 100 ? w : 740;
+      cosmicCanvas.height = h > 100 ? h : 460;
+      
       cosmicGame.player.x = cosmicCanvas.width / 2;
-      cosmicGame.player.y = cosmicCanvas.height - 45;
+      cosmicGame.player.y = cosmicCanvas.height - 80;
 
       // Init starfield
       cosmicGame.stars = [];
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 75; i++) {
         cosmicGame.stars.push({
           x: Math.random() * cosmicCanvas.width,
           y: Math.random() * cosmicCanvas.height,
-          size: Math.random() * 2 + 0.8,
-          speed: Math.random() * 1.5 + 0.5
+          size: Math.random() * 2.2 + 0.8,
+          speed: Math.random() * 2 + 0.6
         });
       }
     }
 
     function startCosmicGame() {
-      document.getElementById('cosmic-start-screen').style.display = 'none';
+      const startScreen = document.getElementById('cosmic-start-screen');
+      if (startScreen) startScreen.style.display = 'none';
+      
       resizeCosmicCanvas();
       cosmicGame.running = true;
       cosmicGame.score = 0;
@@ -3276,21 +3305,27 @@
       cosmicGame.lasers = [];
       cosmicGame.asteroids = [];
       cosmicGame.particles = [];
+      
       document.getElementById('cosmic-score').textContent = '0';
       document.getElementById('cosmic-high').textContent = cosmicGame.highScore;
-      document.getElementById('cosmic-lives').textContent = '3';
+      document.getElementById('cosmic-lives').textContent = '❤️❤️❤️';
       playAudioSfx('score');
       requestAnimationFrame(cosmicLoop);
     }
 
     function cosmicFireLaser() {
       const now = performance.now();
-      if (now - cosmicGame.lastFire < 180) return;
+      if (now - cosmicGame.lastFire < 160) return;
       cosmicGame.lastFire = now;
       cosmicGame.lasers.push({
-        x: cosmicGame.player.x,
-        y: cosmicGame.player.y - 15,
-        speed: 12
+        x: cosmicGame.player.x - 10,
+        y: cosmicGame.player.y - 18,
+        speed: 14
+      });
+      cosmicGame.lasers.push({
+        x: cosmicGame.player.x + 10,
+        y: cosmicGame.player.y - 18,
+        speed: 14
       });
       playAudioSfx('pop');
     }
@@ -3302,7 +3337,7 @@
       const H = cosmicCanvas.height;
 
       // Clear Canvas
-      ctxCosmic.fillStyle = '#090a10';
+      ctxCosmic.fillStyle = '#0a0a0f';
       ctxCosmic.fillRect(0, 0, W, H);
 
       // Starfield
@@ -3310,75 +3345,83 @@
       cosmicGame.stars.forEach(star => {
         star.y += star.speed;
         if (star.y > H) { star.y = 0; star.x = Math.random() * W; }
-        ctxCosmic.globalAlpha = star.speed / 2;
+        ctxCosmic.globalAlpha = Math.min(1, star.speed / 2);
         ctxCosmic.fillRect(star.x, star.y, star.size, star.size);
       });
       ctxCosmic.globalAlpha = 1;
 
-      // Handle Controls
-      if (cosmicGame.keys.left) cosmicGame.player.vx = -7;
-      else if (cosmicGame.keys.right) cosmicGame.player.vx = 7;
-      else cosmicGame.player.vx *= 0.8;
+      // Controls velocity
+      if (cosmicGame.keys.left) cosmicGame.player.vx = -8;
+      else if (cosmicGame.keys.right) cosmicGame.player.vx = 8;
+      else cosmicGame.player.vx *= 0.82;
 
       cosmicGame.player.x += cosmicGame.player.vx;
-      if (cosmicGame.player.x < 20) cosmicGame.player.x = 20;
-      if (cosmicGame.player.x > W - 20) cosmicGame.player.x = W - 20;
+      if (cosmicGame.player.x < 25) cosmicGame.player.x = 25;
+      if (cosmicGame.player.x > W - 25) cosmicGame.player.x = W - 25;
 
       if (cosmicGame.keys.fire) cosmicFireLaser();
 
-      // Draw Spaceship (Retro Cinnabar Vector Fighter)
       const px = cosmicGame.player.x;
       const py = cosmicGame.player.y;
+
+      // Engine Thruster Flame
+      ctxCosmic.fillStyle = Math.random() > 0.5 ? '#fef08a' : '#ff7043';
+      ctxCosmic.beginPath();
+      ctxCosmic.moveTo(px - 6, py + 14);
+      ctxCosmic.lineTo(px, py + 24 + Math.random() * 10);
+      ctxCosmic.lineTo(px + 6, py + 14);
+      ctxCosmic.fill();
+
+      // Spaceship Body (Retro Cinnabar Fighter)
       ctxCosmic.fillStyle = '#e03c31';
       ctxCosmic.strokeStyle = '#ffffff';
-      ctxCosmic.lineWidth = 2;
+      ctxCosmic.lineWidth = 2.5;
       ctxCosmic.beginPath();
-      ctxCosmic.moveTo(px, py - 20);
-      ctxCosmic.lineTo(px - 16, py + 14);
-      ctxCosmic.lineTo(px - 6, py + 8);
-      ctxCosmic.lineTo(px + 6, py + 8);
-      ctxCosmic.lineTo(px + 16, py + 14);
+      ctxCosmic.moveTo(px, py - 26);
+      ctxCosmic.lineTo(px - 20, py + 16);
+      ctxCosmic.lineTo(px - 8, py + 10);
+      ctxCosmic.lineTo(px + 8, py + 10);
+      ctxCosmic.lineTo(px + 20, py + 16);
       ctxCosmic.closePath();
       ctxCosmic.fill();
       ctxCosmic.stroke();
 
-      // Thruster Flame
-      ctxCosmic.fillStyle = Math.random() > 0.5 ? '#fef08a' : '#ffb3a8';
+      // Cockpit Window
+      ctxCosmic.fillStyle = '#fef08a';
       ctxCosmic.beginPath();
-      ctxCosmic.moveTo(px - 4, py + 10);
-      ctxCosmic.lineTo(px, py + 18 + Math.random() * 8);
-      ctxCosmic.lineTo(px + 4, py + 10);
+      ctxCosmic.ellipse(px, py - 6, 4, 10, 0, 0, Math.PI * 2);
       ctxCosmic.fill();
+
+      // Wing Blasters
+      ctxCosmic.fillStyle = '#fff';
+      ctxCosmic.fillRect(px - 12, py - 12, 3, 10);
+      ctxCosmic.fillRect(px + 9, py - 12, 3, 10);
 
       // Update & Draw Lasers
       ctxCosmic.fillStyle = '#fef08a';
       ctxCosmic.shadowColor = '#fef08a';
-      ctxCosmic.shadowBlur = 8;
+      ctxCosmic.shadowBlur = 10;
       for (let i = cosmicGame.lasers.length - 1; i >= 0; i--) {
         const l = cosmicGame.lasers[i];
         l.y -= l.speed;
-        ctxCosmic.fillRect(l.x - 2, l.y, 4, 14);
+        ctxCosmic.fillRect(l.x - 2, l.y, 4, 16);
         if (l.y < -20) cosmicGame.lasers.splice(i, 1);
       }
       ctxCosmic.shadowBlur = 0;
 
       // Spawn Asteroids
-      if (Math.random() < 0.035 && cosmicGame.asteroids.length < 10) {
+      if (Math.random() < 0.04 && cosmicGame.asteroids.length < 12) {
         cosmicGame.asteroids.push({
-          x: Math.random() * (W - 40) + 20,
-          y: -30,
-          size: Math.random() * 18 + 14,
-          speed: Math.random() * 2.5 + 1.5,
+          x: Math.random() * (W - 60) + 30,
+          y: -40,
+          size: Math.random() * 22 + 16,
+          speed: Math.random() * 2.8 + 1.6,
           rot: 0,
-          rotSpeed: (Math.random() - 0.5) * 0.06
+          rotSpeed: (Math.random() - 0.5) * 0.08
         });
       }
 
       // Update & Draw Asteroids
-      ctxCosmic.strokeStyle = '#e03c31';
-      ctxCosmic.fillStyle = '#1c1b1a';
-      ctxCosmic.lineWidth = 2;
-
       for (let i = cosmicGame.asteroids.length - 1; i >= 0; i--) {
         const ast = cosmicGame.asteroids[i];
         ast.y += ast.speed;
@@ -3387,10 +3430,13 @@
         ctxCosmic.save();
         ctxCosmic.translate(ast.x, ast.y);
         ctxCosmic.rotate(ast.rot);
+        ctxCosmic.fillStyle = '#1c1b1a';
+        ctxCosmic.strokeStyle = '#e03c31';
+        ctxCosmic.lineWidth = 2.5;
         ctxCosmic.beginPath();
         for (let j = 0; j < 8; j++) {
           const angle = (j / 8) * Math.PI * 2;
-          const r = ast.size * (j % 2 === 0 ? 1 : 0.75);
+          const r = ast.size * (j % 2 === 0 ? 1 : 0.72);
           const ax = Math.cos(angle) * r;
           const ay = Math.sin(angle) * r;
           if (j === 0) ctxCosmic.moveTo(ax, ay);
@@ -3405,8 +3451,7 @@
         for (let li = cosmicGame.lasers.length - 1; li >= 0; li--) {
           const l = cosmicGame.lasers[li];
           const dist = Math.hypot(l.x - ast.x, l.y - ast.y);
-          if (dist < ast.size + 4) {
-            // Asteroid destroyed
+          if (dist < ast.size + 6) {
             cosmicGame.lasers.splice(li, 1);
             cosmicGame.asteroids.splice(i, 1);
             cosmicGame.score += 20;
@@ -3418,15 +3463,15 @@
               document.getElementById('cosmic-high').textContent = cosmicGame.highScore;
             }
 
-            // Explosion particles
-            for (let p = 0; p < 12; p++) {
+            // Explosion sparks
+            for (let p = 0; p < 14; p++) {
               cosmicGame.particles.push({
                 x: ast.x,
                 y: ast.y,
-                vx: (Math.random() - 0.5) * 6,
-                vy: (Math.random() - 0.5) * 6,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.5) * 8,
                 life: 1,
-                color: Math.random() > 0.5 ? '#e03c31' : '#fef08a'
+                color: Math.random() > 0.4 ? '#e03c31' : '#fef08a'
               });
             }
             playAudioSfx('bounce');
@@ -3435,29 +3480,35 @@
         }
 
         // Ship Collision Check
-        if (Math.hypot(px - ast.x, py - ast.y) < ast.size + 14) {
+        if (Math.hypot(px - ast.x, py - ast.y) < ast.size + 16) {
           cosmicGame.asteroids.splice(i, 1);
           cosmicGame.lives--;
-          document.getElementById('cosmic-lives').textContent = cosmicGame.lives;
+          
+          let hearts = '';
+          for (let h = 0; h < cosmicGame.lives; h++) hearts += '❤️';
+          document.getElementById('cosmic-lives').textContent = hearts || '💀';
           playAudioSfx('bounce');
 
           if (cosmicGame.lives <= 0) {
             cosmicGame.running = false;
-            document.getElementById('cosmic-start-screen').style.display = 'flex';
-            document.getElementById('cosmic-start-screen').innerHTML = `
-              <div style="font-family: var(--font-display); font-size: 34px; color: var(--cinnabar); margin-bottom: 6px;">MISSION FAILED</div>
-              <p style="font-family: var(--font-mono); font-size: 15px; color: #fff; margin-bottom: 16px;">
-                Final Score: <strong>${cosmicGame.score}</strong> | High Score: <strong>${cosmicGame.highScore}</strong>
-              </p>
-              <button class="btn-brutal" onclick="startCosmicGame()" style="background: var(--cinnabar); border-color: #fff;">
-                <i class="fa-solid fa-rotate-right"></i> PLAY AGAIN
-              </button>
-            `;
+            const startScreen = document.getElementById('cosmic-start-screen');
+            if (startScreen) {
+              startScreen.style.display = 'flex';
+              startScreen.innerHTML = `
+                <div style="font-family: var(--font-display); font-size: 38px; color: var(--cinnabar); margin-bottom: 6px;">MISSION FAILED</div>
+                <p style="font-family: var(--font-mono); font-size: 15px; color: #fff; margin-bottom: 16px;">
+                  Final Score: <strong>${cosmicGame.score}</strong> | High Score: <strong>${cosmicGame.highScore}</strong>
+                </p>
+                <button class="btn-brutal" onclick="startCosmicGame()" style="background: var(--cinnabar); border-color: #fff;">
+                  <i class="fa-solid fa-rotate-right"></i> PLAY AGAIN 🚀
+                </button>
+              `;
+            }
             return;
           }
         }
 
-        if (ast.y > H + 40) cosmicGame.asteroids.splice(i, 1);
+        if (ast.y > H + 50) cosmicGame.asteroids.splice(i, 1);
       }
 
       // Draw Particles
@@ -3468,7 +3519,7 @@
         pt.life -= 0.04;
         ctxCosmic.fillStyle = pt.color;
         ctxCosmic.globalAlpha = Math.max(0, pt.life);
-        ctxCosmic.fillRect(pt.x, pt.y, 3, 3);
+        ctxCosmic.fillRect(pt.x, pt.y, 3.5, 3.5);
         if (pt.life <= 0) cosmicGame.particles.splice(pi, 1);
       }
       ctxCosmic.globalAlpha = 1;
@@ -3476,14 +3527,31 @@
       requestAnimationFrame(cosmicLoop);
     }
 
+    // Canvas Mouse / Pointer steer & shoot
+    if (cosmicCanvas) {
+      cosmicCanvas.addEventListener('mousemove', (e) => {
+        if (!cosmicGame.running) return;
+        const rect = cosmicCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        cosmicGame.player.x = Math.max(25, Math.min(cosmicCanvas.width - 25, mx));
+      });
+      cosmicCanvas.addEventListener('mousedown', (e) => {
+        if (cosmicGame.running) {
+          e.preventDefault();
+          cosmicFireLaser();
+        }
+      });
+    }
+
     // Keyboard controls for Cosmic Defender
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') cosmicGame.keys.left = true;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') cosmicGame.keys.right = true;
-      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') {
-        if (document.getElementById('game-cosmic-wrap').style.display !== 'none' && cosmicGame.running) {
+      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+        const wrap = document.getElementById('game-cosmic-wrap');
+        if (wrap && wrap.style.display !== 'none' && cosmicGame.running) {
           e.preventDefault();
-          cosmicGame.keys.fire = true;
+          cosmicFireLaser();
         }
       }
     });
@@ -3491,21 +3559,150 @@
     window.addEventListener('keyup', (e) => {
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') cosmicGame.keys.left = false;
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') cosmicGame.keys.right = false;
-      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') cosmicGame.keys.fire = false;
     });
 
-    // Touch controls
+    // Touch & Pointer controls for on-screen buttons
     const btnLeft = document.getElementById('ctrl-left');
     const btnRight = document.getElementById('ctrl-right');
     const btnFire = document.getElementById('ctrl-fire');
     if (btnLeft && btnRight && btnFire) {
-      btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicGame.keys.left = true; });
-      btnLeft.addEventListener('touchend', () => { cosmicGame.keys.left = false; });
-      btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicGame.keys.right = true; });
-      btnRight.addEventListener('touchend', () => { cosmicGame.keys.right = false; });
-      btnFire.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicFireLaser(); });
+      const startLeft = (e) => { e.preventDefault(); cosmicGame.keys.left = true; };
+      const stopLeft = () => { cosmicGame.keys.left = false; };
+      btnLeft.addEventListener('pointerdown', startLeft);
+      btnLeft.addEventListener('pointerup', stopLeft);
+      btnLeft.addEventListener('pointerleave', stopLeft);
+      btnLeft.addEventListener('touchstart', startLeft);
+      btnLeft.addEventListener('touchend', stopLeft);
+
+      const startRight = (e) => { e.preventDefault(); cosmicGame.keys.right = true; };
+      const stopRight = () => { cosmicGame.keys.right = false; };
+      btnRight.addEventListener('pointerdown', startRight);
+      btnRight.addEventListener('pointerup', stopRight);
+      btnRight.addEventListener('pointerleave', stopRight);
+      btnRight.addEventListener('touchstart', startRight);
+      btnRight.addEventListener('touchend', stopRight);
+
+      const fireAction = (e) => { e.preventDefault(); cosmicFireLaser(); };
+      btnFire.addEventListener('pointerdown', fireAction);
+      btnFire.addEventListener('touchstart', fireAction);
     }
 
+    // ============================================================
+    // 8. FIREBASE CLOUD REAL-TIME INTEGRATION
+    // ============================================================
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5-gzeKnu1qbMj1TAzbo_2-yuLXijrqic",
+      authDomain: "work-69135.firebaseapp.com",
+      projectId: "work-69135",
+      storageBucket: "work-69135.firebasestorage.app",
+      messagingSenderId: "154916955198",
+      appId: "1:154916955198:web:3a134ad404a13229da9d6f"
+    };
+
+    function applyPortfolioData(d) {
+      if (!d) return;
+      if (d.name) {
+        const brand = document.getElementById('header-brand-name');
+        if (brand) brand.textContent = d.name.toUpperCase();
+        const heroName = document.getElementById('hero-name-span');
+        if (heroName) heroName.textContent = d.name.toUpperCase();
+        document.title = d.name + ' | Student • AI Explorer • Web Maker';
+      }
+      if (d.eyebrow) {
+        const ep = document.getElementById('hero-greeting-pill');
+        if (ep) ep.textContent = d.eyebrow;
+      }
+      if (d.headline) {
+        const hl = document.getElementById('hero-headline');
+        if (hl) hl.innerHTML = d.headline;
+      }
+      if (d.bio) {
+        const bio = document.getElementById('hero-bio');
+        if (bio) bio.innerHTML = d.bio;
+      }
+      if (d.stat1) {
+        const s1 = document.getElementById('stat-portals');
+        if (s1) s1.textContent = d.stat1.split(' ')[0];
+      }
+      if (d.stat2) {
+        const s2 = document.getElementById('stat-ai');
+        if (s2) s2.textContent = d.stat2.split(' ')[0];
+      }
+      if (d.heroPhoto) {
+        const img = document.getElementById('user-photo-img');
+        if (img) img.src = d.heroPhoto;
+      }
+      if (d.p1) {
+        const c1 = document.querySelector('#projects .project-card:nth-child(1)');
+        if (c1) {
+          if (d.p1.title) { const t = c1.querySelector('.proj-title'); if (t) t.textContent = d.p1.title; }
+          if (d.p1.url) {
+            const u = c1.querySelector('.proj-url'); if (u) u.textContent = d.p1.url;
+            const b = c1.querySelector('a.btn-brutal'); if (b) b.href = d.p1.url;
+          }
+          if (d.p1.desc) { const p = c1.querySelector('.proj-desc'); if (p) p.textContent = d.p1.desc; }
+        }
+      }
+      if (d.p2) {
+        const c2 = document.querySelector('#projects .project-card:nth-child(2)');
+        if (c2) {
+          if (d.p2.title) { const t = c2.querySelector('.proj-title'); if (t) t.textContent = d.p2.title; }
+          if (d.p2.url) {
+            const u = c2.querySelector('.proj-url'); if (u) u.textContent = d.p2.url;
+            const b = c2.querySelector('a.btn-brutal'); if (b) b.href = d.p2.url;
+          }
+          if (d.p2.desc) { const p = c2.querySelector('.proj-desc'); if (p) p.textContent = d.p2.desc; }
+        }
+      }
+      if (d.hobbyPhotos) {
+        Object.keys(d.hobbyPhotos).forEach(h => {
+          if (d.hobbyPhotos[h]) {
+            const el = document.getElementById('polaroid-img-' + h);
+            if (el) el.src = d.hobbyPhotos[h];
+          }
+        });
+      }
+      if (d.email) {
+        const mailBtn = document.querySelector('a[href^="mailto:"]');
+        if (mailBtn) {
+          mailBtn.href = 'mailto:' + d.email;
+          mailBtn.innerHTML = '<i class="fa-solid fa-envelope"></i> ' + d.email;
+        }
+      }
+      if (d.whatsapp) {
+        const waBtn = document.querySelector('a[href*="wa.me"]');
+        if (waBtn) waBtn.href = 'https://wa.me/91' + d.whatsapp.replace(/\D/g, '');
+      }
+      if (d.github) {
+        const ghBtn = document.querySelector('a[href*="github.com"]');
+        if (ghBtn) ghBtn.href = d.github;
+      }
+    }
+
+    // Check cached data first for instant load
+    const cachedData = localStorage.getItem('portfolio_firebase_data');
+    if (cachedData) {
+      try { applyPortfolioData(JSON.parse(cachedData)); } catch(e) {}
+    }
+
+    // Connect to Firebase Firestore
+    try {
+      if (typeof firebase !== 'undefined') {
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        db.collection('portfolio').doc('content').onSnapshot((doc) => {
+          if (doc.exists) {
+            const d = doc.data();
+            applyPortfolioData(d);
+            localStorage.setItem('portfolio_firebase_data', JSON.stringify(d));
+          }
+        }, (err) => {
+          console.log('Firebase listener notice:', err.message);
+        });
+      }
+    } catch (err) {
+      console.warn('Firebase init notice:', err);
+    }
   
   </script>
 </body>
