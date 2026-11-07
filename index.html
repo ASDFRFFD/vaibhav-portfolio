@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Meet the All-Rounder & Panchayat Assistant | Creative Portfolio</title>
-  <meta name="description" content="A creative, bold portfolio replicating the exact physics, 120 FPS smooth scrolling, and custom cursor system of worksruthi.com.">
+  <title>Panchayat Assistant • Content Creator • AI & Web | Official Portfolio</title>
+  <meta name="description" content="Portfolio of a Panchayat Assistant, Content Creator, AI enthusiast, and Web Maker. Creator of gpsahayak.in. Built with chutzpah.">
 
-  <!-- Google Fonts: Anton (Impact bold display), Syne (modern punchy), Plus Jakarta Sans (body), Caveat (handwritten scribbles) -->
+  <!-- Google Fonts: Anton, Syne, Plus Jakarta Sans, Caveat, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Lenis Smooth Scroll (120 FPS high-precision silky scroll) -->
+  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 
   <style>
@@ -24,18 +24,14 @@
       --paper: #fbfbf6;
       --ink: #1c1b1a;
       --ink-muted: #5e5d59;
-      --cinnabar: #e03c31; /* Signature worksruthi cinnabar red */
-      --cinnabar-light: rgba(224, 60, 49, 0.12);
-      --highlight: #fef08a; /* Highlighter yellow */
-      --spring: #f3f3e9;
+      --cinnabar: #e03c31; /* worksruthi signature red */
+      --highlight: #fef08a; /* yellow tape */
       --font-display: 'Anton', 'Syne', sans-serif;
       --font-heading: 'Syne', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-hand: 'Caveat', cursive;
       --font-mono: 'Space Mono', monospace;
-      --p2-size: 13px;
       --ease-site: cubic-bezier(.22, 1, .36, 1);
-      --border-dark: #1c1b1a;
     }
 
     * {
@@ -49,21 +45,12 @@
       color: var(--ink);
     }
 
-    /* Lenis Smooth Scroll integration styles */
+    /* Lenis setup */
     html.lenis, html.lenis body {
       height: auto;
     }
     .lenis.lenis-smooth {
       scroll-behavior: auto !important;
-    }
-    .lenis.lenis-smooth [data-lenis-prevent] {
-      overscroll-behavior: contain;
-    }
-    .lenis.lenis-stopped {
-      overflow: hidden;
-    }
-    .lenis.lenis-scrolling iframe {
-      pointer-events: none;
     }
 
     body {
@@ -71,19 +58,15 @@
       color: var(--ink);
       font-family: var(--font-body);
       overflow-x: hidden;
-      line-height: 1.5;
+      line-height: 1.45;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Subtle Paper Grain Texture */
+    /* Subtle Paper Texture */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
       opacity: 0.035;
       pointer-events: none;
       z-index: 9999;
@@ -92,16 +75,96 @@
     }
 
     /* ==========================================================================
-       EXACT worksruthi.com CURSOR SYSTEM (.tc) - DIRECTLY SOURCED
+       1. WORKSURTHI SIGNATURE PRELOADER (Slide-Up Curtain)
+       ========================================================================== */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(24px, 4vw, 50px);
+      border-bottom: 3px solid var(--ink);
+      transition: transform 0.85s var(--ease-site);
+      will-change: transform;
+    }
+
+    #preloader.loaded {
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .preloader-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .preloader-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preloader-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--cinnabar);
+      border-radius: 50%;
+      animation: blink 0.8s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .preloader-middle {
+      margin: auto 0;
+    }
+
+    .preloader-msg {
+      font-family: var(--font-hand);
+      font-size: clamp(28px, 4vw, 44px);
+      color: var(--cinnabar);
+      margin-bottom: 8px;
+    }
+
+    .preloader-count {
+      font-family: var(--font-display);
+      font-size: clamp(80px, 18vw, 220px);
+      line-height: 0.85;
+      letter-spacing: -2px;
+      color: var(--ink);
+    }
+
+    .preloader-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      border-top: 2px solid var(--ink);
+      padding-top: 14px;
+    }
+
+    /* ==========================================================================
+       2. EXACT worksruthi.com CURSOR SYSTEM (.tc)
        ========================================================================== */
     @media (hover: hover) and (pointer: fine) {
       html.has-tc, html.has-tc * {
         cursor: none !important;
       }
-      html.has-tc :is(input:not([type=button],[type=submit],[type=checkbox],[type=radio],[type=range]), textarea, [contenteditable=""], [contenteditable=true]) {
+      html.has-tc :is(input:not([type=button],[type=submit],[type=checkbox],[type=radio],[type=range]), textarea, [contenteditable=""]) {
         cursor: text !important;
       }
-      html.has-tc [data-cursor=none], html.has-tc [data-cursor=none] * {
+      html.has-tc [data-cursor="none"], html.has-tc [data-cursor="none"] * {
         cursor: auto !important;
       }
     }
@@ -113,9 +176,7 @@
       z-index: 2147483000;
       pointer-events: none;
       font-family: var(--font-mono);
-      font-size: var(--p2-size);
-      text-transform: none;
-      letter-spacing: 0;
+      font-size: 13px;
       opacity: 0;
       line-height: 1;
       transition: opacity .2s ease-out;
@@ -124,66 +185,20 @@
       overflow: hidden;
     }
 
-    .tc[data-on="true"] {
-      opacity: 1;
-    }
-
-    .tc > * {
-      will-change: transform;
-      white-space: pre;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .tc[data-tone="dark"] {
-      --tc-ink: var(--spring);
-    }
-    .tc[data-ink="cinnabar"]:not([data-tone="red"]) {
-      --tc-ink: var(--cinnabar);
-    }
-    .tc[data-tone="red"] {
-      --tc-ink: var(--ink);
-      --tc-mark: var(--ink);
-      --tc-ball: var(--ink);
-    }
-    .tc[data-tone="photo"] {
-      --tc-ink: var(--spring);
-    }
-    .tc[data-tone="photo"] .tc-verb {
-      text-shadow: 0 0 6px #1c1b1a80, 0 0 1px #1c1b1a99;
-    }
+    .tc[data-on="true"] { opacity: 1; }
+    .tc > * { will-change: transform; white-space: pre; position: absolute; top: 0; left: 0; }
 
     .tc-verb__in, .tc-ball__in {
       transition: opacity .22s ease-out, transform .34s var(--ease-site);
       display: block;
     }
 
-    .tc[data-mode="idle"] .tc-verb__in {
-      opacity: 0;
-      transform: scale(.5);
-    }
+    .tc[data-mode="idle"] .tc-verb__in { opacity: 0; transform: scale(.5); }
+    .tc[data-mode="word"] .tc-ball__in { opacity: 0; transform: scale(.3); }
+    .tc-trail { transition: opacity .22s ease-out; }
+    .tc[data-mode="word"] .tc-trail { opacity: 0; }
 
-    .tc[data-mode="word"] .tc-ball__in {
-      opacity: 0;
-      transform: scale(.3);
-    }
-
-    .tc-trail {
-      transition: opacity .22s ease-out;
-    }
-
-    .tc[data-mode="word"] .tc-trail {
-      opacity: 0;
-    }
-
-    .tc-trail__dot {
-      will-change: transform;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
+    .tc-trail__dot { will-change: transform; position: absolute; top: 0; left: 0; }
     .tc-trail__dot:before {
       content: "";
       left: calc(var(--d) / -2);
@@ -213,78 +228,21 @@
       will-change: transform;
     }
 
-    .tc-verb {
-      color: var(--tc-ink);
-    }
-
+    .tc-verb { color: var(--tc-ink); }
     .tc-verb__w {
       transition: transform .18s var(--ease-site);
       align-items: baseline;
       display: flex;
     }
-
-    .tc-ch {
-      width: 1ch;
-      display: inline-block;
-    }
-
-    .tc-verb__arrow {
-      color: var(--tc-mark);
-      margin-left: .6ch;
-      display: inline-block;
-    }
-
-    .tc-verb.is-down .tc-verb__w {
-      transform: scale(.82, .74);
-    }
-
-    .tc-verb[data-verb="scroll"] .tc-ch,
-    .tc-verb[data-verb="scroll"] .tc-verb__arrow {
-      animation: 1.1s cubic-bezier(.45, 0, .55, 1) infinite tc-drop;
-      animation-delay: calc(var(--i, 6) * 70ms);
-    }
-
-    @keyframes tc-drop {
-      0%, 100% { transform: translateY(-.12em); }
-      50% { transform: translateY(.28em); }
-    }
-
-    .tc-verb[data-verb="hover"] .tc-verb__w,
-    .tc-verb[data-verb="hover"] .tc-ch {
-      animation: 1.8s cubic-bezier(.45, 0, .55, 1) infinite tc-float;
-      animation-delay: calc(var(--i) * -150ms);
-    }
-
-    @keyframes tc-float {
-      0%, 100% { transform: translateY(-.18em); }
-      50% { transform: translateY(.18em); }
-    }
-
-    .tc-verb[data-verb="drag"] .tc-verb__w {
-      animation: 1.4s cubic-bezier(.45, 0, .55, 1) infinite tc-sway;
-    }
-
-    @keyframes tc-sway {
-      0%, 100% { transform: translate(-.3em); }
-      50% { transform: translate(.3em); }
-    }
-
-    .tc-verb[data-verb="open"] .tc-verb__arrow {
-      color: var(--tc-ink);
-      animation: 1.2s cubic-bezier(.45, 0, .55, 1) infinite tc-out;
-    }
-
-    @keyframes tc-out {
-      0%, 100% { transform: none; }
-      50% { transform: translate(.2em, -.2em); }
-    }
+    .tc-ch { width: 1ch; display: inline-block; }
+    .tc-verb__arrow { color: var(--tc-mark); margin-left: .6ch; display: inline-block; }
 
     /* ==========================================================================
-       PAGE STYLING & CONTENT
+       3. CLEAN & MINIMAL EDITORIAL LAYOUT (Shruti style: punchy, high-impact)
        ========================================================================== */
     .container {
       width: 92%;
-      max-width: 1300px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 16px;
     }
@@ -293,10 +251,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(243, 243, 233, 0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(243, 243, 233, 0.95);
+      backdrop-filter: blur(12px);
       border-bottom: 2px solid var(--ink);
-      padding: 16px 0;
+      padding: 14px 0;
     }
 
     .nav-inner {
@@ -308,7 +266,7 @@
     .brand {
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: 20px;
+      font-size: 19px;
       letter-spacing: -0.5px;
       text-decoration: none;
       color: var(--ink);
@@ -318,16 +276,15 @@
     }
 
     .brand-dot {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: var(--cinnabar);
       border-radius: 50%;
-      display: inline-block;
     }
 
     .nav-menu {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       list-style: none;
       align-items: center;
     }
@@ -338,253 +295,111 @@
       font-size: 14px;
       font-weight: 600;
       text-transform: lowercase;
-      letter-spacing: 0.3px;
       transition: color 0.2s;
     }
 
-    .nav-menu a:hover {
-      color: var(--cinnabar);
-    }
+    .nav-menu a:hover { color: var(--cinnabar); }
 
-    .status-pill {
+    .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 5px 12px;
       background: var(--paper);
       border: 1.5px solid var(--ink);
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
       box-shadow: 2px 2px 0 var(--ink);
     }
 
-    .status-indicator {
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 6px #10b981;
-    }
-
-    /* Hero Section */
+    /* Hero */
     .hero-wrap {
-      padding: 70px 0 60px;
-      position: relative;
+      padding: 50px 0 40px;
     }
 
-    .hero-pre-title {
+    .hero-eyebrow {
       font-family: var(--font-hand);
       font-size: 26px;
       color: var(--cinnabar);
-      margin-bottom: 12px;
-      transform: rotate(-2deg);
+      margin-bottom: 8px;
       display: inline-block;
+      transform: rotate(-1.5deg);
     }
 
-    .hero-headline {
+    .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(48px, 9.5vw, 128px);
+      font-size: clamp(44px, 8.5vw, 114px);
       line-height: 0.9;
       text-transform: uppercase;
       letter-spacing: -1.5px;
       color: var(--ink);
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
-    .hero-headline .highlight-word {
-      position: relative;
-      display: inline-block;
+    .hero-title .cinnabar-text {
       color: var(--cinnabar);
+      position: relative;
     }
 
     .squiggle-svg {
       position: absolute;
-      bottom: -10px;
+      bottom: -6px;
       left: 0;
       width: 100%;
-      height: 18px;
+      height: 14px;
       pointer-events: none;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 36px;
       align-items: center;
-      position: relative;
-      margin-top: 20px;
     }
 
-    /* Cutout Stage */
-    .photo-stage {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 480px;
-    }
-
-    .photo-cutout-frame {
-      width: 100%;
-      max-width: 440px;
-      height: 520px;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      background: radial-gradient(circle at 50% 60%, rgba(224, 60, 49, 0.12) 0%, transparent 70%);
-    }
-
-    #user-photo-img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 18px 25px rgba(28, 27, 26, 0.35));
-      transition: transform 0.35s ease;
-      position: relative;
-      z-index: 2;
-    }
-
-    #user-photo-img:hover {
-      transform: scale(1.03) rotate(-1deg);
-    }
-
-    .photo-drop-badge {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--paper);
-      border: 2px dashed var(--cinnabar);
-      border-radius: 12px;
-      padding: 10px 18px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-      z-index: 10;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .photo-drop-badge:hover {
-      background: var(--highlight);
-      transform: translateX(-50%) translateY(-2px);
-      box-shadow: 5px 5px 0 var(--ink);
-    }
-
-    /* Hand-Drawn Annotations & Doodles */
-    .doodle-note {
-      position: absolute;
-      font-family: var(--font-hand);
-      font-size: 22px;
-      color: var(--cinnabar);
-      line-height: 1.1;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .doodle-note-1 {
-      top: 40px;
-      left: -20px;
-      transform: rotate(-8deg);
-      max-width: 160px;
-    }
-
-    .doodle-note-2 {
-      bottom: 90px;
-      right: -25px;
-      transform: rotate(6deg);
-      max-width: 170px;
-    }
-
-    .arrow-svg {
-      width: 48px;
-      height: 48px;
-      fill: none;
-      stroke: var(--cinnabar);
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .sticker {
-      position: absolute;
-      padding: 8px 16px;
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: 2px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-      border-radius: 6px;
-      z-index: 6;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-    }
-
-    .sticker-red {
-      background: var(--cinnabar);
-      color: #fff;
-      top: 10px;
-      right: 20px;
-      transform: rotate(7deg);
-    }
-
-    .sticker-yellow {
-      background: var(--highlight);
-      color: var(--ink);
-      bottom: 25px;
-      left: 10px;
-      transform: rotate(-5deg);
-    }
-
-    .hero-bio-lead {
-      font-size: clamp(18px, 2.2vw, 24px);
-      font-weight: 500;
+    .hero-bio {
+      font-size: clamp(17px, 1.8vw, 21px);
       line-height: 1.5;
       color: var(--ink);
       margin-bottom: 28px;
+      max-width: 520px;
     }
 
-    .hero-bio-lead .mark {
+    .hero-bio .mark {
       background: var(--highlight);
       padding: 2px 6px;
       font-weight: 700;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
-    .hero-cta-bar {
+    .hero-btns {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 36px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
+    /* Brutalist Buttons */
     .btn-brutal {
-      padding: 14px 30px;
+      padding: 12px 26px;
       background: var(--ink);
       color: #fff;
       font-family: var(--font-heading);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       text-decoration: none;
       border: 2px solid var(--ink);
-      border-radius: 8px;
+      border-radius: 6px;
       box-shadow: 4px 4px 0 var(--cinnabar);
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-brutal:hover {
@@ -595,22 +410,22 @@
     }
 
     .btn-brutal-alt {
-      padding: 14px 26px;
+      padding: 12px 22px;
       background: var(--paper);
       color: var(--ink);
       font-family: var(--font-heading);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       text-decoration: none;
       border: 2px solid var(--ink);
-      border-radius: 8px;
+      border-radius: 6px;
       box-shadow: 4px 4px 0 var(--ink);
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-brutal-alt:hover {
@@ -619,307 +434,399 @@
       background: var(--highlight);
     }
 
-    /* Infinite Marquee Ribbon */
+    /* Photo Cutout Centerpiece */
+    .photo-stage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 440px;
+    }
+
+    .photo-cutout-frame {
+      width: 100%;
+      max-width: 400px;
+      height: 480px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 60%, rgba(224, 60, 49, 0.1) 0%, transparent 70%);
+    }
+
+    #user-photo-img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 22px rgba(28, 27, 26, 0.3));
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    #user-photo-img:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    .photo-upload-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      border: 2px dashed var(--cinnabar);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      z-index: 10;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .photo-upload-badge:hover {
+      background: var(--highlight);
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Minimal Doodles */
+    .doodle-note {
+      position: absolute;
+      font-family: var(--font-hand);
+      font-size: 21px;
+      color: var(--cinnabar);
+      line-height: 1.1;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .doodle-1 { top: 30px; left: -15px; transform: rotate(-6deg); }
+    .doodle-2 { bottom: 80px; right: -20px; transform: rotate(5deg); }
+
+    .sticker {
+      position: absolute;
+      padding: 6px 14px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 4px;
+      z-index: 6;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .sticker-red {
+      background: var(--cinnabar);
+      color: #fff;
+      top: 10px;
+      right: 20px;
+      transform: rotate(6deg);
+    }
+
+    .sticker-yellow {
+      background: var(--highlight);
+      color: var(--ink);
+      bottom: 25px;
+      left: 10px;
+      transform: rotate(-4deg);
+    }
+
+    /* Marquee */
     .marquee-ribbon {
       background: var(--ink);
       color: #fff;
-      padding: 14px 0;
+      padding: 12px 0;
       border-top: 2px solid var(--ink);
       border-bottom: 2px solid var(--ink);
       overflow: hidden;
       white-space: nowrap;
-      position: relative;
     }
 
     .marquee-track {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee 22s linear infinite;
+      animation: marquee 24s linear infinite;
       font-family: var(--font-display);
-      font-size: 26px;
-      letter-spacing: 1px;
+      font-size: 22px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
 
-    .marquee-track span {
-      margin: 0 16px;
-    }
-
-    .marquee-track .star {
-      color: var(--cinnabar);
-    }
+    .marquee-track span { margin: 0 14px; }
+    .marquee-track .star { color: var(--cinnabar); }
 
     @keyframes marquee {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    /* Section Styling */
+    /* Sections */
     section {
-      padding: 90px 0;
+      padding: 75px 0;
       border-bottom: 2px solid var(--ink);
     }
 
-    .section-eyebrow {
+    .sec-eyebrow {
       font-family: var(--font-hand);
+      font-size: 22px;
+      color: var(--cinnabar);
+      margin-bottom: 6px;
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5.5vw, 68px);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .sec-desc {
+      font-size: 17px;
+      color: var(--ink-muted);
+      max-width: 620px;
+      margin-bottom: 38px;
+    }
+
+    /* Flagship Project Box: gpsahayak.in (Special Spotlight Card) */
+    .flagship-card {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      padding: clamp(28px, 4vw, 44px);
+      box-shadow: 8px 8px 0 var(--cinnabar);
+      margin-bottom: 40px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .flagship-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 12px 12px 0 var(--cinnabar);
+    }
+
+    .flagship-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--cinnabar);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .flagship-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .flagship-desc {
+      font-size: 16px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .flagship-preview-box {
+      background: var(--bg-alt);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      height: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .flagship-preview-box i {
+      font-size: 48px;
+      color: var(--cinnabar);
+      margin-bottom: 10px;
+    }
+
+    .flagship-url-pill {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* Grid for other 2 cards (Minimal) */
+    .cards-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .mini-card {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: all 0.2s ease;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0 var(--cinnabar);
+    }
+
+    .mini-card-num {
+      font-family: var(--font-display);
       font-size: 24px;
       color: var(--cinnabar);
       margin-bottom: 8px;
-      transform: rotate(-1.5deg);
-      display: inline-block;
     }
 
-    .section-big-title {
-      font-family: var(--font-display);
-      font-size: clamp(38px, 6vw, 76px);
-      text-transform: uppercase;
-      line-height: 0.95;
-      letter-spacing: -1px;
-      margin-bottom: 20px;
-    }
-
-    .section-desc {
-      font-size: 18px;
-      color: var(--ink-muted);
-      max-width: 680px;
-      margin-bottom: 48px;
-      line-height: 1.6;
-    }
-
-    /* Editorial About / Pitch Box */
-    .pitch-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .pitch-card {
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 8px 8px 0 var(--ink);
-      position: relative;
-    }
-
-    .pitch-card p {
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 18px;
-      color: var(--ink);
-    }
-
-    .pitch-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    .tape-effect {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 140px;
-      height: 28px;
-      background: rgba(254, 240, 138, 0.7);
-      border: 1px dashed rgba(28, 27, 26, 0.4);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Selected Work / Portfolio Cards */
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 32px;
-    }
-
-    .work-item {
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 6px 6px 0 var(--ink);
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .work-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 10px 10px 0 var(--cinnabar);
-    }
-
-    .work-media-box {
-      height: 220px;
-      background: var(--bg-alt);
-      border-bottom: 2px solid var(--ink);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .work-media-box i.work-icon {
-      font-size: 56px;
-      color: var(--ink);
-      transition: transform 0.3s ease;
-    }
-
-    .work-item:hover .work-media-box i.work-icon {
-      transform: scale(1.15) rotate(-5deg);
-      color: var(--cinnabar);
-    }
-
-    .work-number {
-      position: absolute;
-      top: 14px;
-      left: 16px;
-      font-family: var(--font-display);
-      font-size: 32px;
-      color: var(--ink);
-      opacity: 0.3;
-    }
-
-    .work-body {
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .work-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .tag-pill {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      background: var(--bg-alt);
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-    }
-
-    .work-title {
+    .mini-card-title {
       font-family: var(--font-heading);
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 10px;
-      color: var(--ink);
+      margin-bottom: 8px;
     }
 
-    .work-desc {
-      font-size: 15px;
+    .mini-card-desc {
+      font-size: 14px;
       color: var(--ink-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      flex: 1;
+      line-height: 1.5;
     }
 
-    /* B-Roll / Field Scrapbook */
+    /* Skills Pill Grid */
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .skill-chip {
+      padding: 8px 16px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .skill-chip:hover {
+      transform: translate(-2px, -2px);
+      background: var(--highlight);
+    }
+
+    /* B-Roll (Polaroids) */
     .broll-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
     .polaroid {
       background: #fff;
       border: 2px solid var(--ink);
-      padding: 14px 14px 24px;
-      box-shadow: 5px 5px 0 var(--ink);
-      transition: transform 0.3s;
+      padding: 12px 12px 20px;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform 0.25s;
       cursor: pointer;
     }
 
     .polaroid:hover {
-      transform: scale(1.06) rotate(0deg) !important;
+      transform: scale(1.05) rotate(0deg) !important;
       z-index: 10;
-      box-shadow: 8px 8px 0 var(--cinnabar);
+      box-shadow: 7px 7px 0 var(--cinnabar);
     }
 
-    .polaroid-img-box {
+    .polaroid-box {
       width: 100%;
-      height: 180px;
+      height: 150px;
       background: var(--bg-alt);
       border: 1px solid var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 28px;
       color: var(--ink-muted);
-      margin-bottom: 12px;
-      overflow: hidden;
+      margin-bottom: 10px;
     }
 
-    .polaroid-caption {
+    .polaroid-txt {
       font-family: var(--font-hand);
-      font-size: 20px;
-      color: var(--ink);
+      font-size: 18px;
       text-align: center;
-      line-height: 1.2;
     }
 
-    /* Contact / Let's Talk Section */
-    .contact-wrap {
+    /* Contact */
+    .contact-card {
       background: var(--paper);
       border: 2px solid var(--ink);
-      border-radius: 24px;
-      padding: 60px 50px;
-      box-shadow: 12px 12px 0 var(--ink);
-      position: relative;
+      border-radius: 20px;
+      padding: clamp(32px, 5vw, 56px);
+      box-shadow: 10px 10px 0 var(--ink);
     }
 
-    .big-contact-title {
+    .contact-title {
       font-family: var(--font-display);
-      font-size: clamp(40px, 7vw, 92px);
+      font-size: clamp(36px, 6vw, 84px);
       text-transform: uppercase;
       line-height: 0.95;
-      margin-bottom: 24px;
-      letter-spacing: -1px;
+      margin-bottom: 20px;
     }
 
-    .big-contact-title span.red {
-      color: var(--cinnabar);
-    }
-
-    .contact-action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: center;
-      margin-top: 36px;
-    }
-
-    /* Footer */
     footer {
-      padding: 40px 0;
+      padding: 34px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
-      font-size: 14px;
+      gap: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
-    #photo-file-input {
-      display: none;
-    }
+    #photo-file-input { display: none; }
 
-    /* Modal for Photo Help / Instructions */
+    /* Modal */
     .photo-modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(28, 27, 26, 0.8);
+      inset: 0;
+      background: rgba(28, 27, 26, 0.82);
       backdrop-filter: blur(8px);
       z-index: 100000;
       display: none;
@@ -927,57 +834,59 @@
       justify-content: center;
       padding: 20px;
     }
-
-    .photo-modal-overlay.active {
-      display: flex;
-    }
+    .photo-modal-overlay.active { display: flex; }
 
     .photo-modal-card {
       background: var(--paper);
       border: 3px solid var(--ink);
-      border-radius: 20px;
-      max-width: 540px;
+      border-radius: 18px;
+      max-width: 500px;
       width: 100%;
-      padding: 36px;
-      box-shadow: 10px 10px 0 var(--cinnabar);
+      padding: 32px;
+      box-shadow: 8px 8px 0 var(--cinnabar);
       position: relative;
     }
 
-    .modal-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: var(--ink);
-      color: #fff;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid, .pitch-grid {
+    @media (max-width: 860px) {
+      .hero-grid, .flagship-card, .cards-2col {
         grid-template-columns: 1fr;
-        gap: 40px;
       }
       .broll-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .photo-stage {
         order: -1;
-        min-height: 380px;
-      }
-      .contact-wrap {
-        padding: 40px 24px;
+        min-height: 350px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hidden file picker for user's PNG photo -->
+  <!-- ==========================================================================
+       WORKSURTHI SIGNATURE PRELOADER (SLIDE-UP REVEAL CURTAIN)
+       ========================================================================== -->
+  <div id="preloader">
+    <div class="preloader-top">
+      <div class="preloader-status">
+        <span class="preloader-dot"></span>
+        <span id="preloader-status-text">INITIALIZING GPSAHAYAK...</span>
+      </div>
+      <div>© 2026 OFFICIAL PORTFOLIO</div>
+    </div>
+
+    <div class="preloader-middle">
+      <div class="preloader-msg">loading with chutzpah ✦</div>
+      <div class="preloader-count" id="preloader-percent">00%</div>
+    </div>
+
+    <div class="preloader-bottom">
+      <div>PANCHAYAT ASSISTANT • AI & WEB</div>
+      <div>READY TO IMPACT</div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for PNG photo -->
   <input type="file" id="photo-file-input" accept="image/png, image/webp, image/jpeg">
 
   <!-- Header -->
@@ -985,110 +894,103 @@
     <div class="container nav-inner">
       <a href="#hero" class="brand" data-cursor="hover">
         <span class="brand-dot"></span>
-        <span>THE ALL-ROUNDER</span>
+        <span id="header-brand-name">PANCHAYAT ASSISTANT</span>
       </a>
 
       <ul class="nav-menu">
-        <li><a href="#about" data-cursor="hover">About</a></li>
-        <li><a href="#work" data-cursor="hover">Selected Work</a></li>
-        <li><a href="#broll" data-cursor="hover">B-Roll</a></li>
-        <li><a href="#contact" data-cursor="open">Let's Talk</a></li>
+        <li><a href="#about" data-cursor="hover">about</a></li>
+        <li><a href="#projects" data-cursor="hover">projects</a></li>
+        <li><a href="#broll" data-cursor="hover">b-roll</a></li>
+        <li><a href="#contact" data-cursor="open">let's talk</a></li>
       </ul>
 
-      <div class="status-pill" data-cursor="hover">
-        <span class="status-indicator"></span>
-        <span>Panchayat Secretariat • Open for Impact</span>
+      <div class="status-badge" data-cursor="hover">
+        <span style="color: #10b981;">●</span>
+        <span>GPSAHAYAK.IN CREATOR</span>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (Clean, Minimal & Punchy like worksruthi) -->
   <main class="hero-wrap" id="hero">
     <div class="container">
       
-      <!-- Top Quirky Intro -->
-      <div class="hero-pre-title">
-        नमस्ते! hello world, welcome to my creative corner ✦
+      <div class="hero-eyebrow">
+        hello world! meet the modern gram mitra ✦
       </div>
 
-      <!-- Giant Headline -->
-      <h1 class="hero-headline">
-        MEET THE <span class="highlight-word" data-cursor="hover">ALL-ROUNDER<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
-        PANCHAYAT ASSISTANT &<br/>
-        DIGITAL ARTIST WITH CHUTZPAH.
+      <h1 class="hero-title">
+        MEET THE <span class="cinnabar-text" data-cursor="hover">PANCHAYAT ASSISTANT<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>.<br/>
+        A CONTENT CREATOR, AI &<br/>
+        WEB MAKER WITH CHUTZPAH.
       </h1>
 
-      <!-- Split Layout: Photo Centerpiece & Personality Copy -->
       <div class="hero-grid">
         
-        <!-- Left Column: Sharp Copy & CTA -->
+        <!-- Left: Crisp, Short Copy -->
         <div>
-          <p class="hero-bio-lead">
-            You thought a <span class="mark">Panchayat Assistant</span> only stamps files? Think again. 
-            I bridge grassroots public welfare, 100% transparent citizen e-governance, and cutting-edge <span class="mark">AI video production</span> & tech systems. 
-            From solving offline village grievances at 11 AM to rendering 4K cinematic AI reels at 8 PM.
+          <p class="hero-bio">
+            Serving rural India by day with <span class="mark">transparent citizen governance</span>. 
+            Crafting digital platforms with <span class="mark">HTML, CSS, JS & AI tools</span> by night. 
+            Creator and maintainer of <strong>gpsahayak.in</strong>.
           </p>
 
-          <div class="hero-cta-bar">
-            <a href="#contact" class="btn-brutal" data-cursor="open">
-              <i class="fa-solid fa-bolt"></i> Work With Me
+          <div class="hero-btns">
+            <a href="https://gpsahayak.in" target="_blank" class="btn-brutal" data-cursor="open">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit gpsahayak.in
             </a>
-            <a href="#work" class="btn-brutal-alt" data-cursor="scroll">
-              <i class="fa-solid fa-eye"></i> See The Work
+            <a href="#projects" class="btn-brutal-alt" data-cursor="scroll">
+              <i class="fa-solid fa-eye"></i> My Projects
             </a>
             <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
               <i class="fa-solid fa-camera"></i> Change Photo
             </button>
           </div>
 
-          <!-- Quick Micro-metrics -->
-          <div style="display: flex; gap: 24px; padding-top: 16px; border-top: 2px solid var(--ink);">
-            <div data-cursor="hover">
-              <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">5000+</div>
-              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Citizens Assisted</div>
+          <!-- Minimal Metrics -->
+          <div style="display: flex; gap: 24px; padding-top: 14px; border-top: 2px solid var(--ink);">
+            <div>
+              <div style="font-family: var(--font-display); font-size: 28px; color: var(--cinnabar);">100%</div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">Citizen Transparency</div>
             </div>
-            <div data-cursor="hover">
-              <div style="font-family: var(--font-display); font-size: 32px; color: var(--ink);">100%</div>
-              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Portal Accuracy</div>
+            <div>
+              <div style="font-family: var(--font-display); font-size: 28px; color: var(--ink);">GPSAHAYAK</div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">Flagship Web App</div>
             </div>
-            <div data-cursor="hover">
-              <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">4K AI</div>
-              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Video & Creative</div>
+            <div>
+              <div style="font-family: var(--font-display); font-size: 28px; color: var(--cinnabar);">AI + CODE</div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">Modern Stack</div>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: The Signature Cutout Photo Stage -->
+        <!-- Right: The Cutout PNG Frame (Supports User Photo) -->
         <div class="photo-stage">
 
-          <!-- Hand-drawn Annotations pointing to photo -->
-          <div class="doodle-note doodle-note-1">
-            yes, that's me in the field!
-            <svg class="arrow-svg" viewBox="0 0 50 50">
+          <div class="doodle-note doodle-1">
+            yes, that's me!
+            <svg style="width:36px; height:36px; fill:none; stroke:#e03c31; stroke-width:2.5;" viewBox="0 0 50 50">
               <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
             </svg>
           </div>
 
-          <div class="doodle-note doodle-note-2">
-            <svg class="arrow-svg" style="transform: rotate(180deg);" viewBox="0 0 50 50">
-              <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
-            </svg>
-            turning raw footage into pure visual gold!
+          <div class="doodle-note doodle-2">
+            building gpsahayak.in ✦
           </div>
 
-          <!-- Playful Draggable Stickers -->
+          <!-- Draggable Badges -->
           <div class="sticker sticker-red" data-cursor="drag">
-            ✦ 100% VERIFIED
+            ✦ PANCHAYAT TECH
           </div>
           <div class="sticker sticker-yellow" data-cursor="drag">
-            PANCHAYAT HERO
+            CONTENT CREATOR
           </div>
 
-          <!-- The Cutout Frame -->
+          <!-- PNG Cutout Stage -->
           <div class="photo-cutout-frame">
             <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG" data-cursor="hover">
 
-            <div class="photo-drop-badge" onclick="triggerPhotoUpload()" data-cursor="open">
+            <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
               <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
               <span>Drop / Click Your PNG Photo Here</span>
             </div>
@@ -1101,54 +1003,46 @@
     </div>
   </main>
 
-  <!-- Infinite Rolling Marquee Ribbon -->
+  <!-- Marquee Banner -->
   <div class="marquee-ribbon" data-cursor="scroll">
     <div class="marquee-track">
-      <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
+      <span>PANCHAYAT ASSISTANT</span> <span class="star">✦</span>
+      <span>CONTENT CREATOR</span> <span class="star">✦</span>
+      <span>AI PRACTITIONER</span> <span class="star">✦</span>
+      <span>HTML • CSS • JAVASCRIPT</span> <span class="star">✦</span>
+      <span>GPSAHAYAK.IN</span> <span class="star">✦</span>
       <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
-      <span>AI VIDEO PRODUCTION</span> <span class="star">✦</span>
-      <span>RAW FOOTAGE TO VIRAL REELS</span> <span class="star">✦</span>
-      <span>DATA ENTRY & PFMS</span> <span class="star">✦</span>
-      <span>AYUSHMAN & PM-KISAN</span> <span class="star">✦</span>
       <span>100% TRANSPARENCY</span> <span class="star">✦</span>
-      <span>TECH ALL-ROUNDER</span> <span class="star">✦</span>
-      <!-- Loop duplicate -->
-      <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
+      <!-- Loop -->
+      <span>PANCHAYAT ASSISTANT</span> <span class="star">✦</span>
+      <span>CONTENT CREATOR</span> <span class="star">✦</span>
+      <span>AI PRACTITIONER</span> <span class="star">✦</span>
+      <span>HTML • CSS • JAVASCRIPT</span> <span class="star">✦</span>
+      <span>GPSAHAYAK.IN</span> <span class="star">✦</span>
       <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
-      <span>AI VIDEO PRODUCTION</span> <span class="star">✦</span>
-      <span>RAW FOOTAGE TO VIRAL REELS</span> <span class="star">✦</span>
-      <span>DATA ENTRY & PFMS</span> <span class="star">✦</span>
-      <span>AYUSHMAN & PM-KISAN</span> <span class="star">✦</span>
       <span>100% TRANSPARENCY</span> <span class="star">✦</span>
-      <span>TECH ALL-ROUNDER</span> <span class="star">✦</span>
     </div>
   </div>
 
-  <!-- Section 1: The Pitch / About Me -->
+  <!-- About Section (Minimal, 2 crisp sentences) -->
   <section id="about">
     <div class="container">
-      <div class="pitch-grid">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center;">
         
         <div>
-          <div class="section-eyebrow">the what, why, and how ✦</div>
-          <h2 class="section-big-title">
-            I SOLVE REAL PROBLEMS ON THE GROUND & MAKE THEM LOOK GOOD ONLINE.
-          </h2>
-          <p class="section-desc">
-            Most people treat public administration and modern creative technology as two different planets. I live right at their intersection.
-          </p>
+          <div class="sec-eyebrow">the philosophy ✦</div>
+          <h2 class="sec-title">BRIDGING VILLAGE GOVERNANCE WITH MODERN WEB & AI.</h2>
         </div>
 
-        <div class="pitch-card" data-cursor="hover">
-          <div class="tape-effect"></div>
-          <p>
-            <strong>At the Gram Panchayat Secretariat:</strong> I manage the entire digital gateway for thousands of rural citizens. Aadhaar updates, Ayushman Bharat Golden Cards, PM-Kisan Samman Nidhi, Family ID, E-District certificates, and financial reporting on PFMS. Zero delay, zero corruption.
+        <div style="background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 32px; box-shadow: 6px 6px 0 var(--ink);">
+          <p style="font-size: 17px; margin-bottom: 14px;">
+            <strong>By Day:</strong> I work at the Panchayat Sachivalaya ensuring rural citizens receive their benefits through schemes like Ayushman Bharat, PM-Kisan, E-KYC, and Family ID with complete honesty.
           </p>
-          <p>
-            <strong>In the Creative & Tech Lab:</strong> I process raw footage, build automated video editing workflows, deploy AI generation pipelines, design 3D web experiences, and fix complex hardware & network setups.
+          <p style="font-size: 17px; margin-bottom: 14px;">
+            <strong>By Night:</strong> I build clean web solutions using HTML, CSS, JavaScript, and modern AI pipelines — creating community resources like <strong>gpsahayak.in</strong> to empower assistants and villagers alike.
           </p>
-          <p style="font-family: var(--font-hand); font-size: 22px; color: var(--cinnabar);">
-            "If it involves citizens, computers, code, or cameras — consider it handled."
+          <p style="font-family: var(--font-hand); font-size: 21px; color: var(--cinnabar);">
+            "Technology is only as good as the lives it touches."
           </p>
         </div>
 
@@ -1156,182 +1050,165 @@
     </div>
   </section>
 
-  <!-- Section 2: Selected Work Showcase -->
-  <section id="work" style="background: var(--bg-alt);">
+  <!-- Projects Section (Spotlighting gpsahayak.in) -->
+  <section id="projects" style="background: var(--bg-alt);">
     <div class="container">
-      <div class="section-eyebrow">selected case studies ✦</div>
-      <h2 class="section-big-title">WHAT I ACTUALLY DO EVERY SINGLE DAY</h2>
-      <p class="section-desc">
-        A breakdown of four major domains where I deliver measurable grassroots impact and high-voltage media.
-      </p>
+      <div class="sec-eyebrow">featured work ✦</div>
+      <h2 class="sec-title">PROJECTS & CREATIONS</h2>
+      <p class="sec-desc">Clean, practical tools built to solve grassroots problems with code and content.</p>
 
-      <div class="works-grid">
+      <!-- Flagship Spotlight: gpsahayak.in -->
+      <div class="flagship-card" data-cursor="open">
+        <div>
+          <div class="flagship-badge">
+            <i class="fa-solid fa-star"></i> Flagship Project
+          </div>
+          <h3 class="flagship-title">GPSAHAYAK.IN</h3>
+          <p class="flagship-desc">
+            A dedicated portal engineered for Panchayat Assistants across Uttar Pradesh and India. Provides direct scheme shortcuts, portal guidelines, official format downloads, and digital assistance tools in one unified dashboard.
+          </p>
 
-        <!-- Work 01 -->
-        <div class="work-item" data-cursor="open">
-          <div class="work-media-box">
-            <span class="work-number">01</span>
-            <i class="fa-solid fa-id-card-clip work-icon"></i>
+          <div class="skills-wrap" style="margin-bottom: 22px;">
+            <span class="skill-chip">HTML5 / CSS3</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">E-Governance API</span>
+            <span class="skill-chip">AI Assistance</span>
           </div>
-          <div class="work-body">
-            <div class="work-tags">
-              <span class="tag-pill">E-Governance</span>
-              <span class="tag-pill">Ayushman Bharat</span>
-              <span class="tag-pill">DBT</span>
-            </div>
-            <h3 class="work-title">100% Scheme Saturation Drive</h3>
-            <p class="work-desc">
-              Organized village-level e-KYC camps to deliver Ayushman Golden Cards and PM-Kisan verification directly to doorsteps for senior citizens and underprivileged families.
-            </p>
-          </div>
+
+          <a href="https://gpsahayak.in" target="_blank" class="btn-brutal">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Site (gpsahayak.in)
+          </a>
         </div>
 
-        <!-- Work 02 -->
-        <div class="work-item" data-cursor="open">
-          <div class="work-media-box">
-            <span class="work-number">02</span>
-            <i class="fa-solid fa-video work-icon"></i>
+        <!-- Preview Visual Box -->
+        <div class="flagship-preview-box">
+          <i class="fa-solid fa-globe"></i>
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; margin-bottom: 8px;">
+            GP SAHAYAK PORTAL
           </div>
-          <div class="work-body">
-            <div class="work-tags">
-              <span class="tag-pill">AI Video</span>
-              <span class="tag-pill">Raw Footage</span>
-              <span class="tag-pill">Shorts/Reels</span>
-            </div>
-            <h3 class="work-title">Public Awareness Video Series</h3>
-            <p class="work-desc">
-              Turned raw handheld footage into crisp, engaging 60-second viral explainers showing residents how to check their scheme status on mobile without visiting brokers.
-            </p>
+          <div class="flagship-url-pill">
+            https://gpsahayak.in
           </div>
         </div>
+      </div>
 
-        <!-- Work 03 -->
-        <div class="work-item" data-cursor="open">
-          <div class="work-media-box">
-            <span class="work-number">03</span>
-            <i class="fa-solid fa-cubes work-icon"></i>
-          </div>
-          <div class="work-body">
-            <div class="work-tags">
-              <span class="tag-pill">Three.js</span>
-              <span class="tag-pill">3D WebGL</span>
-              <span class="tag-pill">GSAP</span>
-            </div>
-            <h3 class="work-title">Interactive Digital Dashboards</h3>
-            <p class="work-desc">
-              Built dynamic 3D web interfaces visualizing Panchayat development statistics, clean water distribution data, and budget allocations with smooth animations.
-            </p>
-          </div>
+      <!-- 2 Minimal Companion Cards -->
+      <div class="cards-2col">
+        
+        <div class="mini-card" data-cursor="hover">
+          <div class="mini-card-num">02 / E-GOVERNANCE</div>
+          <h4 class="mini-card-title">Gram Panchayat Secretariat Portal Hub</h4>
+          <p class="mini-card-desc">
+            Streamlined processing for Ayushman Golden Cards, PM Kisan Samman Nidhi e-KYC, and E-District public certificates with zero bureaucratic delay.
+          </p>
         </div>
 
-        <!-- Work 04 -->
-        <div class="work-item" data-cursor="open">
-          <div class="work-media-box">
-            <span class="work-number">04</span>
-            <i class="fa-solid fa-network-wired work-icon"></i>
-          </div>
-          <div class="work-body">
-            <div class="work-tags">
-              <span class="tag-pill">IT Hardware</span>
-              <span class="tag-pill">MIS</span>
-              <span class="tag-pill">Biometrics</span>
-            </div>
-            <h3 class="work-title">Secretariat IT & Network Setup</h3>
-            <p class="work-desc">
-              Maintained zero downtime for government servers, biometric scanners, high-speed Wi-Fi, and dual-language official correspondence systems.
-            </p>
-          </div>
+        <div class="mini-card" data-cursor="hover">
+          <div class="mini-card-num">03 / CONTENT & AI</div>
+          <h4 class="mini-card-title">AI & Digital Literacy Content</h4>
+          <p class="mini-card-desc">
+            Short, highly-engaging video guides and infographics explaining digital welfare rights so village residents can self-check status on mobile phones.
+          </p>
         </div>
 
       </div>
+
+      <!-- Skills Chips -->
+      <div style="margin-top: 40px;">
+        <div style="font-family: var(--font-heading); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 12px;">
+          Core Tech & Competencies:
+        </div>
+        <div class="skills-wrap">
+          <span class="skill-chip">Panchayat Administration</span>
+          <span class="skill-chip">HTML5</span>
+          <span class="skill-chip">CSS3</span>
+          <span class="skill-chip">JavaScript</span>
+          <span class="skill-chip">AI Prompts & Workflows</span>
+          <span class="skill-chip">Digital Content Creation</span>
+          <span class="skill-chip">E-Gram Swaraj & PFMS</span>
+          <span class="skill-chip">Advanced Excel & MIS</span>
+          <span class="skill-chip">Hardware / Biometrics Setup</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Section 3: B-Roll / Field Scrapbook -->
+  <!-- B-Roll Section (Candid polaroids) -->
   <section id="broll">
     <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 30px;">
         <div>
-          <div class="section-eyebrow">life outside the office ✦</div>
-          <h2 class="section-big-title" style="margin-bottom: 0;">THE B-ROLL ARCHIVE</h2>
+          <div class="sec-eyebrow">behind the scenes ✦</div>
+          <h2 class="sec-title" style="margin-bottom: 0;">B-ROLL ARCHIVE</h2>
         </div>
-        <p style="font-family: var(--font-hand); font-size: 22px; color: var(--cinnabar); max-width: 320px;">
-          "the candid snapshots of fieldwork, editing screens, and village tea breaks."
+        <p style="font-family: var(--font-hand); font-size: 20px; color: var(--cinnabar);">
+          "village camps, late-night code, and cutting chai."
         </p>
       </div>
 
       <div class="broll-grid">
 
-        <div class="polaroid" style="transform: rotate(-3deg);" data-cursor="hover">
-          <div class="polaroid-img-box">
-            <i class="fa-solid fa-desktop"></i>
-          </div>
-          <div class="polaroid-caption">portal grind at 9 AM</div>
+        <div class="polaroid" style="transform: rotate(-2.5deg);" data-cursor="hover">
+          <div class="polaroid-box"><i class="fa-solid fa-landmark"></i></div>
+          <div class="polaroid-txt">panchayat sachivalaya</div>
         </div>
 
         <div class="polaroid" style="transform: rotate(2deg);" data-cursor="hover">
-          <div class="polaroid-img-box">
-            <i class="fa-solid fa-mug-hot"></i>
-          </div>
-          <div class="polaroid-caption">cutting chai & gram sabha</div>
+          <div class="polaroid-box"><i class="fa-solid fa-code"></i></div>
+          <div class="polaroid-txt">building gpsahayak.in</div>
         </div>
 
-        <div class="polaroid" style="transform: rotate(-2deg);" data-cursor="hover">
-          <div class="polaroid-img-box">
-            <i class="fa-solid fa-camera-retro"></i>
-          </div>
-          <div class="polaroid-caption">shooting raw reel b-roll</div>
+        <div class="polaroid" style="transform: rotate(-1.5deg);" data-cursor="hover">
+          <div class="polaroid-box"><i class="fa-solid fa-users"></i></div>
+          <div class="polaroid-txt">citizen e-kyc camp</div>
         </div>
 
         <div class="polaroid" style="transform: rotate(3deg);" data-cursor="hover">
-          <div class="polaroid-img-box">
-            <i class="fa-solid fa-people-roof"></i>
-          </div>
-          <div class="polaroid-caption">citizen smile delivered ✓</div>
+          <div class="polaroid-box"><i class="fa-solid fa-mug-hot"></i></div>
+          <div class="polaroid-txt">chai & code break</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Section 4: Contact / Let's Talk -->
-  <section id="contact" style="border-bottom: none; padding-bottom: 60px;">
+  <!-- Contact Section -->
+  <section id="contact" style="border-bottom: none; padding-bottom: 50px;">
     <div class="container">
       
-      <div class="contact-wrap">
-        <div class="section-eyebrow">ready when you are ✦</div>
-        <h2 class="big-contact-title">
-          GOT A SCHEME TO PROCESS, <br/>
-          OR NEED <span class="red">VIRAL MEDIA?</span><br/>
-          LET'S TALK.
+      <div class="contact-card">
+        <div class="sec-eyebrow">say hello ✦</div>
+        <h2 class="contact-title">
+          HAVE A QUESTION OR PROJECT?<br/>
+          <span style="color: var(--cinnabar);">LET'S CONNECT.</span>
         </h2>
 
-        <p style="font-size: 19px; color: var(--ink-muted); max-width: 650px;">
-          Available for Gram Panchayat consultations, official data MIS management, freelance AI video editing, and modern web development.
+        <p style="font-size: 18px; color: var(--ink-muted); max-width: 600px; margin-bottom: 28px;">
+          Available for Panchayat consultations, e-governance queries, web development collaborations, or gpsahayak.in feedback.
         </p>
 
-        <div class="contact-action-row">
-          <a href="https://wa.me/" target="_blank" class="btn-brutal" style="background: #25d366; border-color: #25d366; color: #fff; box-shadow: 4px 4px 0 var(--ink);" data-cursor="open">
-            <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Chat on WhatsApp
+        <div style="display: flex; flex-wrap: wrap; gap: 14px;">
+          <a href="https://wa.me/" target="_blank" class="btn-brutal" style="background: #25d366; border-color: #25d366;" data-cursor="open">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
           </a>
 
           <a href="mailto:panchayat.assistant.official@gmail.com" class="btn-brutal-alt" data-cursor="open">
-            <i class="fa-solid fa-envelope"></i> Send an Email
+            <i class="fa-solid fa-envelope"></i> Send Email
           </a>
 
-          <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
-            <i class="fa-solid fa-image"></i> How to Add Your Photo
-          </button>
+          <a href="https://gpsahayak.in" target="_blank" class="btn-brutal-alt" data-cursor="open">
+            <i class="fa-solid fa-globe"></i> Open gpsahayak.in
+          </a>
         </div>
       </div>
 
-      <!-- Footer -->
       <footer>
         <div>
-          © 2026 <strong>THE ALL-ROUNDER & PANCHAYAT ASSISTANT</strong>. Designed with chutzpah.
+          © 2026 <strong>Panchayat Assistant & Content Creator</strong> • Creator of gpsahayak.in
         </div>
         <div>
-          Inspired by worksruthi.com • Built with exact .tc cursor physics & 120 FPS Lenis
+          Inspired by worksruthi.com • Built with exact .tc cursor physics
         </div>
       </footer>
 
@@ -1341,88 +1218,107 @@
   <!-- Photo Upload Instructions Modal -->
   <div class="photo-modal-overlay" id="photo-modal">
     <div class="photo-modal-card">
-      <button class="modal-close-btn" onclick="closePhotoInstructions()">✕</button>
-      <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px; color: var(--ink);">
+      <button onclick="closePhotoInstructions()" style="position: absolute; top: 14px; right: 14px; background: var(--ink); color: #fff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">✕</button>
+      <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 10px;">
         अपनी PNG फ़ोटो कैसे लगाएं? 📸
       </h3>
-      <p style="color: var(--ink-muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6;">
-        आप 2 बहुत आसान तरीकों से अपनी फ़ोटो यहाँ लगा सकते हैं:
+      <p style="color: var(--ink-muted); font-size: 14px; margin-bottom: 16px; line-height: 1.5;">
+        नीचे दिए गए बटन पर क्लिक करके अपने कंप्यूटर से कोई भी ट्रांसपेरेंट PNG फ़ोटो चुनें, वह तुरंत लग जाएगी:
       </p>
-
-      <div style="background: var(--bg-alt); padding: 18px; border-radius: 12px; border: 2px solid var(--ink); margin-bottom: 18px;">
-        <strong style="color: var(--cinnabar); font-size: 16px;">तरीका 1: डायरेक्ट बटन दबाकर फ़ोटो सेलेक्ट करें (Instant)</strong>
-        <p style="font-size: 14px; margin-top: 6px; color: var(--ink);">
-          नीचे दिए गए बटन पर क्लिक करें और अपने कंप्यूटर या फ़ोन से कोई भी <strong>ट्रांसपेरेंट बैकग्राउंड वाली PNG फ़ोटो</strong> चुन लें। वह तुरंत हीरो सेक्शन में लग जाएगी!
-        </p>
-        <button class="btn-brutal" style="margin-top: 12px; padding: 10px 20px; font-size: 13px;" onclick="triggerPhotoUpload()">
-          <i class="fa-solid fa-upload"></i> फ़ोटो चुनें (Select PNG)
-        </button>
-      </div>
-
-      <div style="background: var(--bg-alt); padding: 18px; border-radius: 12px; border: 2px solid var(--ink);">
-        <strong style="color: var(--ink); font-size: 16px;">तरीका 2: फ़ाइल सेव करके (Permanent for GitHub Pages)</strong>
-        <p style="font-size: 14px; margin-top: 6px; color: var(--ink-muted);">
-          अपनी PNG फ़ोटो का नाम <strong><code>photo.png</code></strong> रखें और उसे इसी फ़ोल्डर (<code>raw footage'</code>) में कॉपी कर दें। वेबसाइट लोड होते ही उसे अपने आप उठा लेगी!
-        </p>
-      </div>
+      <button class="btn-brutal" onclick="triggerPhotoUpload()" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-upload"></i> फ़ोटो चुनें (Select PNG)
+      </button>
+      <p style="font-size: 12px; color: var(--ink-muted); margin-top: 14px;">
+        या फ़ोटो का नाम <strong><code>photo.png</code></strong> रखकर इसी फ़ोल्डर में रख दें।
+      </p>
     </div>
   </div>
 
   <!-- Floating Edit Info Button (Bottom Right) -->
-  <button onclick="openEditDrawer()" data-cursor="hover" style="position: fixed; bottom: 24px; right: 24px; z-index: 999; background: var(--cinnabar); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 20px; font-family: var(--font-heading); font-weight: 700; font-size: 13px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+  <button onclick="openEditDrawer()" data-cursor="hover" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--cinnabar); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 18px; font-family: var(--font-heading); font-weight: 700; font-size: 12px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px;">
     <i class="fa-solid fa-pen-to-square"></i> <span>Edit My Details</span>
   </button>
 
-  <!-- Edit Profile Drawer Modal -->
-  <div id="edit-drawer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(28,27,26,0.85); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; max-width: 480px; width: 100%; padding: 32px; box-shadow: 10px 10px 0 var(--cinnabar); position: relative;">
-      <button onclick="closeEditDrawer()" style="position: absolute; top: 16px; right: 16px; background: var(--ink); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;">✕</button>
-      <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px;">अपनी जानकारी अपडेट करें ✏️</h3>
-      <p style="font-size: 13px; color: var(--ink-muted); margin-bottom: 20px;">यहाँ अपनी जानकारी भरें, वेबसाइट तुरंत अपडेट हो जाएगी:</p>
+  <!-- Edit Drawer Modal -->
+  <div id="edit-drawer" style="position: fixed; inset: 0; background: rgba(28,27,26,0.85); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--paper); border: 3px solid var(--ink); border-radius: 18px; max-width: 460px; width: 100%; padding: 28px; box-shadow: 8px 8px 0 var(--cinnabar); position: relative;">
+      <button onclick="closeEditDrawer()" style="position: absolute; top: 14px; right: 14px; background: var(--ink); color: #fff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">✕</button>
+      <h3 style="font-family: var(--font-heading); font-size: 20px; margin-bottom: 6px;">अपनी जानकारी अपडेट करें ✏️</h3>
+      <p style="font-size: 13px; color: var(--ink-muted); margin-bottom: 18px;">यहाँ अपनी जानकारी भरें, वेबसाइट तुरंत अपडेट हो जाएगी:</p>
       
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">आपका नाम (Full Name):</label>
-        <input type="text" id="edit-name" placeholder="जैसे: RAHUL VERMA" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px;">आपका नाम (Full Name):</label>
+        <input type="text" id="edit-name" placeholder="जैसे: RAHUL VERMA" style="width: 100%; padding: 9px 12px; border: 2px solid var(--ink); border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff;">
       </div>
 
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">पंचायत और ब्लॉक / जिला:</label>
-        <input type="text" id="edit-panchayat" placeholder="जैसे: Gram Panchayat Rampur, Varanasi" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px;">पंचायत और जिला:</label>
+        <input type="text" id="edit-panchayat" placeholder="जैसे: Gram Panchayat Rampur, Varanasi" style="width: 100%; padding: 9px 12px; border: 2px solid var(--ink); border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff;">
       </div>
 
-      <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">व्हाट्सएप नंबर (10 डिजिट):</label>
-        <input type="tel" id="edit-phone" placeholder="जैसे: 9876543210" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px;">व्हाट्सएप नंबर:</label>
+        <input type="tel" id="edit-phone" placeholder="जैसे: 9876543210" style="width: 100%; padding: 9px 12px; border: 2px solid var(--ink); border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff;">
       </div>
 
-      <div style="margin-bottom: 22px;">
-        <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">ईमेल आईडी:</label>
-        <input type="email" id="edit-email" placeholder="जैसे: yourname@gmail.com" style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 8px; font-family: inherit; font-size: 14px; background: #fff;">
+      <div style="margin-bottom: 18px;">
+        <label style="display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px;">ईमेल आईडी:</label>
+        <input type="email" id="edit-email" placeholder="जैसे: yourname@gmail.com" style="width: 100%; padding: 9px 12px; border: 2px solid var(--ink); border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff;">
       </div>
 
-      <div style="display: flex; gap: 12px;">
+      <div style="display: flex; gap: 10px;">
         <button onclick="savePersonalDetails()" class="btn-brutal" style="flex: 1; justify-content: center;">
-          <i class="fa-solid fa-check"></i> सेव करें (Save)
+          <i class="fa-solid fa-check"></i> सेव करें
         </button>
         <button onclick="closeEditDrawer()" class="btn-brutal-alt">रद्द करें</button>
       </div>
     </div>
   </div>
 
-  <!-- ==========================================================================
-       EXACT worksruthi.com JAVASCRIPT ENGINE (CURSOR & SMOOTH SCROLL)
-       ========================================================================== -->
+  <!-- JAVASCRIPT ENGINE -->
   <script>
-    // 1. Lenis 120 FPS Inertial Smooth Scrolling (Desktop & Touch)
+    // 1. FAST PRELOADER WITH PERCENTAGE COUNTER (worksruthi style)
+    const preloader = document.getElementById('preloader');
+    const percentEl = document.getElementById('preloader-percent');
+    const statusText = document.getElementById('preloader-status-text');
+
+    const statusMessages = [
+      "INITIALIZING GPSAHAYAK...",
+      "LOADING CITIZEN PORTALS...",
+      "COMPILING HTML, CSS, JS...",
+      "READY WITH CHUTZPAH!"
+    ];
+
+    let currentPercent = 0;
+    let msgIndex = 0;
+
+    const preloaderInterval = setInterval(() => {
+      currentPercent += Math.floor(Math.random() * 8) + 4;
+      if (currentPercent >= 100) {
+        currentPercent = 100;
+        clearInterval(preloaderInterval);
+        percentEl.textContent = "100%";
+        statusText.textContent = "DONE WITH CHUTZPAH!";
+        
+        setTimeout(() => {
+          preloader.classList.add('loaded');
+        }, 300);
+      } else {
+        percentEl.textContent = (currentPercent < 10 ? "0" : "") + currentPercent + "%";
+        if (currentPercent > 30 && msgIndex === 0) { msgIndex = 1; statusText.textContent = statusMessages[1]; }
+        if (currentPercent > 65 && msgIndex === 1) { msgIndex = 2; statusText.textContent = statusMessages[2]; }
+        if (currentPercent > 88 && msgIndex === 2) { msgIndex = 3; statusText.textContent = statusMessages[3]; }
+      }
+    }, 40);
+
+    // 2. Lenis 120 FPS Inertial Smooth Scrolling
     const lenis = new Lenis({
-      duration: 1.25,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
-      gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.1,
-      touchMultiplier: 1.8,
-      infinite: false
+      touchMultiplier: 1.6
     });
 
     function raf(time) {
@@ -1431,17 +1327,12 @@
     }
     requestAnimationFrame(raf);
 
-    // 2. EXACT worksruthi.com Cursor System (from worksruthi 0wwm4zeupoc1q.js)
+    // 3. EXACT worksruthi.com Cursor System (from worksruthi chunk 0wwm4zeupoc1q.js)
     (function initWorksruthiCursor() {
-      // Check if fine pointer
       if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
       const htmlEl = document.documentElement;
-
-      // Exponential damping function directly from worksruthi:
-      // s = (current, target, rate, dt) => current + (target - current) * (1 - Math.exp(-rate * dt))
       const smoothExp = (e, t, r, n) => e + (t - e) * (1 - Math.exp(-r * n));
-
       const createSpan = (className, text = "") => {
         let el = document.createElement("span");
         el.className = className;
@@ -1452,28 +1343,23 @@
       const verbsSet = new Set(["scroll", "hover", "draw", "drag", "peel", "stick", "open"]);
       const verbArrows = { scroll: "↓", drag: "↔", open: "↗" };
 
-      // Root container .tc
       const tc = createSpan("tc");
       tc.setAttribute("aria-hidden", "true");
       tc.dataset.on = "false";
       tc.dataset.mode = "idle";
-      tc.dataset.tone = "light";
 
-      // Verb container
       const tcVerb = createSpan("tc-verb");
       const tcVerbIn = createSpan("tc-verb__in");
       const tcVerbW = createSpan("tc-verb__w");
       tcVerbIn.append(tcVerbW);
       tcVerb.append(tcVerbIn);
 
-      // Ball container
       const tcBall = createSpan("tc-ball");
       const tcBallIn = createSpan("tc-ball__in");
       const tcBallDot = createSpan("tc-ball__dot");
       tcBallIn.append(tcBallDot);
       tcBall.append(tcBallIn);
 
-      // 6 Snake trail dots
       const tcTrail = createSpan("tc-trail");
       const trailDots = Array.from({ length: 6 }, () => {
         let dot = createSpan("tc-trail__dot");
@@ -1485,19 +1371,14 @@
       document.body.append(tc);
       htmlEl.classList.add("has-tc");
 
-      // State tracking
       let pos = { x: -200, y: -200, seen: false };
       let trailPos = { x: -200, y: -200 };
       let vel = { x: null, y: null, vx: 0, vy: 0 };
       let currentVerb = "";
-      let lastElement = null;
       let lastTime = performance.now();
 
-      // Update Cursor state on target hover
       const updateCursorOnElement = (target) => {
-        let cursorData = target?.closest?.("[data-cursor]")?.dataset.cursor;
         let interactiveTarget = target?.closest?.('[data-cursor], a[href], button, [role="button"], label, select, input');
-        
         let verb = "";
         if (interactiveTarget) {
           if (interactiveTarget.hasAttribute("data-cursor")) {
@@ -1534,7 +1415,6 @@
         }
       };
 
-      // Pointer Move Handler
       window.addEventListener("pointermove", (e) => {
         pos.x = e.clientX;
         pos.y = e.clientY;
@@ -1543,41 +1423,20 @@
           pos.seen = true;
           trailPos.x = pos.x;
           trailPos.y = pos.y;
-          for (let d of trailDots) {
-            d.x = pos.x;
-            d.y = pos.y;
-          }
+          for (let d of trailDots) { d.x = pos.x; d.y = pos.y; }
         }
 
-        if (currentVerb !== null) {
-          tc.dataset.on = "true";
-        }
-
+        if (currentVerb !== null) tc.dataset.on = "true";
         updateCursorOnElement(e.target);
       }, { passive: true });
 
-      // Click / Down hop
-      window.addEventListener("pointerdown", () => {
-        tcVerb.classList.add("is-down");
-      });
-      window.addEventListener("pointerup", () => {
-        tcVerb.classList.remove("is-down");
-      });
+      window.addEventListener("pointerdown", () => tcVerb.classList.add("is-down"));
+      window.addEventListener("pointerup", () => tcVerb.classList.remove("is-down"));
 
-      // Mouse leave window
-      document.addEventListener("mouseleave", () => {
-        tc.dataset.on = "false";
-      });
-      document.addEventListener("mouseenter", () => {
-        tc.dataset.on = pos.seen ? "true" : "false";
-      });
-
-      // Physics RAF loop (Squash, Stretch, & Exponential Trail)
       function tick(now) {
         let dt = Math.min(0.05, (now - lastTime) / 1000);
         lastTime = now;
 
-        // Calculate velocity with smoothing
         if (vel.x !== null && dt > 0) {
           vel.vx = smoothExp(vel.vx, (pos.x - vel.x) / dt, 18, dt);
           vel.vy = smoothExp(vel.vy, (pos.y - vel.y) / dt, 18, dt);
@@ -1585,13 +1444,10 @@
         vel.x = pos.x;
         vel.y = pos.y;
 
-        // Smooth text position
         trailPos.x = smoothExp(trailPos.x, pos.x, 20, dt);
         trailPos.y = smoothExp(trailPos.y, pos.y, 20, dt);
-
         tcVerb.style.transform = `translate3d(${trailPos.x}px, ${trailPos.y}px, 0) translate(-50%, -50%)`;
 
-        // Squash & stretch based on velocity
         let speed = Math.hypot(vel.vx, vel.vy);
         let ballTransform = "";
         if (speed > 30) {
@@ -1599,12 +1455,10 @@
           ballTransform = `rotate(${Math.atan2(vel.vy, vel.vx)}rad) scale(${1 + scaleFactor}, ${1 / (1 + scaleFactor)})`;
         }
 
-        // Set Main Ball position
         tcBall.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
         tcBallDot.style.transform = ballTransform;
         tcBallDot.style.transformOrigin = "50% 50%";
 
-        // Cascade 6 trailing dots (each dot smoothly follows the previous one)
         let leaderX = pos.x;
         let leaderY = pos.y;
         for (let dot of trailDots) {
@@ -1620,13 +1474,11 @@
       requestAnimationFrame(tick);
     })();
 
-    // 3. Photo Upload & Drag-and-Drop Handler
+    // 4. Photo Handler
     const photoInput = document.getElementById('photo-file-input');
     const photoImg = document.getElementById('user-photo-img');
 
-    function triggerPhotoUpload() {
-      photoInput.click();
-    }
+    function triggerPhotoUpload() { photoInput.click(); }
 
     photoInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) {
@@ -1640,23 +1492,15 @@
     });
 
     const photoStage = document.querySelector('.photo-stage');
-    photoStage.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      photoStage.style.transform = 'scale(1.02)';
-    });
-    photoStage.addEventListener('dragleave', () => {
-      photoStage.style.transform = 'none';
-    });
+    photoStage.addEventListener('dragover', (e) => { e.preventDefault(); photoStage.style.transform = 'scale(1.02)'; });
+    photoStage.addEventListener('dragleave', () => { photoStage.style.transform = 'none'; });
     photoStage.addEventListener('drop', (e) => {
       e.preventDefault();
       photoStage.style.transform = 'none';
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        const file = e.dataTransfer.files[0];
         const reader = new FileReader();
-        reader.onload = function(evt) {
-          photoImg.src = evt.target.result;
-        };
-        reader.readAsDataURL(file);
+        reader.onload = function(evt) { photoImg.src = evt.target.result; };
+        reader.readAsDataURL(e.dataTransfer.files[0]);
       }
     });
 
@@ -1665,14 +1509,10 @@
       img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400"><rect width="320" height="400" fill="none"/><circle cx="160" cy="130" r="75" fill="%231c1b1a"/><path d="M50 380 C50 250, 270 250, 270 380 Z" fill="%231c1b1a"/><circle cx="160" cy="120" r="14" fill="%23e03c31"/><path d="M140 180 Q160 200 180 180" stroke="%23f3f3e9" stroke-width="6" fill="none" stroke-linecap="round"/></svg>';
     }
 
-    function openPhotoInstructions() {
-      document.getElementById('photo-modal').classList.add('active');
-    }
-    function closePhotoInstructions() {
-      document.getElementById('photo-modal').classList.remove('active');
-    }
+    function openPhotoInstructions() { document.getElementById('photo-modal').classList.add('active'); }
+    function closePhotoInstructions() { document.getElementById('photo-modal').classList.remove('active'); }
 
-    // 4. Draggable Stickers Physics
+    // 5. Draggable Stickers
     document.querySelectorAll('.sticker').forEach(sticker => {
       let isDragging = false;
       let startX, startY, origLeft, origTop;
@@ -1700,14 +1540,11 @@
       });
 
       window.addEventListener('mouseup', () => {
-        if (isDragging) {
-          isDragging = false;
-          sticker.style.cursor = 'grab';
-        }
+        if (isDragging) { isDragging = false; sticker.style.cursor = 'grab'; }
       });
     });
 
-    // 5. In-Page Personalizer / LocalStorage persistence
+    // 6. Profile In-Page Customizer
     function savePersonalDetails() {
       const name = document.getElementById('edit-name').value;
       const panchayat = document.getElementById('edit-panchayat').value;
@@ -1715,12 +1552,8 @@
       const email = document.getElementById('edit-email').value;
 
       if (name) {
-        document.querySelectorAll('.brand span').forEach(el => el.textContent = name.toUpperCase());
+        document.getElementById('header-brand-name').textContent = name.toUpperCase();
         localStorage.setItem('portfolio_name', name);
-      }
-      if (panchayat) {
-        document.querySelector('.status-pill span:last-child').textContent = panchayat + ' • Open for Impact';
-        localStorage.setItem('portfolio_panchayat', panchayat);
       }
       if (phone) {
         const waBtn = document.querySelector('a[href*="wa.me"]');
@@ -1733,7 +1566,7 @@
         localStorage.setItem('portfolio_email', email);
       }
       closeEditDrawer();
-      alert('बधाई! आपकी जानकारी अपडेट हो गई है और सुरक्षित सेव कर दी गई है।');
+      alert('जानकारी सफलतापूर्वक सेव हो गई!');
     }
 
     function openEditDrawer() {
@@ -1744,18 +1577,14 @@
       document.getElementById('edit-email').value = localStorage.getItem('portfolio_email') || '';
     }
 
-    function closeEditDrawer() {
-      document.getElementById('edit-drawer').style.display = 'none';
-    }
+    function closeEditDrawer() { document.getElementById('edit-drawer').style.display = 'none'; }
 
     window.addEventListener('DOMContentLoaded', () => {
       const savedName = localStorage.getItem('portfolio_name');
-      const savedPanchayat = localStorage.getItem('portfolio_panchayat');
       const savedPhone = localStorage.getItem('portfolio_phone');
       const savedEmail = localStorage.getItem('portfolio_email');
 
-      if (savedName) document.querySelectorAll('.brand span').forEach(el => el.textContent = savedName.toUpperCase());
-      if (savedPanchayat) document.querySelector('.status-pill span:last-child').textContent = savedPanchayat + ' • Open for Impact';
+      if (savedName) document.getElementById('header-brand-name').textContent = savedName.toUpperCase();
       if (savedPhone) {
         const waBtn = document.querySelector('a[href*="wa.me"]');
         if (waBtn) waBtn.href = 'https://wa.me/91' + savedPhone.replace(/\D/g, '');
