@@ -1946,12 +1946,12 @@
       <div class="passions-grid">
         
         <!-- Hobby 1: Adventure & Travel / Hiking -->
-        <div class="polaroid-card" style="transform: rotate(-2deg);" data-cursor="hover" onclick="openPassionLightbox('travel')">
+        <div class="polaroid-card" style="transform: rotate(-2deg);" data-cursor="open" onclick="openPassionLightbox('travel')">
           <div class="polaroid-tape"></div>
           
           <div class="polaroid-photo-frame" id="frame-travel">
             <img id="polaroid-img-travel" class="polaroid-img" src="hobby-travel.jpg" onerror="loadHobbyFallback(this, 'travel')" alt="Adventure & Travel Photo">
-            <div class="polaroid-upload-pill" onclick="event.stopPropagation(); triggerHobbyUpload('travel')">
+            <div class="polaroid-upload-pill" data-cursor="hover" onclick="event.stopPropagation(); triggerHobbyUpload('travel')">
               <i class="fa-solid fa-camera"></i> <span>Drop / Upload Photo</span>
             </div>
           </div>
@@ -1970,12 +1970,12 @@
         </div>
 
         <!-- Hobby 2: Astronomy & Stargazing -->
-        <div class="polaroid-card" style="transform: rotate(2.2deg);" data-cursor="hover" onclick="openPassionLightbox('astronomy')">
+        <div class="polaroid-card" style="transform: rotate(2.2deg);" data-cursor="open" onclick="openPassionLightbox('astronomy')">
           <div class="polaroid-tape polaroid-tape--cinnabar"></div>
 
           <div class="polaroid-photo-frame" id="frame-astronomy">
             <img id="polaroid-img-astronomy" class="polaroid-img" src="hobby-astronomy.jpg" onerror="loadHobbyFallback(this, 'astronomy')" alt="Astronomy & Cosmos Photo">
-            <div class="polaroid-upload-pill" onclick="event.stopPropagation(); triggerHobbyUpload('astronomy')">
+            <div class="polaroid-upload-pill" data-cursor="hover" onclick="event.stopPropagation(); triggerHobbyUpload('astronomy')">
               <i class="fa-solid fa-camera"></i> <span>Drop / Upload Photo</span>
             </div>
           </div>
@@ -1994,12 +1994,12 @@
         </div>
 
         <!-- Hobby 3: Robotics & Hardware Tinkering -->
-        <div class="polaroid-card" style="transform: rotate(-1.5deg);" data-cursor="hover" onclick="openPassionLightbox('robotics')">
+        <div class="polaroid-card" style="transform: rotate(-1.5deg);" data-cursor="open" onclick="openPassionLightbox('robotics')">
           <div class="polaroid-tape"></div>
 
           <div class="polaroid-photo-frame" id="frame-robotics">
             <img id="polaroid-img-robotics" class="polaroid-img" src="hobby-robotics.jpg" onerror="loadHobbyFallback(this, 'robotics')" alt="Robotics & Hardware Photo">
-            <div class="polaroid-upload-pill" onclick="event.stopPropagation(); triggerHobbyUpload('robotics')">
+            <div class="polaroid-upload-pill" data-cursor="hover" onclick="event.stopPropagation(); triggerHobbyUpload('robotics')">
               <i class="fa-solid fa-camera"></i> <span>Drop / Upload Photo</span>
             </div>
           </div>
@@ -2018,12 +2018,12 @@
         </div>
 
         <!-- Hobby 4: Midnight AI & Coding Lab -->
-        <div class="polaroid-card" style="transform: rotate(2.5deg);" data-cursor="hover" onclick="openPassionLightbox('coding')">
+        <div class="polaroid-card" style="transform: rotate(2.5deg);" data-cursor="open" onclick="openPassionLightbox('coding')">
           <div class="polaroid-tape polaroid-tape--cinnabar"></div>
 
           <div class="polaroid-photo-frame" id="frame-coding">
             <img id="polaroid-img-coding" class="polaroid-img" src="hobby-coding.jpg" onerror="loadHobbyFallback(this, 'coding')" alt="Coding & AI Workstation Photo">
-            <div class="polaroid-upload-pill" onclick="event.stopPropagation(); triggerHobbyUpload('coding')">
+            <div class="polaroid-upload-pill" data-cursor="hover" onclick="event.stopPropagation(); triggerHobbyUpload('coding')">
               <i class="fa-solid fa-camera"></i> <span>Drop / Upload Photo</span>
             </div>
           </div>
