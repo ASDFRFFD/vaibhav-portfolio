@@ -73,355 +73,128 @@
       background-size: 20px 20px;
     }
 
-    /* ==========================================================================
-       1. WORKSURTHI PRELOADER CURTAIN
-       ========================================================================== */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 9999999;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(24px, 4vw, 50px);
-      border-bottom: 3px solid var(--ink);
-      transition: transform 0.8s var(--ease-site);
-      will-change: transform;
-    }
-
-    #preloader.loaded {
-      transform: translateY(-100%);
-      pointer-events: none;
-    }
-
-    .preloader-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      text-transform: uppercase;
-    }
-
-    .preloader-status {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .preloader-dot {
-      width: 10px;
-      height: 10px;
-      background: var(--cinnabar);
-      border-radius: 50%;
-      animation: blink 0.8s infinite alternate;
-    }
-
-    @keyframes blink {
-      0% { opacity: 0.2; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1.1); }
-    }
-
-    .preloader-middle { margin: auto 0; }
-    .preloader-msg {
-      font-family: var(--font-hand);
-      font-size: clamp(28px, 4vw, 44px);
-      color: var(--cinnabar);
-      margin-bottom: 6px;
-    }
-
-    .preloader-count {
-      font-family: var(--font-display);
-      font-size: clamp(80px, 18vw, 220px);
-      line-height: 0.85;
-      letter-spacing: -2px;
-      color: var(--ink);
-    }
-
-    .preloader-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      border-top: 2px solid var(--ink);
-      padding-top: 14px;
-    }
-
-    /* ==========================================================================
-       2. EXACT worksruthi.com CURSOR SYSTEM (.tc) WITH BOUNCE & PARTICLES
-       ========================================================================== */
-    @media (hover: hover) and (pointer: fine) {
-      html.has-tc, html.has-tc * { cursor: none !important; }
-      html.has-tc :is(input:not([type=button],[type=submit],[type=checkbox],[type=radio],[type=range]), textarea, [contenteditable=""]) {
-        cursor: text !important;
-      }
-      html.has-tc [data-cursor="none"], html.has-tc [data-cursor="none"] * {
-        cursor: auto !important;
-      }
-    }
-
-    .tc {
-      --tc-ink: var(--ink);
-      --tc-mark: var(--cinnabar);
-      --tc-ball: var(--cinnabar);
-      z-index: 2147483000;
-      pointer-events: none;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      opacity: 0;
-      line-height: 1;
-      transition: opacity .2s ease-out;
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .tc[data-on="true"] { opacity: 1; }
-    .tc > * { will-change: transform; white-space: pre; position: absolute; top: 0; left: 0; }
-
-    .tc-verb__in, .tc-ball__in {
-      transition: opacity .22s ease-out, transform .34s var(--ease-site);
-      display: block;
-    }
-
-    .tc[data-mode="idle"] .tc-verb__in { opacity: 0; transform: scale(.5); }
-    .tc[data-mode="word"] .tc-ball__in { opacity: 0; transform: scale(.3); }
-    .tc-trail { transition: opacity .22s ease-out; }
-    .tc[data-mode="word"] .tc-trail { opacity: 0; }
-
-    .tc-trail__dot { will-change: transform; position: absolute; top: 0; left: 0; }
-    .tc-trail__dot:before {
-      content: "";
-      left: calc(var(--d) / -2);
-      top: calc(var(--d) / -2);
-      width: var(--d);
-      height: var(--d);
-      background: var(--tc-ball);
-      border-radius: 50%;
-      position: absolute;
-    }
-
-    .tc-trail__dot:first-child  { --d: 12px;   opacity: .85; }
-    .tc-trail__dot:nth-child(2) { --d: 10.5px; opacity: .7;  }
-    .tc-trail__dot:nth-child(3) { --d: 9px;    opacity: .55; }
-    .tc-trail__dot:nth-child(4) { --d: 7.5px;  opacity: .4;  }
-    .tc-trail__dot:nth-child(5) { --d: 6px;    opacity: .28; }
-    .tc-trail__dot:nth-child(6) { --d: 4.5px;  opacity: .16; }
-
-    .tc-ball__dot {
-      background: var(--tc-ball);
-      border-radius: 50%;
-      width: 14px;
-      height: 14px;
-      position: absolute;
-      top: -7px;
-      left: -7px;
-      will-change: transform;
-    }
-
-    .tc-verb { color: var(--tc-ink); }
-    .tc-verb__w {
-      transition: transform .18s var(--ease-site);
-      align-items: baseline;
-      display: flex;
-    }
-    .tc-ch { width: 1ch; display: inline-block; }
-    .tc-verb__arrow { color: var(--tc-mark); margin-left: .6ch; display: inline-block; }
-
-    /* ==========================================================================
-       3. CLEAN & MINIMAL EDITORIAL LAYOUT
-       ========================================================================== */
-    .container {
-      width: 92%;
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(243, 243, 233, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 2px solid var(--ink);
-      padding: 14px 0;
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 19px;
-      letter-spacing: -0.5px;
-      text-decoration: none;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-dot {
-      width: 9px;
-      height: 9px;
-      background: var(--cinnabar);
-      border-radius: 50%;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 22px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-menu a {
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: lowercase;
-      transition: color 0.2s;
-    }
-
-    .nav-menu a:hover { color: var(--cinnabar); }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 12px;
-      background: var(--paper);
-      border: 1.5px solid var(--ink);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-
-    /* Sound Toggle Pill */
-    .sound-toggle-btn {
-      background: none;
-      border: 1.5px solid var(--ink);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--paper);
-      box-shadow: 2px 2px 0 var(--ink);
-      transition: all 0.15s;
-    }
-
-    .sound-toggle-btn:hover {
-      background: var(--highlight);
-      transform: translateY(-1px);
-    }
-
     /* ============================================================
-       WORKSRUTHI MONUMENTAL HERO: CLEAN 3-COLUMN NON-OVERLAPPING GRID
+       WORKSRUTHI CLEAN HERO FLOW (100% NON-OVERLAPPING & MINIMAL)
        ============================================================ */
     .hero-wrap {
       position: relative;
       width: 100%;
-      padding: 30px 0 24px;
+      padding: 40px 0 35px;
       overflow: hidden;
       background: var(--bg);
     }
 
-    .hero-top-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .hero-eyebrow {
       font-family: var(--font-hand);
       font-size: clamp(20px, 2.2vw, 26px);
       color: var(--cinnabar);
       margin-bottom: 14px;
+      text-align: center;
       transform: rotate(-1.5deg);
     }
 
-    .hero-layout-grid {
-      display: grid;
-      grid-template-columns: 1fr minmax(280px, 440px) 1.25fr;
-      align-items: stretch;
-      min-height: clamp(520px, 78vh, 720px);
-      gap: 24px;
-      position: relative;
-    }
-
-    /* Left Side: HELLO (top) & MEET (bottom) */
-    .hero-side--left {
+    .hero-stage {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      text-align: right;
-      padding: 20px 0 35px;
-      z-index: 3;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    /* Center Column: Grounded Photo Frame */
-    .hero-center-col {
+    /* Horizontal Word Rows */
+    .hero-word-row {
       display: flex;
+      align-items: baseline;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: clamp(10px, 2vw, 24px);
+      width: 100%;
+      z-index: 5;
+    }
+
+    .hero-word-row--top {
+      margin-bottom: -10px;
+    }
+
+    .hero-word-row--bottom {
+      margin-top: -10px;
+      margin-bottom: 16px;
+    }
+
+    /* Worksruthi Monumental Typography */
+    .hero-word {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(48px, 9.2vw, 128px);
+      color: var(--cinnabar);
+      line-height: 0.85;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      font-weight: 400;
+      user-select: none;
+      display: inline-flex;
+      align-items: baseline;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-word:hover {
+      transform: scale(1.02);
+    }
+
+    .hero-comma {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(48px, 9.2vw, 128px);
+      color: var(--cinnabar);
+      line-height: 0.85;
+      margin-left: -4px;
+    }
+
+    /* Center Cutout Photo Stage: Bounded and Grounded */
+    .hero-photo-stage {
+      width: 100%;
+      max-width: 440px;
+      height: clamp(380px, 50vh, 520px);
+      display: flex;
       align-items: flex-end;
-      height: 100%;
+      justify-content: center;
       position: relative;
       z-index: 2;
+      margin: 0 auto;
+      background: radial-gradient(circle at 50% 75%, rgba(224, 60, 49, 0.12) 0%, transparent 70%);
     }
 
-    .hero-photo-wrapper {
-      width: 100%;
-      height: clamp(480px, 76vh, 700px);
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      background: radial-gradient(circle at 50% 70%, rgba(224, 60, 49, 0.12) 0%, transparent 72%);
-    }
-
-    #user-photo-img {
+    .hero-photo {
       height: 100%;
       width: auto;
       max-width: 100%;
       object-fit: contain;
       object-position: bottom center;
-      filter: drop-shadow(0 20px 32px rgba(28, 27, 26, 0.36));
+      filter: drop-shadow(0 16px 28px rgba(28, 27, 26, 0.35));
       display: block;
       transition: transform 0.25s var(--ease-site);
     }
 
-    #user-photo-img:hover {
+    .hero-photo:hover {
       transform: scale(1.02);
     }
 
     .photo-upload-badge {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--paper);
       border: 2px dashed var(--cinnabar);
-      border-radius: 10px;
-      padding: 8px 16px;
-      font-size: 12px;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--ink);
       z-index: 10;
       cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -434,71 +207,8 @@
       transform: translateX(-50%) translateY(-2px);
     }
 
-    /* Right Side: {{ first name }} (top) & vaibhav. + Byline (bottom) */
-    .hero-side--right {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: left;
-      padding: 20px 0 20px;
-      z-index: 3;
-    }
-
-    .hero-word-wrap {
-      display: flex;
-      align-items: baseline;
-    }
-
-    .hero-word--hello {
-      justify-content: flex-end;
-    }
-
-    .hero-word--meet {
-      justify-content: flex-end;
-      margin-bottom: 24px;
-    }
-
-    .hero-word--stranger-wrap {
-      justify-content: flex-start;
-      align-items: baseline;
-      gap: 4px;
-    }
-
-    .hero-intro-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    /* Worksruthi Monumental Typography */
-    .hero-word {
-      font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 8.8vw, 136px);
-      color: var(--cinnabar);
-      line-height: 0.82;
-      letter-spacing: -0.015em;
-      text-transform: uppercase;
-      font-weight: 400;
-      user-select: none;
-      transition: transform 0.22s var(--ease-site);
-    }
-
-    .hero-word:hover {
-      transform: scale(1.02);
-    }
-
-    .hero-word-comma {
-      font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 8.8vw, 136px);
-      color: var(--cinnabar);
-      line-height: 0.82;
-      margin-left: 2px;
-    }
-
     /* Visitor Name Slot Interaction */
-    .hero-word--stranger {
-      min-height: 1.1em;
+    .hero-stranger-box {
       display: inline-flex;
       align-items: baseline;
     }
@@ -516,15 +226,9 @@
       transform: scale(1.03);
     }
 
-    .hero-slot-btn:focus-visible {
-      outline: 2px solid var(--cinnabar);
-      outline-offset: 4px;
-      border-radius: 4px;
-    }
-
     .hero-placeholder {
       font-family: var(--font-mono);
-      font-size: clamp(18px, 2.6vw, 42px);
+      font-size: clamp(18px, 2.8vw, 42px);
       font-weight: 700;
       color: var(--cinnabar);
       text-transform: none;
@@ -536,17 +240,6 @@
       gap: 3px;
       background: rgba(224, 60, 49, 0.05);
       border-radius: 5px;
-    }
-
-    .hero-placeholder:hover {
-      border-bottom-style: solid;
-      background: rgba(224, 60, 49, 0.1);
-    }
-
-    .hero-placeholder .bracket {
-      color: var(--ink-muted);
-      font-weight: 400;
-      opacity: 0.65;
     }
 
     .hero-slot-caret {
@@ -566,7 +259,7 @@
     .hero-slot-input {
       all: unset;
       font-family: var(--font-mono);
-      font-size: clamp(18px, 2.6vw, 42px);
+      font-size: clamp(18px, 2.8vw, 42px);
       font-weight: 700;
       color: var(--cinnabar);
       caret-color: var(--cinnabar);
@@ -581,30 +274,13 @@
 
     .hero-merged {
       font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(54px, 8.8vw, 136px);
+      font-size: clamp(48px, 9.2vw, 128px);
       color: var(--cinnabar);
-      line-height: 0.82;
+      line-height: 0.85;
       letter-spacing: -0.015em;
       text-transform: uppercase;
       display: inline-block;
       cursor: pointer;
-      position: relative;
-    }
-
-    .hero-merged::after {
-      content: "✎";
-      font-family: var(--font-mono);
-      font-size: 13px;
-      position: absolute;
-      top: -8px;
-      right: -16px;
-      color: var(--ink-muted);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .hero-merged:hover::after {
-      opacity: 0.85;
     }
 
     .hero-merged__rise {
@@ -612,86 +288,90 @@
       display: inline-block;
     }
 
-    /* Byline Box Directly Under vaibhav. */
-    .hero-byline-box {
-      max-width: 480px;
-      margin-top: 4px;
+    @keyframes hero-merge {
+      0% { opacity: 0; transform: translateY(110%); }
+      60% { opacity: 1; }
+      100% { opacity: 1; transform: none; }
+    }
+
+    /* Minimal Brutalist Byline & Actions */
+    .hero-byline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      max-width: 620px;
+      margin: 0 auto;
     }
 
     .hero-byline-text {
-      font-size: clamp(14px, 1.35vw, 17px);
+      font-family: var(--font-mono);
+      font-size: clamp(13px, 1.2vw, 15px);
       line-height: 1.5;
       color: var(--ink);
-      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
     }
 
-    .hero-byline-text .mark {
-      background: var(--highlight);
-      padding: 2px 6px;
-      font-weight: 700;
-      border-radius: 3px;
+    .hero-byline-muted {
+      color: var(--ink-muted);
+      text-transform: none;
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
     }
 
     .hero-byline-actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      margin-bottom: 16px;
     }
 
-    .hero-micro-stats {
-      display: flex;
-      gap: 22px;
-      padding-top: 14px;
-      border-top: 2px solid var(--ink);
+    .btn-brutal-sm {
+      padding: 9px 18px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 3px 3px 0 var(--cinnabar);
+      transition: all 0.15s ease;
+      cursor: pointer;
     }
 
-    /* Mobile Responsive (Below 920px) */
-    @media (max-width: 919px) {
-      .hero-layout-grid {
-        display: flex;
-        flex-direction: column;
-        min-height: auto;
-        gap: 18px;
-        text-align: center;
-      }
-      .hero-side--left {
-        padding: 0;
-        text-align: center;
-        align-items: center;
-      }
-      .hero-side--right {
-        padding: 0;
-        text-align: center;
-        align-items: center;
-      }
-      .hero-word--hello, .hero-word--meet, .hero-word--stranger-wrap {
-        justify-content: center;
-      }
-      .hero-word--meet {
-        margin-bottom: 0;
-      }
-      .hero-intro-group {
-        align-items: center;
-        text-align: center;
-      }
-      .hero-center-col {
-        order: 2;
-        min-height: 420px;
-      }
-      .hero-photo-wrapper {
-        height: 420px;
-      }
-      .hero-byline-box {
-        text-align: center;
-        margin: 12px auto 0;
-      }
-      .hero-byline-actions {
-        justify-content: center;
-      }
-      .hero-micro-stats {
-        justify-content: center;
-      }
+    .btn-brutal-sm:hover {
+      background: var(--cinnabar);
+      border-color: var(--cinnabar);
+      transform: translateY(-1px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .btn-brutal-sm-alt {
+      padding: 9px 18px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .btn-brutal-sm-alt:hover {
+      background: var(--highlight);
+      transform: translateY(-1px);
     }
 
     /* ============================================================
@@ -1547,91 +1227,56 @@
   <main class="hero-wrap" id="hero">
     <div class="container">
       
-      <div class="hero-top-eyebrow" id="hero-greeting-pill">
+      <!-- Top Eyebrow -->
+      <div class="hero-eyebrow" id="hero-greeting-pill">
         hello world! welcome to my chaotic digital brain ✦
       </div>
 
-      <div class="hero-layout-grid">
+      <!-- Stage: Worksruthi Minimal & Monumental -->
+      <div class="hero-stage">
         
-        <!-- Column 1 (Left): HELLO (Top) & MEET (Bottom) -->
-        <div class="hero-side hero-side--left">
-          <div class="hero-word-wrap hero-word--hello" data-cursor="hover">
-            <span class="hero-word">hello</span>
+        <!-- Top: hello {{ first name }} , -->
+        <div class="hero-word-row hero-word-row--top">
+          <span class="hero-word hero-word--hello">hello</span>
+          <div class="hero-stranger-box" id="hero-stranger-wrap">
+            <button type="button" class="hero-slot-btn hero-placeholder" id="hero-slot-btn" title="Click to enter your name">
+              {{ first name<span class="hero-slot-caret"></span> }}
+            </button>
           </div>
-          <div class="hero-word-wrap hero-word--meet" data-cursor="hover">
-            <span class="hero-word">meet</span>
+          <span class="hero-comma">,</span>
+        </div>
+
+        <!-- Center: Grounded Photo Cutout -->
+        <div class="hero-photo-stage">
+          <img id="user-photo-img" class="hero-photo" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Portrait PNG" data-cursor="hover">
+
+          <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
+            <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
+            <span>Drop / Click Your PNG Photo Here</span>
           </div>
         </div>
 
-        <!-- Column 2 (Center): Grounded Cutout PNG Photo Frame -->
-        <div class="hero-center-col">
-          <div class="hero-photo-wrapper">
-            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Portrait PNG" data-cursor="hover">
-
-            <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
-              <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
-              <span>Drop / Click Your PNG Photo Here</span>
-            </div>
-          </div>
+        <!-- Bottom: meet vaibhav. -->
+        <div class="hero-word-row hero-word-row--bottom">
+          <span class="hero-word hero-word--meet">meet</span>
+          <span class="hero-word hero-word--vaibhav" id="hero-author-word">
+            <span id="hero-author-name">vaibhav.</span>
+          </span>
         </div>
 
-        <!-- Column 3 (Right): {{ first name }} , (Top) & VAIBHAV. + Byline (Bottom) -->
-        <div class="hero-side hero-side--right">
-          
-          <!-- Top: Interactive Visitor Name Slot -->
-          <div class="hero-word-wrap hero-word--stranger-wrap">
-            <div class="hero-word hero-word--stranger" id="hero-stranger-wrap" data-cursor="hover">
-              <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" title="Click to enter your name">
-                <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
-              </button>
-            </div>
-            <span class="hero-word-comma">,</span>
+        <!-- Byline: Minimal & Punchy -->
+        <div class="hero-byline">
+          <p class="hero-byline-text">
+            a student, AI explorer & web maker with chutzpah. 
+            <span class="hero-byline-muted">(panchayat assistant by day to keep parents calm).</span>
+          </p>
+
+          <div class="hero-byline-actions">
+            <a href="#projects" class="btn-brutal-sm" data-cursor="open">projects ↗</a>
+            <a href="#passions" class="btn-brutal-sm" data-cursor="open">passions ✦</a>
+            <a href="#arcade" class="btn-brutal-sm" data-cursor="hover">play games 🎮</a>
+            <button class="btn-brutal-sm-alt" onclick="openPhotoInstructions()" data-cursor="hover">change photo 📷</button>
           </div>
-
-          <!-- Bottom: vaibhav. + Byline Box directly below -->
-          <div class="hero-intro-group">
-            <div class="hero-word hero-word--vaibhav" id="hero-author-word" data-cursor="hover">
-              <span id="hero-author-name">vaibhav.</span>
-            </div>
-
-            <div class="hero-byline-box">
-              <p class="hero-byline-text">
-                Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
-                and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
-              </p>
-
-              <div class="hero-byline-actions">
-                <a href="#projects" class="btn-brutal" data-cursor="open">
-                  <i class="fa-solid fa-rocket"></i> Shipped Projects
-                </a>
-                <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
-                  <i class="fa-solid fa-gamepad"></i> Play Games 🎮
-                </a>
-                <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
-                  <i class="fa-solid fa-camera"></i> Change Photo
-                </button>
-              </div>
-
-              <!-- Micro Stats -->
-              <div class="hero-micro-stats">
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
-                </div>
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
-                </div>
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
 
       </div>
