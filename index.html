@@ -434,34 +434,38 @@
       background: var(--highlight);
     }
 
-    /* Photo Cutout Centerpiece */
+    /* Photo Cutout Centerpiece (Enlarged to match worksruthi.com scale) */
     .photo-stage {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 440px;
+      min-height: clamp(540px, 76vh, 780px);
+      perspective: 1200px;
     }
 
     .photo-cutout-frame {
       width: 100%;
-      max-width: 400px;
-      height: 480px;
+      max-width: 520px;
+      height: clamp(540px, 76vh, 780px);
       position: relative;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      background: radial-gradient(circle at 50% 60%, rgba(224, 60, 49, 0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 65%, rgba(224, 60, 49, 0.15) 0%, transparent 72%);
+      transition: transform 0.25s var(--ease-site);
+      transform-style: preserve-3d;
     }
 
     #user-photo-img {
       max-height: 100%;
-      max-width: 100%;
+      width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 16px 22px rgba(28, 27, 26, 0.3));
-      transition: transform 0.3s ease;
+      filter: drop-shadow(0 26px 40px rgba(28, 27, 26, 0.42));
+      transition: transform 0.35s var(--ease-site);
       position: relative;
       z-index: 2;
+      transform-origin: 50% 100%;
     }
 
     #user-photo-img:hover {
@@ -850,13 +854,41 @@
     @media (max-width: 860px) {
       .hero-grid, .flagship-card, .cards-2col {
         grid-template-columns: 1fr;
+        gap: 28px;
       }
       .broll-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .photo-stage {
         order: -1;
-        min-height: 350px;
+        min-height: clamp(360px, 50vh, 480px);
+      }
+      .photo-cutout-frame {
+        max-width: 360px;
+        height: clamp(360px, 50vh, 480px);
+      }
+      .doodle-1 {
+        left: 5px;
+        top: 15px;
+        font-size: 18px;
+      }
+      .doodle-2 {
+        right: 5px;
+        bottom: 50px;
+        font-size: 18px;
+      }
+      .nav-menu {
+        gap: 16px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .hero-btns {
+        flex-direction: column;
+      }
+      .btn-brutal, .btn-brutal-alt {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
@@ -1474,8 +1506,54 @@
         updateCursorOnElement(e.target);
       }, { passive: true });
 
-      window.addEventListener("pointerdown", () => tcVerb.classList.add("is-down"));
-      window.addEventListener("pointerup", () => tcVerb.classList.remove("is-down"));
+      let isDown = false;
+      let isBouncing = false;
+      let bounceTime = 0;
+
+      // Particle burst on click
+      function triggerClickParticles(x, y) {
+        for (let i = 0; i < 6; i++) {
+          const p = document.createElement("span");
+          p.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            width: 7px;
+            height: 7px;
+            background: var(--cinnabar);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2147483002;
+            transition: transform 0.45s cubic-bezier(.22, 1, .36, 1), opacity 0.45s ease-out;
+          `;
+          document.body.appendChild(p);
+
+          const angle = (i / 6) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+          const dist = 28 + Math.random() * 24;
+          const dx = Math.cos(angle) * dist;
+          const dy = Math.sin(angle) * dist;
+
+          requestAnimationFrame(() => {
+            p.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(0)`;
+            p.style.opacity = "0";
+          });
+
+          setTimeout(() => p.remove(), 480);
+        }
+      }
+
+      window.addEventListener("pointerdown", (e) => {
+        isDown = true;
+        tcVerb.classList.add("is-down");
+        triggerClickParticles(e.clientX, e.clientY);
+      });
+
+      window.addEventListener("pointerup", () => {
+        isDown = false;
+        tcVerb.classList.remove("is-down");
+        isBouncing = true;
+        bounceTime = 0;
+      });
 
       function tick(now) {
         let dt = Math.min(0.05, (now - lastTime) / 1000);
@@ -1492,15 +1570,42 @@
         trailPos.y = smoothExp(trailPos.y, pos.y, 20, dt);
         tcVerb.style.transform = `translate3d(${trailPos.x}px, ${trailPos.y}px, 0) translate(-50%, -50%)`;
 
+        // Kinetic Ball Squash & Stretch + Bounce Physics
         let speed = Math.hypot(vel.vx, vel.vy);
-        let ballTransform = "";
+        let ballRotScale = "";
         if (speed > 30) {
           let scaleFactor = Math.min(0.55, speed / 2600);
-          ballTransform = `rotate(${Math.atan2(vel.vy, vel.vx)}rad) scale(${1 + scaleFactor}, ${1 / (1 + scaleFactor)})`;
+          ballRotScale = `rotate(${Math.atan2(vel.vy, vel.vx)}rad) scale(${1 + scaleFactor}, ${1 / (1 + scaleFactor)})`;
         }
 
-        tcBall.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-        tcBallDot.style.transform = ballTransform;
+        // Click Hop & Bounce Calculation (harmonic rubber damping)
+        let bounceY = 0;
+        let squashX = 1;
+        let squashY = 1;
+
+        if (isDown) {
+          squashX = 1.35;
+          squashY = 0.65;
+          bounceY = 3;
+        } else if (isBouncing) {
+          bounceTime += dt;
+          let decay = Math.exp(-9 * bounceTime);
+          // Hops up (-28px) and rings with spring oscillation
+          bounceY = -28 * Math.sin(20 * bounceTime) * decay;
+          let osc = 0.42 * Math.sin(22 * bounceTime) * decay;
+          squashX = 1 - osc;
+          squashY = 1 + osc;
+
+          if (bounceTime > 0.55) {
+            isBouncing = false;
+            bounceY = 0;
+            squashX = 1;
+            squashY = 1;
+          }
+        }
+
+        tcBall.style.transform = `translate3d(${pos.x}px, ${pos.y + bounceY}px, 0)`;
+        tcBallDot.style.transform = `${ballRotScale} scale(${squashX}, ${squashY})`;
         tcBallDot.style.transformOrigin = "50% 50%";
 
         let leaderX = pos.x;
@@ -1517,6 +1622,32 @@
       }
       requestAnimationFrame(tick);
     })();
+
+    // 4. Magnetic Buttons Micro-Interaction
+    document.querySelectorAll('.btn-brutal, .btn-brutal-alt').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.25}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+
+    // 5. 3D Parallax Tilt on the Big Hero Photo
+    const heroCutout = document.querySelector('.photo-cutout-frame');
+    if (heroCutout) {
+      window.addEventListener('mousemove', (e) => {
+        const xPercent = (e.clientX / window.innerWidth - 0.5) * 2;
+        const yPercent = (e.clientY / window.innerHeight - 0.5) * 2;
+        heroCutout.style.transform = `rotateY(${xPercent * 8}deg) rotateX(${-yPercent * 6}deg)`;
+      });
+      window.addEventListener('mouseleave', () => {
+        heroCutout.style.transform = 'none';
+      });
+    }
 
     // 4. Photo Handler
     const photoInput = document.getElementById('photo-file-input');
