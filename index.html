@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Meet the All-Rounder & Panchayat Assistant | Creative Portfolio</title>
+  <meta name="description" content="A creative, bold portfolio inspired by worksruthi.com. Bridging grassroots Panchayat E-Governance with modern AI video, media, and tech with chutzpah.">
+
+  <!-- Google Fonts: Anton (Impact bold display), Syne (modern punchy), Plus Jakarta Sans (body), Caveat (handwritten scribbles) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #f3f3e9;
+      --bg-alt: #eaeae0;
+      --paper: #fbfbf6;
+      --ink: #1c1b1a;
+      --ink-muted: #5e5d59;
+      --cinnabar: #e03c31; /* Signature worksruthi red */
+      --cinnabar-light: rgba(224, 60, 49, 0.12);
+      --highlight: #fef08a; /* Highlighter yellow */
+      --spring: #d1fae5;
+      --font-display: 'Anton', 'Syne', sans-serif;
+      --font-heading: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-hand: 'Caveat', cursive;
+      --border-dark: #1c1b1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+      cursor: default;
+    }
+
+    /* Subtle Paper Grain Texture */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: radial-gradient(#1c1b1a 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Trailing Cursor (inspired by worksruthi) */
+    .custom-cursor-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--cinnabar);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, opacity 0.2s;
+    }
+
+    .custom-cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--cinnabar);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out, width 0.2s, height 0.2s;
+      opacity: 0.6;
+    }
+
+    /* Container */
+    .container {
+      width: 92%;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(243, 243, 233, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--ink);
+      padding: 16px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--cinnabar);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--cinnabar);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #10b981;
+    }
+
+    /* Hero Section */
+    .hero-wrap {
+      padding: 70px 0 60px;
+      position: relative;
+    }
+
+    .hero-pre-title {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      color: var(--cinnabar);
+      margin-bottom: 12px;
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 9.5vw, 128px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 30px;
+    }
+
+    .hero-headline .highlight-word {
+      position: relative;
+      display: inline-block;
+      color: var(--cinnabar);
+    }
+
+    /* Hand-drawn red scribble underline under words */
+    .squiggle-svg {
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 18px;
+      pointer-events: none;
+    }
+
+    /* Split Hero Grid: Text & Cutout PNG Photo */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    /* The Centerpiece Photo Container */
+    .photo-stage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 480px;
+    }
+
+    .photo-cutout-frame {
+      width: 100%;
+      max-width: 440px;
+      height: 520px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 60%, rgba(224, 60, 49, 0.12) 0%, transparent 70%);
+    }
+
+    /* User Photo Display (supports transparent PNG) */
+    #user-photo-img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 25px rgba(28, 27, 26, 0.35));
+      transition: transform 0.35s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    #user-photo-img:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    /* Photo Upload / Drop Zone Overlay */
+    .photo-drop-badge {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      border: 2px dashed var(--cinnabar);
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      z-index: 10;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .photo-drop-badge:hover {
+      background: var(--highlight);
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    /* Hand-Drawn Annotations & Doodles */
+    .doodle-note {
+      position: absolute;
+      font-family: var(--font-hand);
+      font-size: 22px;
+      color: var(--cinnabar);
+      line-height: 1.1;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .doodle-note-1 {
+      top: 40px;
+      left: -20px;
+      transform: rotate(-8deg);
+      max-width: 160px;
+    }
+
+    .doodle-note-2 {
+      bottom: 90px;
+      right: -25px;
+      transform: rotate(6deg);
+      max-width: 170px;
+    }
+
+    /* Hand-drawn SVG arrows */
+    .arrow-svg {
+      width: 48px;
+      height: 48px;
+      fill: none;
+      stroke: var(--cinnabar);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Sticker Badges */
+    .sticker {
+      position: absolute;
+      padding: 8px 16px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 6px;
+      z-index: 6;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .sticker:hover {
+      transform: scale(1.1) rotate(0deg) !important;
+    }
+
+    .sticker-red {
+      background: var(--cinnabar);
+      color: #fff;
+      top: 10px;
+      right: 20px;
+      transform: rotate(7deg);
+    }
+
+    .sticker-yellow {
+      background: var(--highlight);
+      color: var(--ink);
+      bottom: 25px;
+      left: 10px;
+      transform: rotate(-5deg);
+    }
+
+    /* Hero Bio Text */
+    .hero-bio-lead {
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .hero-bio-lead .mark {
+      background: var(--highlight);
+      padding: 2px 6px;
+      font-weight: 700;
+      border-radius: 4px;
+    }
+
+    .hero-cta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .btn-brutal {
+      padding: 14px 30px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      box-shadow: 4px 4px 0 var(--cinnabar);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .btn-brutal:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--cinnabar);
+      background: var(--cinnabar);
+      border-color: var(--cinnabar);
+    }
+
+    .btn-brutal-alt {
+      padding: 14px 26px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .btn-brutal-alt:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+      background: var(--highlight);
+    }
+
+    /* Infinite Marquee Ribbon (inspired by worksruthi) */
+    .marquee-ribbon {
+      background: var(--ink);
+      color: #fff;
+      padding: 14px 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .marquee-track span {
+      margin: 0 16px;
+    }
+
+    .marquee-track .star {
+      color: var(--cinnabar);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Section Styling */
+    section {
+      padding: 90px 0;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-hand);
+      font-size: 24px;
+      color: var(--cinnabar);
+      margin-bottom: 8px;
+      transform: rotate(-1.5deg);
+      display: inline-block;
+    }
+
+    .section-big-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 76px);
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 18px;
+      color: var(--ink-muted);
+      max-width: 680px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    /* Editorial About / Pitch Box */
+    .pitch-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .pitch-card {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 8px 8px 0 var(--ink);
+      position: relative;
+    }
+
+    .pitch-card p {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      color: var(--ink);
+    }
+
+    .pitch-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Tape Effect on Card */
+    .tape-effect {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 28px;
+      background: rgba(254, 240, 138, 0.7);
+      border: 1px dashed rgba(28, 27, 26, 0.4);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Selected Work / Portfolio Cards */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+    }
+
+    .work-item {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 var(--ink);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 10px 10px 0 var(--cinnabar);
+    }
+
+    .work-media-box {
+      height: 220px;
+      background: var(--bg-alt);
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .work-media-box i.work-icon {
+      font-size: 56px;
+      color: var(--ink);
+      transition: transform 0.3s ease;
+    }
+
+    .work-item:hover .work-media-box i.work-icon {
+      transform: scale(1.15) rotate(-5deg);
+      color: var(--cinnabar);
+    }
+
+    .work-number {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: var(--ink);
+      opacity: 0.3;
+    }
+
+    .work-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .work-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tag-pill {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+    }
+
+    .work-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .work-desc {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    /* B-Roll / Field Scrapbook (inspired by worksruthi B-Roll section) */
+    .broll-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .polaroid {
+      background: #fff;
+      border: 2px solid var(--ink);
+      padding: 14px 14px 24px;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .polaroid:hover {
+      transform: scale(1.06) rotate(0deg) !important;
+      z-index: 10;
+      box-shadow: 8px 8px 0 var(--cinnabar);
+    }
+
+    .polaroid-img-box {
+      width: 100%;
+      height: 180px;
+      background: var(--bg-alt);
+      border: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 20px;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Contact / Let's Talk Section */
+    .contact-wrap {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 24px;
+      padding: 60px 50px;
+      box-shadow: 12px 12px 0 var(--ink);
+      position: relative;
+    }
+
+    .big-contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7vw, 92px);
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .big-contact-title span.red {
+      color: var(--cinnabar);
+    }
+
+    .contact-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-top: 36px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Hidden File Input for User Photo */
+    #photo-file-input {
+      display: none;
+    }
+
+    /* Modal for Photo Help / Instructions */
+    .photo-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(28, 27, 26, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .photo-modal-overlay.active {
+      display: flex;
+    }
+
+    .photo-modal-card {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      max-width: 540px;
+      width: 100%;
+      padding: 36px;
+      box-shadow: 10px 10px 0 var(--cinnabar);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid, .pitch-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .broll-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .photo-stage {
+        order: -1;
+        min-height: 380px;
+      }
+      .contact-wrap {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Trailing Cursor elements -->
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
+  <div class="custom-cursor-ring" id="cursor-ring"></div>
+
+  <!-- Hidden file picker for user's PNG photo -->
+  <input type="file" id="photo-file-input" accept="image/png, image/webp, image/jpeg">
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#hero" class="brand">
+        <span class="brand-dot"></span>
+        <span>THE ALL-ROUNDER</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Selected Work</a></li>
+        <li><a href="#broll">B-Roll</a></li>
+        <li><a href="#contact">Let's Talk</a></li>
+      </ul>
+
+      <div class="status-pill">
+        <span class="status-indicator"></span>
+        <span>Panchayat Secretariat • Open for Impact</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-wrap" id="hero">
+    <div class="container">
+      
+      <!-- Top Quirky Intro -->
+      <div class="hero-pre-title">
+        नमस्ते! hello world, welcome to my creative corner ✦
+      </div>
+
+      <!-- Giant Headline -->
+      <h1 class="hero-headline">
+        MEET THE <span class="highlight-word">ALL-ROUNDER<svg class="squiggle-svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="#e03c31" stroke-width="5" stroke-linecap="round"/></svg></span>,<br/>
+        PANCHAYAT ASSISTANT &<br/>
+        DIGITAL ARTIST WITH CHUTZPAH.
+      </h1>
+
+      <!-- Split Layout: Photo Centerpiece & Personality Copy -->
+      <div class="hero-grid">
+        
+        <!-- Left Column: Sharp Copy & CTA -->
+        <div>
+          <p class="hero-bio-lead">
+            You thought a <span class="mark">Panchayat Assistant</span> only stamps files? Think again. 
+            I bridge grassroots public welfare, 100% transparent citizen e-governance, and cutting-edge <span class="mark">AI video production</span> & tech systems. 
+            From solving offline village grievances at 11 AM to rendering 4K cinematic AI reels at 8 PM.
+          </p>
+
+          <div class="hero-cta-bar">
+            <a href="#contact" class="btn-brutal">
+              <i class="fa-solid fa-bolt"></i> Work With Me
+            </a>
+            <a href="#work" class="btn-brutal-alt">
+              <i class="fa-solid fa-eye"></i> See The Work
+            </a>
+            <button class="btn-brutal-alt" onclick="openPhotoInstructions()">
+              <i class="fa-solid fa-camera"></i> Change Photo
+            </button>
+          </div>
+
+          <!-- Quick Micro-metrics -->
+          <div style="display: flex; gap: 24px; padding-top: 16px; border-top: 2px solid var(--ink);">
+            <div>
+              <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">5000+</div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Citizens Assisted</div>
+            </div>
+            <div>
+              <div style="font-family: var(--font-display); font-size: 32px; color: var(--ink);">100%</div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Portal Accuracy</div>
+            </div>
+            <div>
+              <div style="font-family: var(--font-display); font-size: 32px; color: var(--cinnabar);">4K AI</div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase;">Video & Creative</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: The Signature Cutout Photo Stage -->
+        <div class="photo-stage">
+
+          <!-- Hand-drawn Annotations pointing to photo -->
+          <div class="doodle-note doodle-note-1">
+            yes, that's me in the field!
+            <svg class="arrow-svg" viewBox="0 0 50 50">
+              <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
+            </svg>
+          </div>
+
+          <div class="doodle-note doodle-note-2">
+            <svg class="arrow-svg" style="transform: rotate(180deg);" viewBox="0 0 50 50">
+              <path d="M10,10 Q30,10 40,35 M40,35 L30,30 M40,35 L45,22"/>
+            </svg>
+            turning raw footage into pure visual gold!
+          </div>
+
+          <!-- Playful Stickers -->
+          <div class="sticker sticker-red">
+            ✦ 100% VERIFIED
+          </div>
+          <div class="sticker sticker-yellow">
+            PANCHAYAT HERO
+          </div>
+
+          <!-- The Cutout Frame -->
+          <div class="photo-cutout-frame">
+            <!-- User's Cutout PNG Photo (Default SVG Avatar if photo.png is not yet added) -->
+            <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG">
+
+            <!-- Floating Button to Upload / Change PNG Photo on the fly -->
+            <div class="photo-drop-badge" onclick="triggerPhotoUpload()">
+              <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
+              <span>Drop / Click Your PNG Photo Here</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Infinite Rolling Marquee Ribbon -->
+  <div class="marquee-ribbon">
+    <div class="marquee-track">
+      <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
+      <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
+      <span>AI VIDEO PRODUCTION</span> <span class="star">✦</span>
+      <span>RAW FOOTAGE TO VIRAL REELS</span> <span class="star">✦</span>
+      <span>DATA ENTRY & PFMS</span> <span class="star">✦</span>
+      <span>AYUSHMAN & PM-KISAN</span> <span class="star">✦</span>
+      <span>100% TRANSPARENCY</span> <span class="star">✦</span>
+      <span>TECH ALL-ROUNDER</span> <span class="star">✦</span>
+      <!-- Duplicate for loop -->
+      <span>PANCHAYAT SECRETARIAT</span> <span class="star">✦</span>
+      <span>CITIZEN E-GOVERNANCE</span> <span class="star">✦</span>
+      <span>AI VIDEO PRODUCTION</span> <span class="star">✦</span>
+      <span>RAW FOOTAGE TO VIRAL REELS</span> <span class="star">✦</span>
+      <span>DATA ENTRY & PFMS</span> <span class="star">✦</span>
+      <span>AYUSHMAN & PM-KISAN</span> <span class="star">✦</span>
+      <span>100% TRANSPARENCY</span> <span class="star">✦</span>
+      <span>TECH ALL-ROUNDER</span> <span class="star">✦</span>
+    </div>
+  </div>
+
+  <!-- Section 1: The Pitch / About Me -->
+  <section id="about">
+    <div class="container">
+      <div class="pitch-grid">
+        
+        <div>
+          <div class="section-eyebrow">the what, why, and how ✦</div>
+          <h2 class="section-big-title">
+            I SOLVE REAL PROBLEMS ON THE GROUND & MAKE THEM LOOK GOOD ONLINE.
+          </h2>
+          <p class="section-desc">
+            Most people treat public administration and modern creative technology as two different planets. I live right at their intersection.
+          </p>
+        </div>
+
+        <div class="pitch-card">
+          <div class="tape-effect"></div>
+          <p>
+            <strong>At the Gram Panchayat Secretariat:</strong> I manage the entire digital gateway for thousands of rural citizens. Aadhaar updates, Ayushman Bharat Golden Cards, PM-Kisan Samman Nidhi, Family ID, E-District certificates, and financial reporting on PFMS. Zero delay, zero corruption.
+          </p>
+          <p>
+            <strong>In the Creative & Tech Lab:</strong> I process raw footage, build automated video editing workflows, deploy AI generation pipelines, design 3D web experiences, and fix complex hardware & network setups.
+          </p>
+          <p style="font-family: var(--font-hand); font-size: 22px; color: var(--cinnabar);">
+            "If it involves citizens, computers, code, or cameras — consider it handled."
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Selected Work Showcase -->
+  <section id="work" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-eyebrow">selected case studies ✦</div>
+      <h2 class="section-big-title">WHAT I ACTUALLY DO EVERY SINGLE DAY</h2>
+      <p class="section-desc">
+        A breakdown of four major domains where I deliver measurable grassroots impact and high-voltage media.
+      </p>
+
+      <div class="works-grid">
+
+        <!-- Work 01 -->
+        <div class="work-item">
+          <div class="work-media-box">
+            <span class="work-number">01</span>
+            <i class="fa-solid fa-id-card-clip work-icon"></i>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="tag-pill">E-Governance</span>
+              <span class="tag-pill">Ayushman Bharat</span>
+              <span class="tag-pill">DBT</span>
+            </div>
+            <h3 class="work-title">100% Scheme Saturation Drive</h3>
+            <p class="work-desc">
+              Organized village-level e-KYC camps to deliver Ayushman Golden Cards and PM-Kisan verification directly to doorsteps for senior citizens and underprivileged families.
+            </p>
+          </div>
+        </div>
+
+        <!-- Work 02 -->
+        <div class="work-item">
+          <div class="work-media-box">
+            <span class="work-number">02</span>
+            <i class="fa-solid fa-video work-icon"></i>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="tag-pill">AI Video</span>
+              <span class="tag-pill">Raw Footage</span>
+              <span class="tag-pill">Shorts/Reels</span>
+            </div>
+            <h3 class="work-title">Public Awareness Video Series</h3>
+            <p class="work-desc">
+              Turned raw handheld footage into crisp, engaging 60-second viral explainers showing residents how to check their scheme status on mobile without visiting brokers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Work 03 -->
+        <div class="work-item">
+          <div class="work-media-box">
+            <span class="work-number">03</span>
+            <i class="fa-solid fa-cubes work-icon"></i>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="tag-pill">Three.js</span>
+              <span class="tag-pill">3D WebGL</span>
+              <span class="tag-pill">GSAP</span>
+            </div>
+            <h3 class="work-title">Interactive Digital Dashboards</h3>
+            <p class="work-desc">
+              Built dynamic 3D web interfaces visualizing Panchayat development statistics, clean water distribution data, and budget allocations with smooth animations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Work 04 -->
+        <div class="work-item">
+          <div class="work-media-box">
+            <span class="work-number">04</span>
+            <i class="fa-solid fa-network-wired work-icon"></i>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="tag-pill">IT Hardware</span>
+              <span class="tag-pill">MIS</span>
+              <span class="tag-pill">Biometrics</span>
+            </div>
+            <h3 class="work-title">Secretariat IT & Network Setup</h3>
+            <p class="work-desc">
+              Maintained zero downtime for government servers, biometric scanners, high-speed Wi-Fi, and dual-language official correspondence systems.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: B-Roll / Field Scrapbook (worksruthi style) -->
+  <section id="broll">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 40px;">
+        <div>
+          <div class="section-eyebrow">life outside the office ✦</div>
+          <h2 class="section-big-title" style="margin-bottom: 0;">THE B-ROLL ARCHIVE</h2>
+        </div>
+        <p style="font-family: var(--font-hand); font-size: 22px; color: var(--cinnabar); max-width: 320px;">
+          "the candid snapshots of fieldwork, editing screens, and village tea breaks."
+        </p>
+      </div>
+
+      <div class="broll-grid">
+
+        <div class="polaroid" style="transform: rotate(-3deg);">
+          <div class="polaroid-img-box">
+            <i class="fa-solid fa-desktop"></i>
+          </div>
+          <div class="polaroid-caption">portal grind at 9 AM</div>
+        </div>
+
+        <div class="polaroid" style="transform: rotate(2deg);">
+          <div class="polaroid-img-box">
+            <i class="fa-solid fa-mug-hot"></i>
+          </div>
+          <div class="polaroid-caption">cutting chai & gram sabha</div>
+        </div>
+
+        <div class="polaroid" style="transform: rotate(-2deg);">
+          <div class="polaroid-img-box">
+            <i class="fa-solid fa-camera-retro"></i>
+          </div>
+          <div class="polaroid-caption">shooting raw reel b-roll</div>
+        </div>
+
+        <div class="polaroid" style="transform: rotate(3deg);">
+          <div class="polaroid-img-box">
+            <i class="fa-solid fa-people-roof"></i>
+          </div>
+          <div class="polaroid-caption">citizen smile delivered ✓</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Contact / Let's Talk -->
+  <section id="contact" style="border-bottom: none; padding-bottom: 60px;">
+    <div class="container">
+      
+      <div class="contact-wrap">
+        <div class="section-eyebrow">ready when you are ✦</div>
+        <h2 class="big-contact-title">
+          GOT A SCHEME TO PROCESS, <br/>
+          OR NEED <span class="red">VIRAL MEDIA?</span><br/>
+          LET'S TALK.
+        </h2>
+
+        <p style="font-size: 19px; color: var(--ink-muted); max-width: 650px;">
+          Available for Gram Panchayat consultations, official data MIS management, freelance AI video editing, and modern web development.
+        </p>
+
+        <div class="contact-action-row">
+          <a href="https://wa.me/" target="_blank" class="btn-brutal" style="background: #25d366; border-color: #25d366; color: #fff; box-shadow: 4px 4px 0 var(--ink);">
+            <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Chat on WhatsApp
+          </a>
+
+          <a href="mailto:panchayat.assistant.official@gmail.com" class="btn-brutal-alt">
+            <i class="fa-solid fa-envelope"></i> Send an Email
+          </a>
+
+          <button class="btn-brutal-alt" onclick="openPhotoInstructions()">
+            <i class="fa-solid fa-image"></i> How to Add Your Photo
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div>
+          © 2026 <strong>THE ALL-ROUNDER & PANCHAYAT ASSISTANT</strong>. Designed with chutzpah.
+        </div>
+        <div>
+          Inspired by worksruthi.com • Built with pure HTML, CSS & Three.js
+        </div>
+      </footer>
+
+    </div>
+  </section>
+
+  <!-- Photo Upload Instructions Modal -->
+  <div class="photo-modal-overlay" id="photo-modal">
+    <div class="photo-modal-card">
+      <button class="modal-close-btn" onclick="closePhotoInstructions()">✕</button>
+      <h3 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 12px; color: var(--ink);">
+        अपनी PNG फ़ोटो कैसे लगाएं? 📸
+      </h3>
+      <p style="color: var(--ink-muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6;">
+        आप 2 बहुत आसान तरीकों से अपनी फ़ोटो यहाँ लगा सकते हैं:
+      </p>
+
+      <div style="background: var(--bg-alt); padding: 18px; border-radius: 12px; border: 2px solid var(--ink); margin-bottom: 18px;">
+        <strong style="color: var(--cinnabar); font-size: 16px;">तरीका 1: डायरेक्ट बटन दबाकर फ़ोटो सेलेक्ट करें (Instant)</strong>
+        <p style="font-size: 14px; margin-top: 6px; color: var(--ink);">
+          नीचे दिए गए बटन पर क्लिक करें और अपने कंप्यूटर या फ़ोन से कोई भी <strong>ट्रांसपेरेंट बैकग्राउंड वाली PNG फ़ोटो</strong> चुन लें। वह तुरंत हीरो सेक्शन में लग जाएगी!
+        </p>
+        <button class="btn-brutal" style="margin-top: 12px; padding: 10px 20px; font-size: 13px;" onclick="triggerPhotoUpload()">
+          <i class="fa-solid fa-upload"></i> फ़ोटो चुनें (Select PNG)
+        </button>
+      </div>
+
+      <div style="background: var(--bg-alt); padding: 18px; border-radius: 12px; border: 2px solid var(--ink);">
+        <strong style="color: var(--ink); font-size: 16px;">तरीका 2: फ़ाइल सेव करके (Permanent for GitHub Pages)</strong>
+        <p style="font-size: 14px; margin-top: 6px; color: var(--ink-muted);">
+          अपनी PNG फ़ोटो का नाम <strong><code>photo.png</code></strong> रखें और उसे इसी फ़ोल्डर (<code>raw footage'</code>) में कॉपी कर दें। वेबसाइट लोड होते ही उसे अपने आप उठा लेगी!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Trailing Cursor Logic (inspired by worksruthi.com)
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    // Hover expand cursor on links/buttons
+    document.querySelectorAll('a, button, .sticker, .photo-drop-badge, .polaroid').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '60px';
+        ring.style.height = '60px';
+        ring.style.borderColor = '#e03c31';
+        ring.style.background = 'rgba(224, 60, 49, 0.08)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.background = 'transparent';
+      });
+    });
+
+    // 2. Photo Upload & Drag-and-Drop Handler
+    const photoInput = document.getElementById('photo-file-input');
+    const photoImg = document.getElementById('user-photo-img');
+
+    function triggerPhotoUpload() {
+      photoInput.click();
+    }
+
+    photoInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          photoImg.src = evt.target.result;
+          closePhotoInstructions();
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    // Drag and Drop photo directly onto the stage
+    const photoStage = document.querySelector('.photo-stage');
+    photoStage.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      photoStage.style.transform = 'scale(1.02)';
+    });
+    photoStage.addEventListener('dragleave', () => {
+      photoStage.style.transform = 'none';
+    });
+    photoStage.addEventListener('drop', (e) => {
+      e.preventDefault();
+      photoStage.style.transform = 'none';
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          photoImg.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Fallback stylish vector avatar if photo.png is not found
+    function loadFallbackAvatar(img) {
+      img.onerror = null;
+      img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400"><rect width="320" height="400" fill="none"/><circle cx="160" cy="130" r="75" fill="%231c1b1a"/><path d="M50 380 C50 250, 270 250, 270 380 Z" fill="%231c1b1a"/><circle cx="160" cy="120" r="14" fill="%23e03c31"/><path d="M140 180 Q160 200 180 180" stroke="%23f3f3e9" stroke-width="6" fill="none" stroke-linecap="round"/></svg>';
+    }
+
+    // Modal Helpers
+    function openPhotoInstructions() {
+      document.getElementById('photo-modal').classList.add('active');
+    }
+    function closePhotoInstructions() {
+      document.getElementById('photo-modal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

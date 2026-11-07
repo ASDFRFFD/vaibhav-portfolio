@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll-Driven 3D Experience (Three.js + GSAP ScrollTrigger)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #030712;
+      color: #f9fafb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Fixed Background 3D Canvas */
+    #webgl-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Scrollable Content Container */
+    .content-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    /* Section Styles */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10vw;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #818cf8;
+      width: fit-content;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #ffffff 40%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+    }
+
+    p.lead {
+      font-size: clamp(16px, 1.8vw, 22px);
+      color: #9ca3af;
+      max-width: 540px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: rgba(17, 24, 39, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 460px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .glass-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .glass-card p {
+      color: #9ca3af;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* Section Alignments */
+    .section-left {
+      align-items: flex-start;
+    }
+
+    .section-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .section-right .glass-card {
+      text-align: left;
+    }
+
+    .section-center {
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Scroll Indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #6b7280;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .mouse-icon {
+      width: 22px;
+      height: 36px;
+      border: 2px solid #6b7280;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .mouse-wheel {
+      width: 4px;
+      height: 8px;
+      background: #818cf8;
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: wheelScroll 1.8s infinite;
+    }
+
+    @keyframes wheelScroll {
+      0% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, 14px); }
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #ec4899, #06b6d4);
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-bar" id="progress"></div>
+
+  <!-- Background 3D Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Scroll Sections -->
+  <div class="content-container">
+
+    <!-- Section 1: Hero -->
+    <section class="section-left" id="hero">
+      <div class="badge">
+        <span>✨</span> Skill: Three.js + GSAP ScrollTrigger
+      </div>
+      <h1>Next-Gen Kinetic<br/>Architecture.</h1>
+      <p class="lead">Scroll to observe real-time 3D camera transitions, dynamic morphing geometry, and cinematic lighting orchestration.</p>
+      <div class="scroll-hint">
+        <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+        <span>Scroll to Explore</span>
+      </div>
+    </section>
+
+    <!-- Section 2: Precision Engineering -->
+    <section class="section-right" id="engineering">
+      <div class="glass-card">
+        <div style="font-size: 12px; color: #818cf8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Phase 01</div>
+        <h3>Precision Dual-Toroid</h3>
+        <p>As you scroll through this phase, the camera pushes closer into the primary axis while the geometric node expands along the Z-plane. Mathematical precision meets high-performance WebGL rendering.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: Shading & Photometrics -->
+    <section class="section-left" id="shading">
+      <div class="glass-card">
+        <div style="font-size: 12px; color: #ec4899; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Phase 02</div>
+        <h3>Volumetric Photometrics</h3>
+        <p>Physical transmission materials dynamically recalculate Fresnel reflections and chromatic dispersion as the point lights traverse around the object in synchronized scrub timelines.</p>
+      </div>
+    </section>
+
+    <!-- Section 4: Climax / CTA -->
+    <section class="section-center" id="conclusion">
+      <div class="badge" style="background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.35); color: #4ade80;">
+        <span>🚀</span> Ready for Production
+      </div>
+      <h1>Empower Your Web Apps</h1>
+      <p class="lead" style="margin-left: auto; margin-right: auto;">These industry-standard integration patterns bridge the gap between creative 3D and modern declarative web architectures.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 10px;">
+        <button style="padding: 14px 32px; background: #6366f1; border: none; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          Back to Top ↑
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- GSAP & ScrollTrigger from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Import Three.js via ES Module -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Scene, Camera, Renderer
+    const canvas = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x030712, 0.05);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(2, 0, 8);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance"
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.3;
+
+    // 2. Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const primaryLight = new THREE.PointLight(0x6366f1, 4, 25);
+    primaryLight.position.set(5, 4, 4);
+    scene.add(primaryLight);
+
+    const secondaryLight = new THREE.PointLight(0xec4899, 4, 25);
+    secondaryLight.position.set(-5, -3, 3);
+    scene.add(secondaryLight);
+
+    const rimLight = new THREE.DirectionalLight(0x06b6d4, 2);
+    rimLight.position.set(0, 8, -6);
+    scene.add(rimLight);
+
+    // 3. 3D Model: Main Kinetic Mesh
+    const mainGeometry = new THREE.TorusKnotGeometry(1.6, 0.45, 220, 32, 2, 5);
+    const mainMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x6366f1,
+      metalness: 0.15,
+      roughness: 0.1,
+      transmission: 0.9,
+      ior: 1.55,
+      thickness: 1.5,
+      specularIntensity: 1.8,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1
+    });
+
+    const mainMesh = new THREE.Mesh(mainGeometry, mainMaterial);
+    scene.add(mainMesh);
+
+    // Secondary Outer Gyro Ring
+    const ringGeo = new THREE.TorusGeometry(3.2, 0.06, 16, 100);
+    const ringMat = new THREE.MeshStandardMaterial({
+      color: 0x4f46e5,
+      metalness: 0.8,
+      roughness: 0.2,
+      wireframe: false
+    });
+    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+    scene.add(ringMesh);
+
+    // Ambient floating dust particles
+    const pCount = 500;
+    const pGeo = new THREE.BufferGeometry();
+    const pPos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i++) {
+      pPos[i] = (Math.random() - 0.5) * 20;
+    }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    const pMat = new THREE.PointsMaterial({
+      size: 0.04,
+      color: 0x818cf8,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+    const particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    // 4. GSAP ScrollTrigger Integration
+    // Progress bar update
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress').style.width = scrolled + '%';
+    });
+
+    // Master Scroll Timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.content-container',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5
+      }
+    });
+
+    // Step 1: Shift right and rotate from Section 1 to Section 2
+    tl.to(mainMesh.position, { x: -2.2, y: 0.3, z: 0.5 }, 0)
+      .to(mainMesh.rotation, { x: Math.PI * 0.8, y: Math.PI * 1.2 }, 0)
+      .to(ringMesh.rotation, { x: -Math.PI * 0.6, y: Math.PI * 0.8 }, 0)
+      .to(primaryLight.position, { x: -4, y: 3, z: 4 }, 0)
+
+    // Step 2: Shift to left for Section 3
+      .to(mainMesh.position, { x: 2.2, y: -0.2, z: 1.0 }, 1)
+      .to(mainMesh.rotation, { x: Math.PI * 1.8, y: Math.PI * 2.4 }, 1)
+      .to(mainMaterial.color, { r: 0.92, g: 0.28, b: 0.6 }, 1) // Color shifts to Magenta
+      .to(secondaryLight.position, { x: 6, y: -2, z: 5 }, 1)
+
+    // Step 3: Center Stage for Conclusion
+      .to(mainMesh.position, { x: 0, y: 0, z: 1.8 }, 2)
+      .to(mainMesh.rotation, { x: Math.PI * 2.5, y: Math.PI * 3.5 }, 2)
+      .to(mainMaterial.color, { r: 0.2, g: 0.8, b: 0.4 }, 2) // Shifts to Emerald Green
+      .to(ringMesh.scale, { x: 1.4, y: 1.4, z: 1.4 }, 2);
+
+    // Continuous baseline idle animation
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+
+      // Idle spin added on top of scroll
+      mainMesh.rotation.z += delta * 0.2;
+      ringMesh.rotation.z -= delta * 0.15;
+      particles.rotation.y += delta * 0.04;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Resize handling
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+  </script>
+</body>
+</html>
+
