@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>A Little Bit of AI, Student, Panchayat & Chutzpah | Portfolio</title>
+  <title>meet Vaibhav. student, AI tinkerer & web builder with chutzpah.</title>
   <meta name="description" content="A student, AI explorer, web builder, and part-time Panchayat Sahayak with chutzpah. Creator of gpsahayak.in and psunionup.site.">
 
   <!-- Google Fonts: Anton (Impact bold), Syne (modern punchy), Plus Jakarta Sans (body), Caveat (scribbles), Space Mono -->
@@ -349,55 +349,52 @@
       font-family: var(--font-hand);
       font-size: clamp(20px, 2.2vw, 26px);
       color: var(--cinnabar);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       transform: rotate(-1.5deg);
     }
 
-    .hero-monument-stage {
-      display: grid;
-      grid-template-columns: 1fr minmax(280px, 460px) 1.15fr;
-      align-items: stretch;
-      position: relative;
-      min-height: clamp(540px, 76vh, 740px);
-      gap: 16px;
-    }
-
-    /* Left Column: HELLO (Top) & MEET (Bottom) */
-    .hero-col--left {
+    /* Unified Editorial Hero Stage */
+    .hero-stage-unified {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      text-align: right;
-      padding-bottom: 24px;
-      z-index: 3;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
     }
 
-    /* Center Column: Cutout Grounded Photo Centerpiece */
-    .hero-col--center {
+    /* Flow Rows: Natural sentence reading across */
+    .hero-flow-row {
       display: flex;
+      align-items: baseline;
       justify-content: center;
-      align-items: flex-end;
-      height: 100%;
-      position: relative;
-      z-index: 2;
+      flex-wrap: wrap;
+      gap: clamp(12px, 2.5vw, 36px);
+      width: 100%;
+      z-index: 5;
     }
 
-    /* Right Column: {{ first name }} (Top) & [NAME]. + Byline (Bottom) */
-    .hero-col--right {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      text-align: left;
-      padding-bottom: 14px;
-      z-index: 3;
+    .hero-flow-row--top {
+      margin-bottom: -15px;
     }
 
-    /* Worksruthi Monumental Typography */
+    .hero-flow-row--bottom {
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+
+    .hero-comma {
+      font-family: 'Impact', 'Anton', var(--font-display);
+      font-size: clamp(54px, 9.5vw, 140px);
+      color: var(--cinnabar);
+      line-height: 0.8;
+      margin-left: -8px;
+    }
+
+    /* Monumental Words */
     .hero-word {
       font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(50px, 8.8vw, 136px);
+      font-size: clamp(54px, 9.5vw, 140px);
       color: var(--cinnabar);
       line-height: 0.82;
       letter-spacing: -0.015em;
@@ -405,35 +402,19 @@
       font-weight: 400;
       user-select: none;
       transition: transform 0.22s var(--ease-site);
-    }
-
-    .hero-word:hover {
-      transform: scale(1.015);
-    }
-
-    .hero-word--hello {
-      margin-top: 6px;
-      align-self: flex-end;
-    }
-
-    .hero-word--meet {
-      margin-bottom: 14px;
-      align-self: flex-end;
-    }
-
-    .hero-word--sruthi {
-      margin-bottom: 10px;
-      color: var(--cinnabar);
-      display: flex;
+      display: inline-flex;
       align-items: baseline;
     }
 
-    /* Visitor Name Slot - The Exact Worksruthi Interaction */
+    .hero-word:hover {
+      transform: scale(1.02);
+    }
+
+    /* Visitor Name Slot Interaction */
     .hero-word--stranger {
-      margin-top: 6px;
       min-height: 1.1em;
-      display: flex;
-      align-items: center;
+      display: inline-flex;
+      align-items: baseline;
     }
 
     .hero-slot-btn {
@@ -457,29 +438,29 @@
 
     .hero-placeholder {
       font-family: var(--font-mono);
-      font-size: clamp(18px, 2.8vw, 42px);
+      font-size: clamp(20px, 3.2vw, 48px);
       font-weight: 700;
       color: var(--cinnabar);
       text-transform: none;
       letter-spacing: -0.02em;
-      border-bottom: 2.5px dashed rgba(224, 60, 49, 0.55);
-      padding: 2px 4px;
+      border-bottom: 3px dashed rgba(224, 60, 49, 0.6);
+      padding: 2px 6px;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
-      background: rgba(224, 60, 49, 0.04);
-      border-radius: 4px;
+      gap: 4px;
+      background: rgba(224, 60, 49, 0.05);
+      border-radius: 6px;
     }
 
     .hero-placeholder:hover {
       border-bottom-style: solid;
-      background: rgba(224, 60, 49, 0.09);
+      background: rgba(224, 60, 49, 0.1);
     }
 
     .hero-placeholder .bracket {
       color: var(--ink-muted);
       font-weight: 400;
-      opacity: 0.6;
+      opacity: 0.65;
     }
 
     .hero-slot-caret {
@@ -499,22 +480,22 @@
     .hero-slot-input {
       all: unset;
       font-family: var(--font-mono);
-      font-size: clamp(18px, 2.8vw, 42px);
+      font-size: clamp(20px, 3.2vw, 48px);
       font-weight: 700;
       color: var(--cinnabar);
       caret-color: var(--cinnabar);
       border-bottom: 3px solid var(--cinnabar);
       min-width: 3ch;
       width: calc(var(--len, 6) * 1ch + 0.25em);
-      background: rgba(224, 60, 49, 0.08);
-      padding: 0 4px;
-      border-radius: 3px;
+      background: rgba(224, 60, 49, 0.09);
+      padding: 0 6px;
+      border-radius: 4px;
       cursor: text;
     }
 
     .hero-merged {
       font-family: 'Impact', 'Anton', var(--font-display);
-      font-size: clamp(50px, 8.8vw, 136px);
+      font-size: clamp(54px, 9.5vw, 140px);
       color: var(--cinnabar);
       line-height: 0.82;
       letter-spacing: -0.015em;
@@ -527,10 +508,10 @@
     .hero-merged::after {
       content: "✎";
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 14px;
       position: absolute;
       top: -8px;
-      right: -16px;
+      right: -18px;
       color: var(--ink-muted);
       opacity: 0;
       transition: opacity 0.2s;
@@ -545,21 +526,17 @@
       display: inline-block;
     }
 
-    @keyframes hero-merge {
-      0% {
-        opacity: 0;
-        transform: translateY(110%);
-      }
-      60% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
+    /* Cutout Center Photo Stage */
+    .photo-stage-center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      z-index: 2;
+      min-height: clamp(480px, 68vh, 680px);
     }
 
-    /* Cutout Photo Centerpiece - Grounded & Framed between words */
     .photo-stage {
       position: relative;
       display: flex;
@@ -567,13 +544,12 @@
       align-items: flex-end;
       width: 100%;
       height: 100%;
-      min-height: clamp(500px, 74vh, 720px);
     }
 
     .photo-cutout-frame {
       width: 100%;
-      max-width: 460px;
-      height: clamp(500px, 74vh, 720px);
+      max-width: 480px;
+      height: clamp(480px, 68vh, 680px);
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -599,90 +575,22 @@
       transform: scale(1.02);
     }
 
-    .photo-upload-badge {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--paper);
-      border: 2px dashed var(--cinnabar);
-      border-radius: 10px;
-      padding: 8px 16px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink);
-      z-index: 10;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .photo-upload-badge:hover {
-      background: var(--highlight);
-      transform: translateX(-50%) translateY(-2px);
-    }
-
-    /* Minimal Doodles */
-    .doodle-note {
-      position: absolute;
-      font-family: var(--font-hand);
-      font-size: 21px;
-      color: var(--cinnabar);
-      line-height: 1.1;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .doodle-1 { top: 25px; left: -10px; transform: rotate(-6deg); }
-    .doodle-2 { bottom: 95px; right: -15px; transform: rotate(5deg); }
-
-    .sticker {
-      position: absolute;
-      padding: 6px 14px;
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      border: 2px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-      border-radius: 4px;
-      z-index: 6;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-    }
-
-    .sticker-red {
-      background: var(--cinnabar);
-      color: #fff;
-      top: 15px;
-      right: 15px;
-      transform: rotate(6deg);
-    }
-
-    .sticker-yellow {
-      background: var(--highlight);
-      color: var(--ink);
-      bottom: 30px;
-      left: 10px;
-      transform: rotate(-4deg);
-    }
-
     /* Byline & Micro-actions below name */
     .hero-byline-box {
-      max-width: 480px;
-      margin-top: 6px;
+      max-width: 680px;
+      margin: 10px auto 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 6;
     }
 
     .hero-byline-text {
-      font-size: clamp(14px, 1.35vw, 17px);
-      line-height: 1.5;
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.55;
       color: var(--ink);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .hero-byline-text .mark {
@@ -695,122 +603,49 @@
     .hero-byline-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
-    /* Brutalist Buttons */
-    .btn-brutal {
-      padding: 12px 22px;
-      background: var(--ink);
-      color: #fff;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      box-shadow: 4px 4px 0 var(--cinnabar);
-      transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .btn-brutal:hover {
-      box-shadow: 6px 6px 0 var(--cinnabar);
-      background: var(--cinnabar);
-      border-color: var(--cinnabar);
-      transform: translateY(-1px);
-    }
-
-    .btn-brutal-alt {
-      padding: 12px 18px;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      box-shadow: 4px 4px 0 var(--ink);
-      transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .btn-brutal-alt:hover {
-      box-shadow: 6px 6px 0 var(--ink);
-      background: var(--highlight);
-      transform: translateY(-1px);
-    }
-
-    /* Micro Stats */
     .hero-micro-stats {
       display: flex;
-      gap: 22px;
-      padding-top: 14px;
+      justify-content: center;
+      gap: 32px;
+      padding-top: 16px;
       border-top: 2px solid var(--ink);
+      width: 100%;
+      max-width: 500px;
     }
 
-    /* Responsive Mobile Layout for Hero */
-    @media (max-width: 849px) {
-      .hero-monument-stage {
-        display: flex;
-        flex-direction: column;
-        min-height: auto;
-        gap: 16px;
-        text-align: center;
+    /* Desktop Wide Enhancement */
+    @media (min-width: 960px) {
+      .hero-flow-row--top {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        right: 0;
+        justify-content: space-between;
+        padding: 0 4vw;
+        pointer-events: none;
       }
-
-      .hero-mobile-row {
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        gap: 12px;
-        flex-wrap: wrap;
+      .hero-flow-row--top > * {
+        pointer-events: auto;
       }
-
-      .hero-col--left, .hero-col--right {
-        text-align: center;
-        align-items: center;
-        padding: 0;
-        height: auto;
+      .hero-flow-row--bottom {
+        position: absolute;
+        bottom: 120px;
+        left: 0;
+        right: 0;
+        justify-content: space-between;
+        padding: 0 4vw;
+        pointer-events: none;
       }
-
-      .hero-word {
-        font-size: clamp(40px, 13vw, 76px);
-        line-height: 0.9;
+      .hero-flow-row--bottom > * {
+        pointer-events: auto;
       }
-
-      .hero-placeholder, .hero-slot-input {
-        font-size: clamp(20px, 6.2vw, 34px);
-      }
-
-      .hero-col--center {
-        min-height: 440px;
-        order: 2;
-      }
-
       .hero-byline-box {
-        margin: 16px auto 0;
-        text-align: center;
-      }
-
-      .hero-byline-actions {
-        justify-content: center;
-      }
-
-      .hero-micro-stats {
-        justify-content: center;
+        margin-top: 24px;
       }
     }
 
@@ -1639,7 +1474,7 @@
     <div class="container nav-inner">
       <a href="#hero" class="brand" data-cursor="hover">
         <span class="brand-dot"></span>
-        <span id="header-brand-name">THE MULTI-HYPHENATE</span>
+        <span id="header-brand-name">VAIBHAV</span>
       </a>
 
       <ul class="nav-menu">
@@ -1663,7 +1498,7 @@
     </div>
   </header>
 
-  <!-- Hero Section: The Exact Worksruthi 4-Word Monumental Stage -->
+  <!-- Hero Section: Unified Natural Flow (hello {{ first name }} , meet vaibhav.) -->
   <main class="hero-monument-wrap" id="hero">
     <div class="container">
       
@@ -1671,20 +1506,26 @@
         hello world! welcome to my chaotic digital brain ✦
       </div>
 
-      <div class="hero-monument-stage">
+      <div class="hero-stage-unified">
         
-        <!-- Left Column: HELLO (Top) & MEET (Bottom) -->
-        <div class="hero-col--left">
+        <!-- Top Greeting Row: hello {{ first name }} , -->
+        <div class="hero-flow-row hero-flow-row--top">
           <div class="hero-word hero-word--hello" data-cursor="hover">
             hello
           </div>
-          <div class="hero-word hero-word--meet" data-cursor="hover">
-            meet
+          
+          <div style="display: inline-flex; align-items: baseline;">
+            <div class="hero-word hero-word--stranger" id="hero-stranger-wrap" data-cursor="hover">
+              <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" title="Click to enter your name">
+                <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
+              </button>
+            </div>
+            <span class="hero-comma">,</span>
           </div>
         </div>
 
-        <!-- Center Column: Grounded Cutout PNG Photo Frame -->
-        <div class="hero-col--center">
+        <!-- Center Grounded Cutout PNG Photo Stage -->
+        <div class="photo-stage-center">
           <div class="photo-stage">
 
             <div class="doodle-note doodle-1">
@@ -1708,7 +1549,7 @@
 
             <!-- Big Photo Frame -->
             <div class="photo-cutout-frame">
-              <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="User Portrait PNG" data-cursor="hover">
+              <img id="user-photo-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Portrait PNG" data-cursor="hover">
 
               <div class="photo-upload-badge" onclick="triggerPhotoUpload()" data-cursor="open">
                 <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
@@ -1719,60 +1560,50 @@
           </div>
         </div>
 
-        <!-- Right Column: {{ first name }} (Top) & ALOK. + Byline (Bottom) -->
-        <div class="hero-col--right">
-          
-          <!-- Interactive Visitor Name Slot -->
-          <div class="hero-word hero-word--stranger" id="hero-stranger-wrap" data-cursor="hover">
-            <button type="button" class="hero-slot-btn tap hero-placeholder" id="hero-slot-btn" aria-label="type your first name" title="Click to enter your name">
-              <span class="bracket">{{</span> <span class="slot-text">first name</span><span class="hero-slot-caret" aria-hidden="true"></span> <span class="bracket">}}</span>
+        <!-- Bottom Introduction Row: meet vaibhav. -->
+        <div class="hero-flow-row hero-flow-row--bottom">
+          <div class="hero-word hero-word--meet" data-cursor="hover">
+            meet
+          </div>
+          <div class="hero-word hero-word--vaibhav" id="hero-author-word" data-cursor="hover">
+            <span id="hero-author-name">vaibhav.</span>
+          </div>
+        </div>
+
+        <!-- Byline & Action Box -->
+        <div class="hero-byline-box">
+          <p class="hero-byline-text">
+            Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
+            and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
+          </p>
+
+          <div class="hero-byline-actions">
+            <a href="#projects" class="btn-brutal" data-cursor="open">
+              <i class="fa-solid fa-rocket"></i> Shipped Projects
+            </a>
+            <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
+              <i class="fa-solid fa-gamepad"></i> Play Games 🎮
+            </a>
+            <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
+              <i class="fa-solid fa-camera"></i> Change Photo
             </button>
           </div>
 
-          <!-- Bottom: [NAME]. and Byline Box -->
-          <div>
-            <div class="hero-word hero-word--sruthi" id="hero-author-word" data-cursor="hover">
-              <span id="hero-author-name">ALOK.</span>
+          <!-- Micro Stats -->
+          <div class="hero-micro-stats">
+            <div>
+              <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
             </div>
-
-            <div class="hero-byline-box">
-              <p class="hero-byline-text">
-                Technically a <span class="mark">student</span>, officially a <span class="mark">Panchayat Assistant</span> (to keep my parents calm), 
-                and passionately an <span class="mark">AI explorer & web maker</span> building <strong>gpsahayak.in</strong> and <strong>psunionup.site</strong>.
-              </p>
-
-              <div class="hero-byline-actions">
-                <a href="#projects" class="btn-brutal" data-cursor="open">
-                  <i class="fa-solid fa-rocket"></i> Shipped Projects
-                </a>
-                <a href="#arcade" class="btn-brutal-alt" data-cursor="hover">
-                  <i class="fa-solid fa-basketball"></i> Play Hoops 🏀
-                </a>
-                <button class="btn-brutal-alt" onclick="openPhotoInstructions()" data-cursor="hover">
-                  <i class="fa-solid fa-camera"></i> Change Photo
-                </button>
-              </div>
-
-              <!-- Micro Stats -->
-              <div class="hero-micro-stats">
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">2+</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Shipped Portals</div>
-                </div>
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
-                </div>
-                <div>
-                  <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
-                  <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
-                </div>
-              </div>
-
+            <div>
+              <div style="font-family: var(--font-display); font-size: 26px; color: var(--ink); line-height: 1;">∞</div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">AI Curiosity</div>
             </div>
-
+            <div>
+              <div style="font-family: var(--font-display); font-size: 26px; color: var(--cinnabar); line-height: 1;">100%</div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px;">Pure Hustle</div>
+            </div>
           </div>
-
         </div>
 
       </div>
@@ -1895,14 +1726,25 @@
   <!-- Section 3: Interactive Basketball Arcade Game (SHOCK FACTOR) -->
   <section id="arcade">
     <div class="container">
-      <div class="sec-eyebrow">bored? take a shot ✦</div>
-      <h2 class="sec-title">THE HOOPS ARCADE</h2>
-      <p class="sec-desc">Drag the basketball and aim for the hoop. Let's see if your aim is as sharp as my code.</p>
+      <div class="sec-eyebrow">bored? let's play ✦</div>
+      <h2 class="sec-title">THE RETRO ARCADE CABIN</h2>
+      <p class="sec-desc">Choose your battle: shoot hoops or defend the galaxy from deep-space asteroids.</p>
 
-      <div class="arcade-card">
+      <!-- Arcade Game Switcher Tabs -->
+      <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 24px;">
+        <button class="btn-brutal" id="tab-hoops-btn" onclick="switchArcadeTab('hoops')" data-cursor="hover" style="background: var(--cinnabar);">
+          <i class="fa-solid fa-basketball"></i> 1. Cinnabar Hoops
+        </button>
+        <button class="btn-brutal-alt" id="tab-cosmic-btn" onclick="switchArcadeTab('cosmic')" data-cursor="hover">
+          <i class="fa-solid fa-shuttle-space"></i> 2. Cosmic Defender 🚀
+        </button>
+      </div>
+
+      <!-- Game 1: Basketball Hoops -->
+      <div class="arcade-card" id="game-hoops-wrap">
         <div class="arcade-stage" id="arcade-stage">
           <div class="game-score-board">
-            🏀 SCORE: <span id="score-display" style="color: var(--cinnabar); font-size: 18px;">0</span>
+            🏀 HOOPS SCORE: <span id="score-display" style="color: var(--cinnabar); font-size: 18px;">0</span>
           </div>
           <div class="game-hint">
             drag & flick the ball towards the hoop! ↗
@@ -1919,6 +1761,43 @@
           <div id="bball">🏀</div>
         </div>
       </div>
+
+      <!-- Game 2: Cosmic Defender (Retro Space Asteroid Shooter) -->
+      <div class="arcade-card" id="game-cosmic-wrap" style="display: none; background: #0c0d14; border-color: var(--ink);">
+        <div style="position: relative; width: 100%; height: 380px; overflow: hidden; border-radius: 12px; background: #090a10;">
+          
+          <div style="position: absolute; top: 12px; left: 16px; font-family: var(--font-mono); font-size: 13px; color: #fff; z-index: 10; display: flex; gap: 20px;">
+            <span>🚀 SCORE: <strong id="cosmic-score" style="color: var(--cinnabar);">0</strong></span>
+            <span>🏆 HIGH: <strong id="cosmic-high" style="color: var(--highlight);">0</strong></span>
+            <span>❤️ LIVES: <span id="cosmic-lives" style="color: #10b981;">3</span></span>
+          </div>
+
+          <div id="cosmic-start-screen" style="position: absolute; inset: 0; background: rgba(12,13,20,0.88); z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+            <div style="font-family: var(--font-display); font-size: 38px; color: var(--cinnabar); margin-bottom: 8px;">COSMIC DEFENDER</div>
+            <p style="font-family: var(--font-mono); font-size: 13px; color: #fff; max-width: 420px; margin-bottom: 18px;">
+              Steer your ship, blast asteroids, and survive deep space!<br/>
+              <strong>Desktop:</strong> Left/Right / A-D to steer, Spacebar to shoot.<br/>
+              <strong>Mobile:</strong> Touch & drag to aim, tap FIRE button.
+            </p>
+            <button class="btn-brutal" onclick="startCosmicGame()" style="background: var(--cinnabar); border-color: #fff;">
+              <i class="fa-solid fa-play"></i> START MISSION
+            </button>
+          </div>
+
+          <canvas id="cosmic-canvas" width="700" height="380" style="width: 100%; height: 100%; display: block;"></canvas>
+
+          <!-- Mobile Controls -->
+          <div id="cosmic-touch-controls" style="position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 16px; z-index: 15;">
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-brutal-alt" id="ctrl-left" style="padding: 10px 18px; font-size: 16px;">◀</button>
+              <button class="btn-brutal-alt" id="ctrl-right" style="padding: 10px 18px; font-size: 16px;">▶</button>
+            </div>
+            <button class="btn-brutal" id="ctrl-fire" style="padding: 10px 24px; background: var(--cinnabar); font-size: 15px;">🔥 FIRE</button>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2703,7 +2582,7 @@
       if (name) {
         document.getElementById('header-brand-name').textContent = name.toUpperCase();
         const heroAuthor = document.getElementById('hero-author-name');
-        if (heroAuthor) heroAuthor.textContent = name.toUpperCase() + '.';
+        if (heroAuthor) heroAuthor.textContent = name.toLowerCase() + '.';
         localStorage.setItem('portfolio_name', name);
       }
       if (phone) {
@@ -3147,6 +3026,312 @@
         }
       });
     });
+
+  
+    // ============================================================
+    // 13. Retro Arcade Switcher & Cosmic Defender Engine
+    // ============================================================
+    function switchArcadeTab(tab) {
+      const hoopsWrap = document.getElementById('game-hoops-wrap');
+      const cosmicWrap = document.getElementById('game-cosmic-wrap');
+      const hoopsBtn = document.getElementById('tab-hoops-btn');
+      const cosmicBtn = document.getElementById('tab-cosmic-btn');
+
+      if (tab === 'hoops') {
+        hoopsWrap.style.display = 'block';
+        cosmicWrap.style.display = 'none';
+        hoopsBtn.style.background = 'var(--cinnabar)';
+        hoopsBtn.style.color = '#fff';
+        cosmicBtn.style.background = 'var(--paper)';
+        cosmicBtn.style.color = 'var(--ink)';
+      } else {
+        hoopsWrap.style.display = 'none';
+        cosmicWrap.style.display = 'block';
+        cosmicBtn.style.background = 'var(--cinnabar)';
+        cosmicBtn.style.color = '#fff';
+        hoopsBtn.style.background = 'var(--paper)';
+        hoopsBtn.style.color = 'var(--ink)';
+        resizeCosmicCanvas();
+      }
+      playAudioSfx('pop');
+    }
+
+    // Cosmic Defender Game Logic
+    let cosmicGame = {
+      running: false,
+      score: 0,
+      highScore: parseInt(localStorage.getItem('cosmic_highscore') || '0', 10),
+      lives: 3,
+      player: { x: 350, y: 330, vx: 0, size: 24 },
+      lasers: [],
+      asteroids: [],
+      particles: [],
+      stars: [],
+      keys: { left: false, right: false, fire: false },
+      lastFire: 0
+    };
+
+    const cosmicCanvas = document.getElementById('cosmic-canvas');
+    let ctxCosmic = cosmicCanvas ? cosmicCanvas.getContext('2d') : null;
+
+    function resizeCosmicCanvas() {
+      if (!cosmicCanvas) return;
+      const rect = cosmicCanvas.getBoundingClientRect();
+      cosmicCanvas.width = rect.width || 700;
+      cosmicCanvas.height = rect.height || 380;
+      cosmicGame.player.x = cosmicCanvas.width / 2;
+      cosmicGame.player.y = cosmicCanvas.height - 45;
+
+      // Init starfield
+      cosmicGame.stars = [];
+      for (let i = 0; i < 60; i++) {
+        cosmicGame.stars.push({
+          x: Math.random() * cosmicCanvas.width,
+          y: Math.random() * cosmicCanvas.height,
+          size: Math.random() * 2 + 0.8,
+          speed: Math.random() * 1.5 + 0.5
+        });
+      }
+    }
+
+    function startCosmicGame() {
+      document.getElementById('cosmic-start-screen').style.display = 'none';
+      resizeCosmicCanvas();
+      cosmicGame.running = true;
+      cosmicGame.score = 0;
+      cosmicGame.lives = 3;
+      cosmicGame.lasers = [];
+      cosmicGame.asteroids = [];
+      cosmicGame.particles = [];
+      document.getElementById('cosmic-score').textContent = '0';
+      document.getElementById('cosmic-high').textContent = cosmicGame.highScore;
+      document.getElementById('cosmic-lives').textContent = '3';
+      playAudioSfx('score');
+      requestAnimationFrame(cosmicLoop);
+    }
+
+    function cosmicFireLaser() {
+      const now = performance.now();
+      if (now - cosmicGame.lastFire < 180) return;
+      cosmicGame.lastFire = now;
+      cosmicGame.lasers.push({
+        x: cosmicGame.player.x,
+        y: cosmicGame.player.y - 15,
+        speed: 12
+      });
+      playAudioSfx('pop');
+    }
+
+    function cosmicLoop() {
+      if (!cosmicGame.running || !ctxCosmic) return;
+
+      const W = cosmicCanvas.width;
+      const H = cosmicCanvas.height;
+
+      // Clear Canvas
+      ctxCosmic.fillStyle = '#090a10';
+      ctxCosmic.fillRect(0, 0, W, H);
+
+      // Starfield
+      ctxCosmic.fillStyle = '#ffffff';
+      cosmicGame.stars.forEach(star => {
+        star.y += star.speed;
+        if (star.y > H) { star.y = 0; star.x = Math.random() * W; }
+        ctxCosmic.globalAlpha = star.speed / 2;
+        ctxCosmic.fillRect(star.x, star.y, star.size, star.size);
+      });
+      ctxCosmic.globalAlpha = 1;
+
+      // Handle Controls
+      if (cosmicGame.keys.left) cosmicGame.player.vx = -7;
+      else if (cosmicGame.keys.right) cosmicGame.player.vx = 7;
+      else cosmicGame.player.vx *= 0.8;
+
+      cosmicGame.player.x += cosmicGame.player.vx;
+      if (cosmicGame.player.x < 20) cosmicGame.player.x = 20;
+      if (cosmicGame.player.x > W - 20) cosmicGame.player.x = W - 20;
+
+      if (cosmicGame.keys.fire) cosmicFireLaser();
+
+      // Draw Spaceship (Retro Cinnabar Vector Fighter)
+      const px = cosmicGame.player.x;
+      const py = cosmicGame.player.y;
+      ctxCosmic.fillStyle = '#e03c31';
+      ctxCosmic.strokeStyle = '#ffffff';
+      ctxCosmic.lineWidth = 2;
+      ctxCosmic.beginPath();
+      ctxCosmic.moveTo(px, py - 20);
+      ctxCosmic.lineTo(px - 16, py + 14);
+      ctxCosmic.lineTo(px - 6, py + 8);
+      ctxCosmic.lineTo(px + 6, py + 8);
+      ctxCosmic.lineTo(px + 16, py + 14);
+      ctxCosmic.closePath();
+      ctxCosmic.fill();
+      ctxCosmic.stroke();
+
+      // Thruster Flame
+      ctxCosmic.fillStyle = Math.random() > 0.5 ? '#fef08a' : '#ffb3a8';
+      ctxCosmic.beginPath();
+      ctxCosmic.moveTo(px - 4, py + 10);
+      ctxCosmic.lineTo(px, py + 18 + Math.random() * 8);
+      ctxCosmic.lineTo(px + 4, py + 10);
+      ctxCosmic.fill();
+
+      // Update & Draw Lasers
+      ctxCosmic.fillStyle = '#fef08a';
+      ctxCosmic.shadowColor = '#fef08a';
+      ctxCosmic.shadowBlur = 8;
+      for (let i = cosmicGame.lasers.length - 1; i >= 0; i--) {
+        const l = cosmicGame.lasers[i];
+        l.y -= l.speed;
+        ctxCosmic.fillRect(l.x - 2, l.y, 4, 14);
+        if (l.y < -20) cosmicGame.lasers.splice(i, 1);
+      }
+      ctxCosmic.shadowBlur = 0;
+
+      // Spawn Asteroids
+      if (Math.random() < 0.035 && cosmicGame.asteroids.length < 10) {
+        cosmicGame.asteroids.push({
+          x: Math.random() * (W - 40) + 20,
+          y: -30,
+          size: Math.random() * 18 + 14,
+          speed: Math.random() * 2.5 + 1.5,
+          rot: 0,
+          rotSpeed: (Math.random() - 0.5) * 0.06
+        });
+      }
+
+      // Update & Draw Asteroids
+      ctxCosmic.strokeStyle = '#e03c31';
+      ctxCosmic.fillStyle = '#1c1b1a';
+      ctxCosmic.lineWidth = 2;
+
+      for (let i = cosmicGame.asteroids.length - 1; i >= 0; i--) {
+        const ast = cosmicGame.asteroids[i];
+        ast.y += ast.speed;
+        ast.rot += ast.rotSpeed;
+
+        ctxCosmic.save();
+        ctxCosmic.translate(ast.x, ast.y);
+        ctxCosmic.rotate(ast.rot);
+        ctxCosmic.beginPath();
+        for (let j = 0; j < 8; j++) {
+          const angle = (j / 8) * Math.PI * 2;
+          const r = ast.size * (j % 2 === 0 ? 1 : 0.75);
+          const ax = Math.cos(angle) * r;
+          const ay = Math.sin(angle) * r;
+          if (j === 0) ctxCosmic.moveTo(ax, ay);
+          else ctxCosmic.lineTo(ax, ay);
+        }
+        ctxCosmic.closePath();
+        ctxCosmic.fill();
+        ctxCosmic.stroke();
+        ctxCosmic.restore();
+
+        // Laser Collision Check
+        for (let li = cosmicGame.lasers.length - 1; li >= 0; li--) {
+          const l = cosmicGame.lasers[li];
+          const dist = Math.hypot(l.x - ast.x, l.y - ast.y);
+          if (dist < ast.size + 4) {
+            // Asteroid destroyed
+            cosmicGame.lasers.splice(li, 1);
+            cosmicGame.asteroids.splice(i, 1);
+            cosmicGame.score += 20;
+            document.getElementById('cosmic-score').textContent = cosmicGame.score;
+
+            if (cosmicGame.score > cosmicGame.highScore) {
+              cosmicGame.highScore = cosmicGame.score;
+              localStorage.setItem('cosmic_highscore', cosmicGame.highScore);
+              document.getElementById('cosmic-high').textContent = cosmicGame.highScore;
+            }
+
+            // Explosion particles
+            for (let p = 0; p < 12; p++) {
+              cosmicGame.particles.push({
+                x: ast.x,
+                y: ast.y,
+                vx: (Math.random() - 0.5) * 6,
+                vy: (Math.random() - 0.5) * 6,
+                life: 1,
+                color: Math.random() > 0.5 ? '#e03c31' : '#fef08a'
+              });
+            }
+            playAudioSfx('bounce');
+            break;
+          }
+        }
+
+        // Ship Collision Check
+        if (Math.hypot(px - ast.x, py - ast.y) < ast.size + 14) {
+          cosmicGame.asteroids.splice(i, 1);
+          cosmicGame.lives--;
+          document.getElementById('cosmic-lives').textContent = cosmicGame.lives;
+          playAudioSfx('bounce');
+
+          if (cosmicGame.lives <= 0) {
+            cosmicGame.running = false;
+            document.getElementById('cosmic-start-screen').style.display = 'flex';
+            document.getElementById('cosmic-start-screen').innerHTML = `
+              <div style="font-family: var(--font-display); font-size: 34px; color: var(--cinnabar); margin-bottom: 6px;">MISSION FAILED</div>
+              <p style="font-family: var(--font-mono); font-size: 15px; color: #fff; margin-bottom: 16px;">
+                Final Score: <strong>${cosmicGame.score}</strong> | High Score: <strong>${cosmicGame.highScore}</strong>
+              </p>
+              <button class="btn-brutal" onclick="startCosmicGame()" style="background: var(--cinnabar); border-color: #fff;">
+                <i class="fa-solid fa-rotate-right"></i> PLAY AGAIN
+              </button>
+            `;
+            return;
+          }
+        }
+
+        if (ast.y > H + 40) cosmicGame.asteroids.splice(i, 1);
+      }
+
+      // Draw Particles
+      for (let pi = cosmicGame.particles.length - 1; pi >= 0; pi--) {
+        const pt = cosmicGame.particles[pi];
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.life -= 0.04;
+        ctxCosmic.fillStyle = pt.color;
+        ctxCosmic.globalAlpha = Math.max(0, pt.life);
+        ctxCosmic.fillRect(pt.x, pt.y, 3, 3);
+        if (pt.life <= 0) cosmicGame.particles.splice(pi, 1);
+      }
+      ctxCosmic.globalAlpha = 1;
+
+      requestAnimationFrame(cosmicLoop);
+    }
+
+    // Keyboard controls for Cosmic Defender
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') cosmicGame.keys.left = true;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') cosmicGame.keys.right = true;
+      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') {
+        if (document.getElementById('game-cosmic-wrap').style.display !== 'none' && cosmicGame.running) {
+          e.preventDefault();
+          cosmicGame.keys.fire = true;
+        }
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') cosmicGame.keys.left = false;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') cosmicGame.keys.right = false;
+      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') cosmicGame.keys.fire = false;
+    });
+
+    // Touch controls
+    const btnLeft = document.getElementById('ctrl-left');
+    const btnRight = document.getElementById('ctrl-right');
+    const btnFire = document.getElementById('ctrl-fire');
+    if (btnLeft && btnRight && btnFire) {
+      btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicGame.keys.left = true; });
+      btnLeft.addEventListener('touchend', () => { cosmicGame.keys.left = false; });
+      btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicGame.keys.right = true; });
+      btnRight.addEventListener('touchend', () => { cosmicGame.keys.right = false; });
+      btnFire.addEventListener('touchstart', (e) => { e.preventDefault(); cosmicFireLaser(); });
+    }
 
   </script>
 </body>
