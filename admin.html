@@ -42,12 +42,67 @@
       font-family: var(--font-body);
       line-height: 1.5;
       padding-bottom: 80px;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
+    }
+
+    /* Login Screen Overlay */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      padding: clamp(28px, 4vw, 40px);
+      box-shadow: 10px 10px 0 var(--cinnabar);
+      position: relative;
+    }
+
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .login-sub {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .login-error {
+      background: #fee2e2;
+      border: 1.5px solid var(--cinnabar);
+      color: var(--cinnabar);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: none;
     }
 
     /* Admin Top Bar */
@@ -328,6 +383,41 @@
 </head>
 <body>
 
+  <!-- Login Gatekeeper Modal -->
+  <div id="login-overlay">
+    <div class="login-card">
+      <div class="login-title">
+        <i class="fa-solid fa-lock" style="color: var(--cinnabar);"></i> ADMIN ACCESS
+      </div>
+      <div class="login-sub">Enter credentials to unlock dashboard</div>
+
+      <div class="login-error" id="login-error-msg">
+        <i class="fa-solid fa-triangle-exclamation"></i> Invalid Username or Password!
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="login-user" class="form-input" placeholder="admin" autofocus required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-pass" class="form-input" placeholder="•••••" required>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 24px;">
+          <button type="submit" class="btn-admin btn-primary" style="flex: 1; justify-content: center; padding: 12px;">
+            <i class="fa-solid fa-key"></i> Unlock Dashboard
+          </button>
+          <a href="index.html" class="btn-admin btn-secondary" style="padding: 12px;">
+            Return to Site
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Admin Header -->
   <header class="admin-header">
     <div class="container admin-nav">
@@ -341,8 +431,11 @@
           <i class="fa-solid fa-cloud-arrow-up"></i> Save to Cloud
         </button>
         <a href="index.html" class="btn-admin btn-secondary" target="_blank">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> View Live Site
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Site
         </a>
+        <button class="btn-admin btn-secondary" onclick="handleLogout()" title="Lock dashboard" style="border-color: var(--cinnabar);">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
       </div>
     </div>
   </header>
@@ -376,7 +469,7 @@
         <p class="card-desc">Update your hero cutout picture, prominent name, headline, and witty bio.</p>
 
         <!-- Hero Photo Upload -->
-        <label class="form-label">Hero Cutout Photo (PNG with transparent background looks best)</label>
+        <label class="form-label">Hero Cutout Photo (Clean PNG without border looks best like Shruti's portfolio)</label>
         <div class="photo-upload-container">
           <div class="photo-preview-box">
             <img id="admin-hero-preview" class="photo-preview-img" src="photo.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100\' height=\'100\' fill=\'%231c1b1a\'/><text x=\'50\' y=\'55\' fill=\'%23fff\' font-size=\'12\' text-anchor=\'middle\'>Photo</text></svg>'">
@@ -394,7 +487,7 @@
 
         <div class="form-grid-2">
           <div class="form-group">
-            <label class="form-label">Full Name (Large Heading)</label>
+            <label class="form-label">Full Name (Large Monumental Heading)</label>
             <input type="text" id="cfg-name" class="form-input" value="VAIBHAV YADAV">
           </div>
 
@@ -405,8 +498,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Hero Headline</label>
-          <input type="text" id="cfg-headline" class="form-input" value="A LITTLE BIT OF AI, A LITTLE BIT OF STUDENT, A LITTLE BIT OF PANCHAYAT, & A WHOLE LOT OF CHUTZPAH.">
+          <label class="form-label">Hero Tagline</label>
+          <input type="text" id="cfg-headline" class="form-input" value="A student, AI explorer & web builder with chutzpah.">
         </div>
 
         <div class="form-group">
@@ -579,6 +672,47 @@
   </div>
 
   <script>
+    // ============================================================
+    // AUTHENTICATION GATEKEEPER (DEFAULT: ADMIN / 12345)
+    // ============================================================
+    const DEFAULT_ADMIN_USER = 'admin';
+    const DEFAULT_ADMIN_PASS = '12345';
+
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem('admin_authenticated');
+      const overlay = document.getElementById('login-overlay');
+      if (isAuth === 'true') {
+        if (overlay) overlay.style.display = 'none';
+      } else {
+        if (overlay) overlay.style.display = 'flex';
+      }
+    }
+
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const user = document.getElementById('login-user').value.trim().toLowerCase();
+      const pass = document.getElementById('login-pass').value.trim();
+      const errorMsg = document.getElementById('login-error-msg');
+
+      if (user === DEFAULT_ADMIN_USER && pass === DEFAULT_ADMIN_PASS) {
+        sessionStorage.setItem('admin_authenticated', 'true');
+        errorMsg.style.display = 'none';
+        document.getElementById('login-overlay').style.display = 'none';
+        showToast('Welcome back, Vaibhav! 🔓');
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('admin_authenticated');
+      checkAuth();
+      showToast('Logged out successfully.');
+    }
+
+    // Run auth check immediately
+    checkAuth();
+
     // Firebase Configuration from user
     const firebaseConfig = {
       apiKey: "AIzaSyA5-gzeKnu1qbMj1TAzbo_2-yuLXijrqic",
