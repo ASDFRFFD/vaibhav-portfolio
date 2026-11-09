@@ -2121,24 +2121,13 @@
         <span id="header-brand-name">VAIBHAV YADAV</span>
       </a>
 
-      <div class="nav-actions">
-        <a href="admin.html" class="admin-pill-btn" data-cursor="hover" title="Open Admin Panel">
-          <i class="fa-solid fa-sliders"></i> Admin
-        </a>
-        <button class="sound-toggle-btn" id="sound-toggle" data-cursor="hover" title="Toggle Sound">
-          <i class="fa-solid fa-volume-high"></i> SFX: ON
-        </button>
-        <div class="status-badge">
-          <span class="status-dot"></span> Available
+      <button id="nav-burger-btn" class="nav-burger-btn" data-cursor="hover" aria-label="Toggle Navigation Menu" onclick="toggleTakeoverMenu()">
+        <div class="burger-icon-bars">
+          <span></span>
+          <span></span>
         </div>
-        <button id="nav-burger-btn" class="nav-burger-btn" data-cursor="hover" aria-label="Toggle Navigation Menu" onclick="toggleTakeoverMenu()">
-          <div class="burger-icon-bars">
-            <span></span>
-            <span></span>
-          </div>
-          <span>MENU</span>
-        </button>
-      </div>
+        <span>MENU</span>
+      </button>
     </div>
   </header>
 
@@ -2260,10 +2249,13 @@
         <a href="admin.html" class="takeover-social-pill" data-cursor="hover">
           <i class="fa-solid fa-sliders"></i> Admin Dashboard
         </a>
+        <button type="button" class="takeover-social-pill" id="sound-toggle" data-cursor="hover" title="Toggle Sound" style="border: 1px solid rgba(255,255,255,0.18); cursor: pointer;">
+          <i class="fa-solid fa-volume-high"></i> <span>SFX: ON</span>
+        </button>
       </div>
 
       <div class="takeover-copy">
-        © 2026 VAIBHAV YADAV • CRAFTED WITH CHUTZPAH
+        © 2026 VAIBHAV YADAV • CURIOSITY BEYOND BOUNDARIES
       </div>
     </div>
   </div>
