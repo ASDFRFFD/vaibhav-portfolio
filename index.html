@@ -292,7 +292,7 @@
     .hero-wrap {
       position: relative;
       width: 100%;
-      padding: 40px 0 50px;
+      padding: 20px 0 50px;
       background: var(--bg);
     }
 
@@ -599,19 +599,19 @@
     /* Right Column: Grounded Photo Stage Frame */
     .hero-right-col {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-end;
+      align-items: flex-end;
       width: 100%;
     }
 
     .photo-stage {
       position: relative;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: flex-end;
       width: 100%;
-      max-width: 720px;
-      height: clamp(620px, 85vh, 860px);
+      max-width: 780px;
+      height: clamp(640px, 86vh, 900px);
     }
 
     .photo-cutout-frame {
@@ -620,7 +620,7 @@
       position: relative;
       display: flex;
       align-items: flex-end;
-      justify-content: center;
+      justify-content: flex-end;
       background: transparent;
       border: none;
       box-shadow: none;
@@ -632,16 +632,16 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      object-position: bottom center;
+      object-position: bottom right;
       transform-origin: bottom center;
-      transform: scale(1.26);
+      transform: scale(1.65);
       filter: drop-shadow(0 24px 38px rgba(28, 27, 26, 0.32));
       display: block;
       transition: transform 0.3s var(--ease-site);
     }
 
     .cutout-img:hover {
-      transform: scale(1.30);
+      transform: scale(1.70);
     }
 
     
