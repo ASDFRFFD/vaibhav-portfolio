@@ -1934,25 +1934,44 @@
 
       /* Mobile Hero Section */
       .hero-wrap {
-        padding: 24px 0 35px;
+        padding: 6px 0 30px;
         overflow: hidden;
       }
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 14px;
       }
       .hero-right-col {
         order: -1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
       }
       .photo-stage {
-        width: 100%;
-        max-width: 480px;
-        height: clamp(480px, 66vh, 600px) !important;
-        margin: 0 auto;
+        width: 100% !important;
+        max-width: 440px !important;
+        height: clamp(380px, 52vh, 480px) !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .photo-cutout-frame {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
       .cutout-img {
-        transform: scale(1.12) !important;
-        transform-origin: bottom center;
+        width: auto !important;
+        max-width: 95vw !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+        transform: scale(1.38) !important;
+        transform-origin: center center !important;
       }
       .hero-title {
         font-size: clamp(38px, 10.5vw, 64px);
