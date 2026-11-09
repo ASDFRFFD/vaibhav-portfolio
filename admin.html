@@ -379,6 +379,46 @@
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+  
+    @media (max-width: 768px) {
+      body {
+        overflow-x: hidden !important;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      header {
+        padding: 14px 0;
+      }
+      .admin-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .admin-nav .actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .admin-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .form-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .card-box {
+        padding: 18px !important;
+      }
+      .login-box {
+        padding: 24px 20px;
+        width: 90% !important;
+      }
+    }
+  
   </style>
 </head>
 <body>
