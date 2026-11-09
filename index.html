@@ -1543,7 +1543,335 @@
     /* ============================================================
        MOBILE RESPONSIVE MEDIA QUERIES (100% CLEAN STACKING)
        ============================================================ */
+    
+    /* ============================================================
+       WORKSRUTHI-INSPIRED CIRCULAR TAKEOVER CURTAIN MENU
+       ============================================================ */
+    .nav-burger-btn {
+      background: var(--cinnabar);
+      color: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: all 0.2s var(--ease-site);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-burger-btn:hover {
+      background: var(--ink);
+      color: #fff;
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--cinnabar);
+    }
+
+    .burger-icon-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 14px;
+    }
+
+    .burger-icon-bars span {
+      display: block;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform 0.25s ease;
+    }
+
+    /* Takeover Fullscreen Overlay */
+    .nav-takeover {
+      position: fixed;
+      inset: 0;
+      z-index: 2000000;
+      background: #151514;
+      color: #fbfbf6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(24px, 4.5vw, 50px) clamp(20px, 6vw, 80px);
+      pointer-events: none;
+      visibility: hidden;
+      clip-path: circle(0px at var(--burger-x, calc(100% - 60px)) var(--burger-y, 35px));
+      transition: clip-path 0.72s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.72s step-end;
+      will-change: clip-path;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .nav-takeover.is-open {
+      pointer-events: all;
+      visibility: visible;
+      clip-path: circle(160% at var(--burger-x, calc(100% - 60px)) var(--burger-y, 35px));
+      transition: clip-path 0.85s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s step-start;
+    }
+
+    .takeover-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(224, 60, 49, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .takeover-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1.5px dashed rgba(251, 251, 246, 0.18);
+    }
+
+    .takeover-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 30px);
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .takeover-close-btn {
+      background: #252422;
+      color: #fbfbf6;
+      border: 1.5px solid rgba(251, 251, 246, 0.3);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .takeover-close-btn:hover {
+      background: var(--cinnabar);
+      color: #fff;
+      border-color: var(--cinnabar);
+      transform: scale(1.05);
+    }
+
+    /* Takeover Main Grid */
+    .takeover-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: clamp(30px, 5vw, 70px);
+      align-items: center;
+      margin: auto 0;
+      padding: 30px 0;
+    }
+
+    .takeover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cinnabar);
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .takeover-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .takeover-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 16px;
+      text-decoration: none;
+      color: #d8d8ce;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4.2vw, 56px);
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      transition: transform 0.25s var(--ease-site), color 0.25s ease;
+      position: relative;
+      width: fit-content;
+    }
+
+    .link-idx {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 1.2vw, 16px);
+      color: var(--cinnabar);
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    .link-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.6em;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.25s ease, transform 0.25s var(--ease-site);
+      color: var(--cinnabar);
+    }
+
+    .takeover-link:hover {
+      color: #fff;
+      transform: translateX(12px);
+    }
+
+    .takeover-link:hover .link-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Right Identity Showcase Card */
+    .takeover-preview-card {
+      background: #1e1d1b;
+      border: 1.5px solid rgba(251, 251, 246, 0.12);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .preview-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: rgba(255,255,255,0.06);
+      padding: 5px 12px;
+      border-radius: 999px;
+      color: #fbfbf6;
+      width: fit-content;
+    }
+
+    .preview-quote {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      line-height: 1.35;
+      color: var(--highlight);
+      transform: rotate(-1deg);
+    }
+
+    .preview-portals {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .portal-pill {
+      background: #151514;
+      border: 1px solid rgba(251, 251, 246, 0.15);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fbfbf6;
+    }
+
+    .preview-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #8c8b85;
+      letter-spacing: 0.5px;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      padding-top: 14px;
+    }
+
+    /* Takeover Footer Row */
+    .takeover-footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1.5px dashed rgba(251, 251, 246, 0.18);
+    }
+
+    .takeover-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .takeover-social-pill {
+      background: rgba(255,255,255,0.06);
+      color: #fbfbf6;
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .takeover-social-pill:hover {
+      background: var(--cinnabar);
+      border-color: var(--cinnabar);
+      color: #fff;
+    }
+
+    .takeover-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #8c8b85;
+    }
+
+
     @media (max-width: 860px) {
+      /* Worksruthi Takeover Menu Mobile Refinement */
+      .takeover-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 16px 0 !important;
+      }
+      .takeover-aside {
+        display: none !important;
+      }
+      .takeover-link {
+        font-size: clamp(26px, 7.5vw, 42px) !important;
+        gap: 10px !important;
+      }
+      .takeover-link .link-num {
+        font-size: 13px !important;
+      }
+      .takeover-footer {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+
       /* Complete Horizontal Overflow Prevention */
       html, body {
         width: 100% !important;
@@ -1822,6 +2150,13 @@
           <div class="status-badge">
             <span class="status-dot"></span> Available
           </div>
+          <button id="nav-burger-btn" class="nav-burger-btn" data-cursor="hover" aria-label="Toggle Navigation Menu" onclick="toggleTakeoverMenu()">
+            <div class="burger-icon-bars">
+              <span></span>
+              <span></span>
+            </div>
+            <span>MENU</span>
+          </button>
         </div>
       </div>
 
@@ -1835,6 +2170,133 @@
       </ul>
     </div>
   </header>
+
+  <!-- ============================================================
+       WORKSRUTHI-INSPIRED CIRCULAR TAKEOVER CURTAIN MENU
+       ============================================================ -->
+  <div id="nav-takeover" class="nav-takeover" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="takeover-bg" aria-hidden="true"></div>
+
+    <!-- Takeover Top Bar -->
+    <div class="takeover-header">
+      <div class="takeover-brand">
+        <span class="brand-dot"></span>
+        <span>VAIBHAV YADAV</span>
+      </div>
+
+      <button id="takeover-close-btn" class="takeover-close-btn" data-cursor="hover" aria-label="Close menu" onclick="closeTakeoverMenu()">
+        <span>CLOSE</span>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Takeover Main Grid -->
+    <div class="takeover-grid">
+      <!-- Left: Monumental Links -->
+      <nav class="takeover-nav" aria-label="Takeover Links">
+        <div class="takeover-eyebrow">
+          // SITEMAP & DIRECTORY ✦
+        </div>
+
+        <ul class="takeover-links-list">
+          <li style="--i: 0;">
+            <a href="#hero" class="takeover-link" data-cursor="hover" onclick="closeTakeoverMenu()">
+              <span class="link-idx">01</span>
+              <span class="link-text">HOME</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+          <li style="--i: 1;">
+            <a href="#education" class="takeover-link" data-cursor="hover" onclick="closeTakeoverMenu()">
+              <span class="link-idx">02</span>
+              <span class="link-text">PHILOSOPHY & DEGREE</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+          <li style="--i: 2;">
+            <a href="#projects" class="takeover-link" data-cursor="hover" onclick="closeTakeoverMenu()">
+              <span class="link-idx">03</span>
+              <span class="link-text">SHIPPED PORTALS</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+          <li style="--i: 3;">
+            <a href="#passions" class="takeover-link" data-cursor="hover" onclick="closeTakeoverMenu()">
+              <span class="link-idx">04</span>
+              <span class="link-text">MULTIVERSE PASSIONS</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+          <li style="--i: 4;">
+            <a href="#arcade" class="takeover-link" data-cursor="hover" onclick="closeTakeoverMenu()">
+              <span class="link-idx">05</span>
+              <span class="link-text">ARCADE ARENA</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+          <li style="--i: 5;">
+            <a href="#contact" class="takeover-link" data-cursor="open" onclick="closeTakeoverMenu()">
+              <span class="link-idx">06</span>
+              <span class="link-text">SAY HI</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Right: Stylized Identity Showcase (Desktop) -->
+      <div class="takeover-preview-card">
+        <div class="preview-card-inner">
+          <div class="preview-badge">
+            <span class="status-dot"></span> Available for Web Projects
+          </div>
+          
+          <div class="preview-quote">
+            "A human is too big to fit inside a single 9-to-5 job title."
+          </div>
+
+          <div class="preview-portals">
+            <div class="portal-pill">
+              <i class="fa-solid fa-globe" style="color: var(--cinnabar);"></i>
+              <span>gpsahayak.in</span>
+            </div>
+            <div class="portal-pill">
+              <i class="fa-solid fa-users" style="color: var(--cinnabar);"></i>
+              <span>psunionup.site</span>
+            </div>
+          </div>
+
+          <div class="preview-meta">
+            <span>LOCATION: UTTAR PRADESH, INDIA</span>
+            <span>STACK: HTML • CSS • JS • AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Takeover Bottom Bar -->
+    <div class="takeover-footer">
+      <div class="takeover-socials">
+        <a href="https://github.com/ASDFRFFD/vaibhav-portfolio" target="_blank" rel="noopener" class="takeover-social-pill" data-cursor="open">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <a href="https://gpsahayak.in" target="_blank" rel="noopener" class="takeover-social-pill" data-cursor="open">
+          <i class="fa-solid fa-link"></i> gpsahayak.in
+        </a>
+        <a href="https://psunionup.site" target="_blank" rel="noopener" class="takeover-social-pill" data-cursor="open">
+          <i class="fa-solid fa-link"></i> psunionup.site
+        </a>
+        <a href="admin.html" class="takeover-social-pill" data-cursor="hover">
+          <i class="fa-solid fa-sliders"></i> Admin Dashboard
+        </a>
+      </div>
+
+      <div class="takeover-copy">
+        © 2026 VAIBHAV YADAV • CRAFTED WITH CHUTZPAH
+      </div>
+    </div>
+  </div>
+
 
   <!-- Hero Section: Clean 2-Column Brutalist Layout -->
   <main class="hero-wrap" id="hero">
@@ -2438,6 +2900,59 @@
       wheelMultiplier: 1.1,
       touchMultiplier: 1.6
     });
+
+    
+    // ============================================================
+    // WORKSRUTHI-INSPIRED CIRCULAR TAKEOVER MENU CONTROLLER
+    // ============================================================
+    const takeoverModal = document.getElementById('nav-takeover');
+    const burgerBtn = document.getElementById('nav-burger-btn');
+
+    function updateBurgerButtonPosition() {
+      if (!burgerBtn || !takeoverModal) return;
+      const rect = burgerBtn.getBoundingClientRect();
+      const cx = (rect.left + rect.width / 2).toFixed(1);
+      const cy = (rect.top + rect.height / 2).toFixed(1);
+      takeoverModal.style.setProperty('--burger-x', cx + 'px');
+      takeoverModal.style.setProperty('--burger-y', cy + 'px');
+    }
+
+    function toggleTakeoverMenu() {
+      if (!takeoverModal) return;
+      if (takeoverModal.classList.contains('is-open')) {
+        closeTakeoverMenu();
+      } else {
+        openTakeoverMenu();
+      }
+    }
+
+    function openTakeoverMenu() {
+      if (!takeoverModal) return;
+      updateBurgerButtonPosition();
+      takeoverModal.classList.add('is-open');
+      takeoverModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      playSound('pop');
+    }
+
+    function closeTakeoverMenu() {
+      if (!takeoverModal) return;
+      updateBurgerButtonPosition();
+      takeoverModal.classList.remove('is-open');
+      takeoverModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      playSound('pop');
+    }
+
+    window.addEventListener('resize', updateBurgerButtonPosition);
+
+    // Escape key to close
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && takeoverModal && takeoverModal.classList.contains('is-open')) {
+        closeTakeoverMenu();
+      }
+    });
+
 
     function raf(time) {
       lenis.raf(time);
