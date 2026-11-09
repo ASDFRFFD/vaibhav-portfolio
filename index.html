@@ -25,6 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
+
     :root {
       --bg: #f3f3e9;
       --bg-alt: #eaeae0;
@@ -422,9 +423,9 @@
     /* Hero 2-Column Responsive Grid */
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 40px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
+      gap: clamp(24px, 4vw, 56px);
+      align-items: flex-end;
     }
 
     .hero-left-col {
@@ -607,17 +608,17 @@
       justify-content: center;
       align-items: flex-end;
       width: 100%;
-      max-width: 580px;
-      height: clamp(580px, 80vh, 760px);
+      max-width: 720px;
+      height: clamp(620px, 85vh, 860px);
     }
 
     .photo-cutout-frame {
       width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
       position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       background: transparent;
       border: none;
       box-shadow: none;
@@ -625,47 +626,25 @@
 
     .cutout-img {
       height: 100%;
-      width: auto;
+      width: 100%;
       max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       object-position: bottom center;
-      filter: drop-shadow(0 24px 36px rgba(28, 27, 26, 0.38));
+      transform-origin: bottom center;
+      transform: scale(1.26);
+      filter: drop-shadow(0 24px 38px rgba(28, 27, 26, 0.32));
       display: block;
-      transition: transform 0.25s var(--ease-site);
+      transition: transform 0.3s var(--ease-site);
     }
 
     .cutout-img:hover {
-      transform: scale(1.02);
+      transform: scale(1.30);
     }
 
-    .photo-badge {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--paper);
-      border: 2px dashed var(--cinnabar);
-      border-radius: 999px;
-      padding: 6px 16px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--ink);
-      z-index: 10;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
+    
 
-    .photo-badge:hover {
-      background: var(--highlight);
-      transform: translateX(-50%) translateY(-2px);
-      box-shadow: 4px 4px 0 var(--ink);
-    }
+    
 
     /* ============================================================
        INFINITE MARQUEE RIBBON
@@ -1613,6 +1592,7 @@
       }
     }
 
+
     /* Edit Drawer */
     .drawer-overlay {
       position: fixed;
@@ -1758,7 +1738,7 @@
       }
 
       /* Ticker Full Width Overflow Protection */
-      .ticker {
+      .ticker, .marquee-ribbon {
         width: 100vw;
         max-width: 100%;
         overflow: hidden !important;
@@ -1778,9 +1758,13 @@
       }
       .photo-stage {
         width: 100%;
-        max-width: 420px;
-        height: clamp(440px, 62vh, 540px) !important;
+        max-width: 480px;
+        height: clamp(480px, 66vh, 600px) !important;
         margin: 0 auto;
+      }
+      .cutout-img {
+        transform: scale(1.12) !important;
+        transform-origin: bottom center;
       }
       .hero-title {
         font-size: clamp(38px, 10.5vw, 64px);
@@ -1846,7 +1830,7 @@
         height: 220px;
       }
       .polaroid-upload-btn {
-        opacity: 1 !important;
+        display: none !important;
       }
 
       /* Mobile Games Section */
@@ -1939,7 +1923,7 @@
   </div>
 
   <!-- Hidden File Input for Hero Photo Upload -->
-  <input type="file" id="photo-file-input" accept="image/png, image/webp, image/jpeg">
+  <input type="file" id="photo-file-input" accept="image/png, image/webp, image/jpeg" style="display: none !important;">
 
   <!-- Sticky Header -->
   <header>
@@ -2034,10 +2018,7 @@
             <div class="photo-cutout-frame">
               <img id="user-photo-img" class="cutout-img" src="photo.png" onerror="loadFallbackAvatar(this)" alt="Vaibhav Cutout Portrait" data-cursor="hover">
               
-              <div class="photo-badge" onclick="triggerPhotoUpload()" data-cursor="open" title="Click or drop your PNG photo here">
-                <i class="fa-solid fa-cloud-arrow-up" style="color: var(--cinnabar);"></i>
-                <span>Drop / Change Photo</span>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -2200,9 +2181,7 @@
           
           <div class="polaroid-photo-frame" id="frame-travel">
             <img id="polaroid-img-travel" class="polaroid-img" src="hobby_travel.png" onerror="loadHobbyFallback(this, 'travel')" alt="Adventure & Travel Photo">
-            <button class="polaroid-upload-btn" onclick="triggerHobbyUpload(event, 'travel')" title="Upload Your Photo">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
+            
           </div>
 
           <div class="polaroid-caption">
@@ -2217,9 +2196,7 @@
           
           <div class="polaroid-photo-frame" id="frame-astronomy">
             <img id="polaroid-img-astronomy" class="polaroid-img" src="hobby_astronomy.png" onerror="loadHobbyFallback(this, 'astronomy')" alt="Astronomy & Cosmos Photo">
-            <button class="polaroid-upload-btn" onclick="triggerHobbyUpload(event, 'astronomy')" title="Upload Your Photo">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
+            
           </div>
 
           <div class="polaroid-caption">
@@ -2234,9 +2211,7 @@
           
           <div class="polaroid-photo-frame" id="frame-robotics">
             <img id="polaroid-img-robotics" class="polaroid-img" src="hobby_robotics.png" onerror="loadHobbyFallback(this, 'robotics')" alt="Robotics & IoT Photo">
-            <button class="polaroid-upload-btn" onclick="triggerHobbyUpload(event, 'robotics')" title="Upload Your Photo">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
+            
           </div>
 
           <div class="polaroid-caption">
@@ -2251,9 +2226,7 @@
           
           <div class="polaroid-photo-frame" id="frame-coding">
             <img id="polaroid-img-coding" class="polaroid-img" src="hobby_coding.png" onerror="loadHobbyFallback(this, 'coding')" alt="Midnight AI Coding Photo">
-            <button class="polaroid-upload-btn" onclick="triggerHobbyUpload(event, 'coding')" title="Upload Your Photo">
-              <i class="fa-solid fa-camera"></i> Change Photo
-            </button>
+            
           </div>
 
           <div class="polaroid-caption">
@@ -3937,6 +3910,28 @@
       messagingSenderId: "154916955198",
       appId: "1:154916955198:web:3a134ad404a13229da9d6f"
     };
+
+    
+    // Instant restore from localStorage
+    try {
+      const savedPhoto = localStorage.getItem('portfolio_user_photo');
+      if (savedPhoto) {
+        const heroImg = document.getElementById('user-photo-img');
+        if (heroImg) heroImg.src = savedPhoto;
+      }
+      const hobbies = ['travel', 'astronomy', 'robotics', 'coding'];
+      hobbies.forEach(h => {
+        const savedHobby = localStorage.getItem('portfolio_hobby_' + h);
+        if (savedHobby) {
+          const hImg = document.getElementById('polaroid-img-' + h);
+          if (hImg) hImg.src = savedHobby;
+        }
+      });
+      const cachedFb = localStorage.getItem('portfolio_firebase_data');
+      if (cachedFb) {
+        applyPortfolioData(JSON.parse(cachedFb));
+      }
+    } catch (_) {}
 
     function applyPortfolioData(d) {
       if (!d) return;
